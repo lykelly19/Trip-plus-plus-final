@@ -1,0 +1,47 @@
+.packing {
+    background-color: #ECEBF3;
+    margin: auto;
+    width: 100%;
+    padding: 40px;
+
+}
+
+.P-content{
+    width: 50%;
+    background-color: #4A587B;
+    border-radius: 25px;
+    min-height: 200px;
+    padding: 30px; 
+    margin:auto;
+
+
+}
+
+
+
+.P-form {
+    border: 3px solid #000;
+    margin: auto;
+}
+
+.P-form input{
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+    height: 45px;
+    box-sizing: border-box;
+
+   
+}
+
+.P-form-add {
+    background-color: #C7FFF5;
+    color: #000;
+    font-weight: 900;
+    border-color: #C7FFF5;
+    border-radius: 100%;
+    font-size: 30px;
+    height: 40px;
+    width: 40px;
+    
+}
