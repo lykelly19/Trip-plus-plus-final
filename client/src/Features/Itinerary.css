@@ -1,0 +1,25 @@
+
+.itinerary-container {
+    background-color: #D8D3E7;
+    border-radius: 20px;
+    /* width: 500px;
+    height: 200px; */
+}
+
+.itinerary-items-container {
+    background-color: #ECECEC;
+    /* width: 300px;
+    height: 100px; */
+    border-radius: 50px;
+}
+
+#add-button {
+    background-color: #4B5267;
+    border-radius: 50px;
+}
+
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #ECECEC; 
+}
