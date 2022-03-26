@@ -20,10 +20,17 @@ const Budgeting = () => {
     setList([...newList]);
 
   };
+  const deleteAll = event =>{
+    var newList = [];
+
+    setList([...newList]);
+
+  };
     return(
         <div>
         <div className="outer-box">
           <h1>Packing List</h1>
+          <div className="del-button" onClick={()=>deleteAll()}>Delete All</div>
           <form className="input-box">
             <input className="input" onChange={event=> {
               setCurrentInput(event.target.value);
