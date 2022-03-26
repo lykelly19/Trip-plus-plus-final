@@ -2,9 +2,18 @@ import React from 'react';
 
 
 
-const Budgeting = () => {
+const Packing = () => {
   const [currentInput, setCurrentInput] = React.useState('')
   const [list, setList] = React.useState([])
+  const [checked, setChecked] = React.useState(new Array(list.length).fill(false)
+);
+
+  const handleOnChange = (position) => {
+    const updatedChecked = checked.map((item, index) =>
+      index === position ? !item : item
+    );
+      setChecked(updatedChecked);
+  };
 
   const addItem = event =>{
     event.preventDefault();
@@ -46,7 +55,12 @@ const Budgeting = () => {
                 <div className="packing-main-content">
                 <div className="packing-content">{content}</div>
                 </div>
-
+                <input
+                    type="checkbox"
+                    id={`custom-checkbox-${index}`}
+                    checked={checked[index]}
+                    onChange={() => handleOnChange(index)}
+                  />
                 </div>
               );
             })}
@@ -55,6 +69,8 @@ const Budgeting = () => {
             //}
     );
 };
+
+
 //ReactDOM.render(<Budgeting/>, document.getElementById('root'))
 
-export default Budgeting
+export default Packing
