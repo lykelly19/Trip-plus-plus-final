@@ -51,11 +51,12 @@ body{
 
 .navLink.active{
   color: white;
-  background-color: #c8b4d0;
+  background-color: #8c90b3;
 }
 
 .navLink:hover{
-  color: grey;
+  color: white;
+  background-color: #c8b4d0;
 }
 
 
