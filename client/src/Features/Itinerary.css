@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+* {
+    font-family: Roboto;
+}
 
 .itinerary-container {
     background-color: #D8D3E7;
-    border-radius: 20px;
+    border-radius: 30px;
 }
 
 .itinerary-items-container {
@@ -15,10 +20,11 @@
     border: none;
     font-weight: 700;
     float: right;
+    font-size: 20px;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: #ECECEC; 
+   background-color: #ECECEC;
 }
 
 .table-striped>tbody>tr:nth-child(even) {
@@ -35,6 +41,12 @@
 
 #itinerary-table tbody th {
     font-weight: 400;
+}
+
+/* all th from first row of itinerary table */
+#itinerary-table thead th {
+    font-weight: 900;
+    font-size: 18px;
 }
 
 tbody tr:last-child{
@@ -74,4 +86,10 @@ tbody tr th:first-child, thead tr th:first-child {
 #map-section {
     padding-top: 120px;
     padding-bottom: 100px;
+}
+
+#map-section h2 {
+    color: #2E294E;
+    font-weight: 900;
+    font-size: 42px;
 }

@@ -104,7 +104,7 @@ const Itinerary = () => {
             </div>
 
 
-            <Button className="mt-3 py-2" id="add-button" onClick={openModal}>Add new itinerary item</Button>  
+            <Button className="mt-4 py-2 px-3" id="add-button" onClick={openModal}>Add new itinerary item</Button>  
             
 
             <div id="map-section">
