@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 const Modal = ({children, modalIsOpen, closeModal}) => {
     return(
         <div className="page-background">
-            <div className="modal-stuff">
+            <div className="itinerary-modal">
                 <Button id="close-button" onClick={closeModal}>X</Button>
                 <div className="modal-section" id="first-modal-section">
                     <p className="modal-heading">Event Name</p>

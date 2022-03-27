@@ -5,7 +5,7 @@
     position: fixed;
 }
 
-.modal-stuff {
+.itinerary-modal {
     background-color: #4B5267;
     border-radius: 25px;
     width: 640px;
@@ -31,15 +31,16 @@
     margin-bottom: 0;
 }
 
-input {
+.itinerary-modal input {
     border-radius: 25px;
     width: 600px;
     height: 40px;
     border: none;
     border-radius: 25px;
+    padding-left: 12px;
 }
 
-textarea {
+.itinerary-modal textarea {
     border-radius: 25px;
     width: 600px;
     border: none;
@@ -64,7 +65,8 @@ textarea {
     font-weight: 800;
     height: 40px;
     width: 80px;
-    margin-left: 435px;
+    float: right;
+    margin-right: 20px;
 }
 
 #close-button {
