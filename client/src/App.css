@@ -1,42 +1,72 @@
 body{
-  background-color: #ecebf3
-
+  background-color: #ecebf3;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.App-logo {
-  height: 10vmin;
-  pointer-events: none;
-  padding: 20px
+#pageWrapper{
+  width: 60%;
+  min-width: 1000px;
+  margin: 0 auto 0 auto;
+}
+
+.appLogo {
+  width: 55px;
 }
 
 .header{
-  border: 2px solid black;
   margin: 3px;
 }
+
+#authButton {
+  margin-top: 10px;
+  background-color: #8c90b3; 
+  border-radius: 12px;
+  border: none;
+  color: white;
+  padding: 3px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  float: right;
+}
+
 
 .navBar{
-  border: 2px solid blue;
+  padding-top:10px;
+  padding-bottom: 10px;
   margin: 3px;
+  text-align: center;
 }
 
+.navLink{
+  border-radius: 6px;
+  padding: 3px 10px;
+  margin-left: 65px;
+  margin-right: 65px;
+  text-decoration: none;
+  color: #4a587b;
+  font-weight: bold;
+}
+
+.navLink.active{
+  color: white;
+  background-color: #c8b4d0;
+}
+
+.navLink:hover{
+  color: grey;
+}
+
+
 .featureComponents{
-  border: 2px solid green;
-  margin: 3px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .footer{
-  border: 2px solid orange;
-  margin: 3px;
-}
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin: 0 auto;
 }
