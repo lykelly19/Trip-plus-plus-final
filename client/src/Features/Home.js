@@ -11,9 +11,10 @@ const Home = () => {
     return(
         <div>
             <p>Home component</p>
-
+    
+            <div class="weatherDiv">
             <a className="weatherwidget-io" href="https://forecast7.com/en/52d5213d40/berlin/" data-label_1="BERLIN" data-label_2="WEATHER" data-theme="blue-mountains" >BERLIN WEATHER</a>
-            
+
             {!function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 // if (!d.getElementById(id)) {
@@ -28,6 +29,7 @@ const Home = () => {
             {/* {AddWeather()} */}
 
             {AddWeather()}
+            </div>
 
         </div>
     )

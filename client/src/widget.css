@@ -1,5 +1,10 @@
 .weatherwidget-io{
     border-radius: 10px;
-    width: 60%;
-    margin: auto;
+}
+
+.weatherDiv{
+    width: 600%;
+    min-width: 300%;
+    margin-left: -250%;
+
 }
