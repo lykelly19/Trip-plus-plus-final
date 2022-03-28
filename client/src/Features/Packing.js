@@ -1,76 +1,94 @@
-import React from 'react';
+import React, { Component } from "react";
 
+export default class Packing extends Component {
+  state = {
+    items: [],
+    itemText: ""
+  };
 
+  onChangeInput = e => {
+    this.setState({ itemText: e.target.value });
+  };
 
-const Packing = () => {
-  const [currentInput, setCurrentInput] = React.useState('')
-  const [list, setList] = React.useState([])
-  const [checked, setChecked] = React.useState(new Array(list.length).fill(false)
+  onSubmitItem = () => {
+    this.setState(({ items, itemText }) => ({
+      items: [...items, { id: items.length + 1, name: itemText, done: false }],
+      itemText: ""
+    }));
+  };
+
+  onChangeBox = item => {
+    this.setState(({ items }) => ({
+      items: items.map(el =>
+        el.id === item.id ? { ...el, done: !el.done } : el
+      )
+    }));
+  };
+
+  handleDel = item => {
+    this.setState(({ items }) => ({
+      items: items.filter(el => el.id !== item.id)
+    }));
+  };
+  deleteAll = () => {
+    this.setState(({ items }) => ({
+      items: []
+    }));
+  };
+
+  render() {
+    const { items, itemText } = this.state;
+
+    return (
+      <div className="P-form">
+        <h2>Packing List:</h2>
+        <div className="deleteAllDiv">
+        <Button className="deleteAllBtn" onClick={this.deleteAll}>Delete All</Button>
+        </div>
+        <div className="inputDiv">
+        <Input value={itemText} onChange={this.onChangeInput} />
+        <Button className="P-form-add" onClick={this.onSubmitItem}>+</Button>
+        </div>
+        <div className="listDiv">
+        <List
+          list={items}
+          onChangeBox={this.onChangeBox}
+          handleDel={this.handleDel}
+        />
+        </div>
+      </div>
+    );
+  }
+}
+
+export const Button = ({ onClick, children }) => (
+  <button type="button" className="btn" onClick={onClick}>
+    {children}
+  </button>
 );
 
-  const handleOnChange = (position) => {
-    const updatedChecked = checked.map((item, index) =>
-      index === position ? !item : item
-    );
-      setChecked(updatedChecked);
-  };
+export const Checkbox = ({ onClick, defaultChecked }) => (
+  <input type="checkbox" onClick={onClick} defaultChecked={defaultChecked} />
+);
 
-  const addItem = event =>{
-    event.preventDefault();
-    const newList = list;
+export const Input = ({ value, onChange }) => (
+  <input type="text" value={value} onChange={onChange} />
+);
 
-  newList.unshift({content:currentInput,isCompleted:false});
-  setList([...newList]);
-  setCurrentInput("");
-  };
-  const deleteItem = (index) =>{
-    var newList = list;
-    newList.splice(index, 1);
-    setList([...newList]);
-
-  };
-  const deleteAll = event =>{
-    var newList = [];
-
-    setList([...newList]);
-
-  };
-    return(
-        <div>
-        <div className="outer-box">
-          <h1>Packing List</h1>
-          <div className="del-button" onClick={()=>deleteAll()}>Delete All</div>
-          <form className="input-box">
-            <input className="input" onChange={event=> {
-              setCurrentInput(event.target.value);
-            }}
-              value={currentInput}
-            />
-            <button clasName="add-button" onClick={addItem}>+</button>
-            </form>
-            {list.map(({content}, index)=>{
-              return (
-                <div className="packing-container">
-                <div className="del-button" onClick={()=>deleteItem()}>X</div>
-                <div className="packing-main-content">
-                <div className="packing-content">{content}</div>
-                </div>
-                <input
-                    type="checkbox"
-                    id={`custom-checkbox-${index}`}
-                    checked={checked[index]}
-                    onChange={() => handleOnChange(index)}
-                  />
-                </div>
-              );
-            })}
-            </div>
-            </div>
-            //}
-    );
-};
-
-
-//ReactDOM.render(<Budgeting/>, document.getElementById('root'))
-
-export default Packing
+export const List = ({ list, onChangeBox, handleDel }) => (
+  <ul>
+    {list.map(item => (
+      <li
+        key={item.id}
+        style={{ textDecoration: item.done ? "line-through" : null }}
+      >
+        <Checkbox className="checkbox"
+          onClick={() => onChangeBox(item)}
+          defaultChecked={item.done}
+        />
+        {item.name}
+        <Button className="deleteButton btn" onClick={() => handleDel(item)}>X</Button>
+      </li>
+    ))}
+  </ul>
+);
