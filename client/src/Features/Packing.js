@@ -11,10 +11,12 @@ export default class Packing extends Component {
   };
 
   onSubmitItem = () => {
+    if(this.state.itemText){ //prevent empty item from being added
     this.setState(({ items, itemText }) => ({
       items: [...items, { id: items.length + 1, name: itemText, done: false }],
       itemText: ""
     }));
+  }
   };
 
   onChangeBox = item => {
