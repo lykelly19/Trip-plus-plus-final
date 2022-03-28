@@ -84,12 +84,14 @@ export const List = ({ list, onChangeBox, handleDel }) => (
         key={item.id}
         style={{ textDecoration: item.done ? "line-through" : null }}
       >
+
+         <Button className="deleteButton btn" onClick={() => handleDel(item)}>X</Button>
+        {item.name}
         <Checkbox className="checkbox"
           onClick={() => onChangeBox(item)}
           defaultChecked={item.done}
         />
-        {item.name}
-        <Button className="deleteButton btn" onClick={() => handleDel(item)}>X</Button>
+        
       </li>
     ))}
   </ul>

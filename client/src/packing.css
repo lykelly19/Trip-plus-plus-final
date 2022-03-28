@@ -3,9 +3,16 @@
     margin: auto;
     width: 100%;
     padding: 40px;
+    margin: 10px;
 
 }
 
+
+.featureComponents{
+    padding-top: 50px;
+    padding-bottom: 75px;
+
+}
 .P-content{
     width: 50%;
     background-color: #4A587B;
@@ -13,10 +20,15 @@
     min-height: 200px;
     padding: 30px;
     margin:auto;
+    
 }
 
 
-
+.P-content h2{
+    text-align: center;
+    color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .P-form {
     /*border: 3px solid #000;*/
     border-radius: 25px;
@@ -51,7 +63,7 @@
     font-weight: 900;
     border: none;
     border-radius: 50%;
-    width: 10%;
+    width: 8%;
     height: 40px;
     float: right;
     font-size: 20px;
@@ -59,15 +71,33 @@
 
 .listDiv ul {
   list-style-type: none;
+  padding: 10px;
  }
-
 
  
 
- li {
+ .listDiv ul li {
    background-color: #BCFBFF;
-   margin: 5px;
    border-radius: 25px;
+   margin: 15px;
+   padding: 10px;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+   
+ }
+
+ .listDiv ul li button{
+     background-color: #BCFBFF;
+     border: 0px;
+     font-size: 16px;
+     color: #8DD0DF;
+     font-weight: 1000;
+     float: left;
+ }
+
+ .listDiv ul li input[type="checkbox"]{
+     float: inline-end;
+     border: 100px #000 solid;
+     
  }
 
  
@@ -75,6 +105,7 @@
   border: none;
   border-radius: 25px;
   min-width: 400px;
+  float: left;
 }
 
 .deleteAllDiv{
@@ -106,3 +137,5 @@ button .P-form-add {
   height: 60px;
   width: 60px;
 }
+
+
