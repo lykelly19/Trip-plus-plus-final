@@ -45,6 +45,7 @@
     width: 600px;
     border: none;
     border-radius: 25px;
+    padding-left: 12px;
 }
 
 #delete-button {
