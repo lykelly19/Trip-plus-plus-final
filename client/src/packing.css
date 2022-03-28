@@ -25,44 +25,83 @@
     margin: auto;
 }
 
-.P-form input{
-    padding: 10px;
-    width: 80%;
+
+.inputDiv{
+    background-color: #fff;
     border-radius: 10px;
-    height: 45px;
-    box-sizing: border-box;
-
-
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+    height: 40px;
+    padding: 0;
 }
 
-.P-form-add {
+.inputDiv input{
+    padding: 10px;
+    width: 90%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    float: left;
+}
+
+
+.inputDiv button {
     background-color: #C7FFF5;
     color: #000;
-    /*font-weight: 900;*/
+    font-weight: 900;
     border: none;
-    border-radius: 25px;
-    /*font-size: 30px;*/
+    border-radius: 50%;
+    width: 10%;
+    height: 40px;
+    float: right;
+    font-size: 20px;
 }
 
-ul {
+.listDiv ul {
   list-style-type: none;
  }
+
+
+ 
+
  li {
    background-color: #BCFBFF;
    margin: 5px;
    border-radius: 25px;
  }
- input[type=text] {
+
+ 
+ .inputDiv input[type=text] {
   border: none;
   border-radius: 25px;
   min-width: 400px;
 }
-.deleteAllBtn {
+
+.deleteAllDiv{
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 10px;
+
+}
+
+.deleteAllBtn button{
   float: right;
 }
-button{
+
+
+.deleteAllDiv button{
   border: none;
+  background-color:#4A587B;
+  color: #C7DDEA;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  float: right;
 }
+
+
+
+
 button .P-form-add {
   height: 60px;
   width: 60px;

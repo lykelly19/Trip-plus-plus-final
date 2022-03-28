@@ -42,7 +42,7 @@ export default class Packing extends Component {
     const { items, itemText } = this.state;
 
     return (
-      <div className="P-form">
+      <div className="P-content">
         <h2>Packing List:</h2>
         <div className="deleteAllDiv">
         <Button className="deleteAllBtn" onClick={this.deleteAll}>Delete All</Button>
