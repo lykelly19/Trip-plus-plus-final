@@ -1,4 +1,5 @@
 import React from 'react'
+import './widget.css'
 export function AddWeather() {
     const script = document.createElement('script');
     script.innerHTML = 

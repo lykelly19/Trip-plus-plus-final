@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './packing.css'
 
 export default class Packing extends Component {
   state = {
