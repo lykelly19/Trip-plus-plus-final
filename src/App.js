@@ -6,8 +6,8 @@ import {BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom"
 import Home from './Features/Home';
 import Itinerary from './Features/Itinerary';
 import Packing from './Features/Packing';
-import 'antd/dist/antd.css';
-import CountView from './Features/CountView';
+import Budgeting from './Features/Budgeting';
+// import CountView from './Features/CountView';
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         <div className="featureComponents">
           <Routes>
             <Route path="/" element={<Home/>}/>
-            <Route path="/budgeting" element ={<CountView/>}/>
+            <Route path="/budgeting" element ={<Budgeting/>}/>
             <Route path="/itinerary" element ={<Itinerary/>}/>
             <Route path="/packing" element ={<Packing/>}/>
           </Routes>

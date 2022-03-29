@@ -11,6 +11,7 @@ import { PieChart } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 const { useState, useEffect, useRef } = React;
+
 //For echarts
 echarts.use([
   TooltipComponent,
@@ -267,7 +268,7 @@ function Index() {
               {/* delete */}
               <List
                 size="small"
-                header={<div className="horizontal-center"><CheckCircleFilled style={{"fontSize":20,"color":"FF5733"}}/></div>}
+                header={<div className="horizontal-center"><CheckCircleFilled style={{"fontSize":20,"opacity":0}}/></div>}
                 split={false}
                 dataSource={countList.map((item) => ({
                   id: item.id,

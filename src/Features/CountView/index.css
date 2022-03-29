@@ -8,8 +8,9 @@ body{
     height: 100%;
 } */
 #container{
-    background-color: #f0f0f0;
+    /* background-color: #f0f0f0; */
     height: 100%;
+    width: 1000px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -31,11 +32,11 @@ body{
 } */
 #container .left-box{
     width: 50%;
-    height: 80%;
-    background-color: white;
+    height: 85%;
+    /* background-color: white; */
     border-radius: 40px;
     opacity: 0.8;
-    padding: 40px
+    padding: 40px;
 }
 
 #container .right-box{
