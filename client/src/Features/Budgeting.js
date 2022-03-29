@@ -3,7 +3,7 @@ import React from 'react'
 const Budgeting = () => {
     return(
         <div>
-            <p>Budgeting component</p>
+            <p>Budgeting component test</p>
         </div>
     )
 }
