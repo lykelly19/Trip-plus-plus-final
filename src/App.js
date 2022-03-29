@@ -4,9 +4,10 @@ import logo from './trip-plus-plus.svg'
 import {BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom";
 
 import Home from './Features/Home';
-import Budgeting from './Features/Budgeting';
 import Itinerary from './Features/Itinerary';
 import Packing from './Features/Packing';
+import Budgeting from './Features/Budgeting';
+// import CountView from './Features/CountView';
 
 function App() {
   return (

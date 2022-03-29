@@ -1,11 +1,13 @@
-import React from 'react'
+import React from 'react';
+import CountView from './CountView';
+import 'antd/dist/antd.min.css';
 
 const Budgeting = () => {
     return(
         <div>
-            <p>Budgeting component test</p>
+            <CountView></CountView>
         </div>
     )
 }
 
-export default Budgeting
+export default Budgeting;
