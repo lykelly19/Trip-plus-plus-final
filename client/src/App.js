@@ -1,4 +1,5 @@
 import './App.css';
+import './packing.css';
 import logo from './trip-plus-plus.svg'
 
 import {BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom";
