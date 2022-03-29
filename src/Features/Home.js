@@ -1,5 +1,5 @@
 import React from 'react'
-import './widget.css'
+import './widget.css';
 export function AddWeather() {
     const script = document.createElement('script');
     script.innerHTML = 
@@ -14,29 +14,26 @@ const Home = () => {
             <p>Home component</p>
     
             <div class="weatherDiv">
-            <a className="weatherwidget-io" href="https://forecast7.com/en/52d5213d40/berlin/" data-label_1="BERLIN" data-label_2="WEATHER" data-theme="blue-mountains" >BERLIN WEATHER</a>
+                <a className="weatherwidget-io" href="https://forecast7.com/en/52d5213d40/berlin/" data-label_1="BERLIN" data-label_2="WEATHER" data-theme="blue-mountains" >BERLIN WEATHER</a>
 
-            {!function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                // if (!d.getElementById(id)) {
+                {!function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
                     js = d.createElement(s);
                     js.id = id;
                     js.src = 'https:weatherwidget.io/js/widget.min.js';
                     fjs.parentNode.insertBefore(js, fjs);
-                // }
-            }
-                (document, 'script', 'weatherwidget-io-js')
-            }
-            {/* {AddWeather()} */}
+                }
+                    (document, 'script', 'weatherwidget-io-js')
+                }
 
-            {AddWeather()}
+                {AddWeather()}
             </div>
 
         </div>
     )
 }
 
-export default Home
+export default Home;
 
 
 // raw script

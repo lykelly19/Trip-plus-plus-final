@@ -35,7 +35,7 @@ function App() {
         </div>
 
         <div className="footer">
-          <p>Copyright text</p>
+          <p>Copyright &#169; 2022 Trip++</p>
         </div>
       </Router>
     </div>
