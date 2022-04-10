@@ -10,7 +10,8 @@ export default class Itinerary extends Component {
 
     state = {
         show: false,
-        items: []
+        items: [],
+        numItems: 1
     };
 
     showModal = e => {
@@ -22,6 +23,12 @@ export default class Itinerary extends Component {
     closeModal = () => {
         this.setState({
             show: false
+        });
+    }
+
+    incrementNumItems = () => {
+        this.setState({
+            numItems: this.state.numItems + 1
         });
     }
 
@@ -42,7 +49,7 @@ export default class Itinerary extends Component {
     render() {
         return (
             <div className="container">
-                { this.state.show && <ItineraryModal closeModal={this.closeModal} onSubmitItineraryItem={this.onSubmitItineraryItem} myItems={this.state.items}></ItineraryModal>}
+                { this.state.show && <ItineraryModal closeModal={this.closeModal} onSubmitItineraryItem={this.onSubmitItineraryItem} myItems={this.state.items} incrementNumItems={this.incrementNumItems} numItems={this.state.numItems}></ItineraryModal>}
                 <div className="itinerary-container py-4 px-5 mt-4">
                     <ItineraryTable items={this.state.items}></ItineraryTable>
                 </div>
@@ -75,7 +82,7 @@ export const ItineraryTable = ({ items }) => (
             items.map((items, i) => (
 
                 <tr className="d-flex" key={i}>
-                    <th className="col-1">A</th>
+                    <th className="col-1">{items.itemNumber}</th>
                     <th className="col-1">{items.date}</th>
                     <th className="col-1">{items.time}</th>
                     <th className="col-2">{items.eventName}</th>

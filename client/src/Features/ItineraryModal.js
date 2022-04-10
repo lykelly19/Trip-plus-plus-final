@@ -28,7 +28,11 @@ export default class Modal extends Component {
         // add the five items into formItems
         for(let i=0; i<5; i++)
             formItems[formItemsKeys[i]] = event.target[i].value;
-        
+
+        formItems["itemNumber"] = this.props.numItems;
+
+        this.props.incrementNumItems();
+
         this.props.myItems.push(formItems);
         this.props.onSubmitItineraryItem();
     }
