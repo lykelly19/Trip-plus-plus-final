@@ -2,13 +2,15 @@ import './Itinerary.css';
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button';
 import ItineraryModal from './ItineraryModal';
+// import ItineraryTable from './ItineraryTable';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import editIcon from './edit-event-icon.png';
 
 export default class Itinerary extends Component {
 
     state = {
-        show: false
+        show: false,
+        items: []
     };
 
     showModal = e => {
@@ -23,91 +25,26 @@ export default class Itinerary extends Component {
         });
     }
 
+    onSubmitItineraryItem = () => {
+
+        console.log(this.state.items);
+
+        // close modal
+        this.setState({
+            show: false
+        });
+
+        // if(this.state.itemText){ //prevent empty item from being added
+        //     console.log(this.state.itemText);
+        // }
+    }
+
     render() {
         return (
             <div className="container">
-                { this.state.show && <ItineraryModal closeModal={this.closeModal}></ItineraryModal>}
+                { this.state.show && <ItineraryModal closeModal={this.closeModal} onSubmitItineraryItem={this.onSubmitItineraryItem} myItems={this.state.items}></ItineraryModal>}
                 <div className="itinerary-container py-4 px-5 mt-4">
-                    <table id="itinerary-table" className="table table-striped table-borderless">
-                        <thead>
-                            <tr className="d-flex">
-                                <th className="col-1">#</th>
-                                <th className="col-1">Date</th>
-                                <th className="col-1">Time</th>
-                                <th className="col-2">Event Name</th>
-                                <th className="col-2">Location</th>
-                                <th className="col-5">Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody className="itinerary-items-container">
-                            <tr className="d-flex">
-                                <th className="col-1">1</th>
-                                <th className="col-1">2/21/2022</th>
-                                <th className="col-1">7:21 PM</th>
-                                <th className="col-2">Visit Thessaliniki</th>
-                                <th className="col-2">Port of Thessaliniki</th>
-                                <th className="col-4">Bring Camera</th>
-                                <th className="col-1">
-                                    <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
-                                </th>
-                            </tr>
-                            <tr className="d-flex">
-                                <th className="col-1">2</th>
-                                <th className="col-1">Date</th>
-                                <th className="col-1">Time</th>
-                                <th className="col-2">Event Name</th>
-                                <th className="col-2">Location</th>
-                                <th className="col-4">Notes</th>
-                                <th className="col-1">
-                                    <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
-                                </th>
-                            </tr>
-                            <tr className="d-flex">
-                                <th className="col-1">3</th>
-                                <th className="col-1">Date</th>
-                                <th className="col-1">Time</th>
-                                <th className="col-2">Event Name</th>
-                                <th className="col-2">Location</th>
-                                <th className="col-4">Notes</th>
-                                <th className="col-1">
-                                    <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
-                                </th>
-                            </tr>
-                            <tr className="d-flex">
-                                <th className="col-1">4</th>
-                                <th className="col-1">Date</th>
-                                <th className="col-1">Time</th>
-                                <th className="col-2">Event Name</th>
-                                <th className="col-2">Location</th>
-                                <th className="col-4">Notes</th>
-                                <th className="col-1">
-                                    <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
-                                </th>
-                            </tr>
-                            <tr className="d-flex">
-                                <th className="col-1">5</th>
-                                <th className="col-1">Date</th>
-                                <th className="col-1">Time</th>
-                                <th className="col-2">Event Name</th>
-                                <th className="col-2">Location</th>
-                                <th className="col-4">Notes</th>
-                                <th className="col-1">
-                                    <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
-                                </th>
-                            </tr>
-                            <tr className="d-flex">
-                                <th className="col-1">6</th>
-                                <th className="col-1">Date</th>
-                                <th className="col-1">Time</th>
-                                <th className="col-2">Event Name</th>
-                                <th className="col-2">Location</th>
-                                <th className="col-4">Notes</th>
-                                <th className="col-1">
-                                    <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
-                                </th>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ItineraryTable items={this.state.items}></ItineraryTable>
                 </div>
 
                 <Button className="mt-4 py-2 px-3" id="add-button" onClick={e=>{this.showModal();}}>Add new itinerary item</Button>  
@@ -119,5 +56,39 @@ export default class Itinerary extends Component {
             </div>
     )}
 }
+
+
+export const ItineraryTable = ({ items }) => (
+    <table id="itinerary-table" className="table table-striped table-borderless">
+    <thead>
+        <tr className="d-flex">
+            <th className="col-1">#</th>
+            <th className="col-1">Date</th>
+            <th className="col-1">Time</th>
+            <th className="col-2">Event Name</th>
+            <th className="col-2">Location</th>
+            <th className="col-5">Notes</th>
+        </tr>
+    </thead>
+    <tbody className="itinerary-items-container">
+        {
+            items.map((items, i) => (
+
+                <tr className="d-flex" key={i}>
+                    <th className="col-1">A</th>
+                    <th className="col-1">{items.date}</th>
+                    <th className="col-1">{items.time}</th>
+                    <th className="col-2">{items.eventName}</th>
+                    <th className="col-2">{items.location}</th>
+                    <th className="col-4">{items.notes}</th>
+                    <th className="col-1">
+                        <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
+                    </th>
+                </tr>
+            ))
+        }
+    </tbody>
+</table>
+);
 
 
