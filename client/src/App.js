@@ -1,12 +1,15 @@
 import './App.css';
 import logo from './trip-plus-plus.svg'
-
-import {BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom";
+import React from "react";
+import {BrowserRouter as Router, Routes, Route, NavLink, useNavigate} from "react-router-dom";
 
 import Home from './Features/Home';
 import Itinerary from './Features/Itinerary';
 import Packing from './Features/Packing';
 import Budgeting from './Features/Budgeting';
+import Login from './Features/Auth/Login';
+import AuthButton from './Features/Auth/AuthButton';
+import Register from './Features/Auth/Register';
 // import CountView from './Features/CountView';
 
 function App() {
@@ -15,7 +18,7 @@ function App() {
       <Router>
         <div className="header">
           <img src={logo} className="appLogo" alt="logo" />
-          <button id="authButton">Log out</button>
+          <AuthButton/>
         </div>
 
         <nav className="navBar">
@@ -31,6 +34,8 @@ function App() {
             <Route path="/budgeting" element ={<Budgeting/>}/>
             <Route path="/itinerary" element ={<Itinerary/>}/>
             <Route path="/packing" element ={<Packing/>}/>
+            <Route path="/login" element ={<Login/>}/>
+            <Route path="/register" element = {<Register/>}/>
           </Routes>
         </div>
 
