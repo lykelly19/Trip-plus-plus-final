@@ -24,13 +24,17 @@ export default function Login(){
         });
     }
 
+    const handleRegister = () => {
+        routerNavigate('/register')
+    }
+
     return(
         <div className="loginPage">
             <div className = "loginContainer">
                 <input type="email" value={email} onChange={handleEmailChanges}></input>
                 <input type="password" value={password} onChange={handlePasswordChanges}></input>
                 <button onClick={handleSignIn}>Sign In</button>
-                <a href="">Create an account</a>
+                <button onClick={handleRegister}>Create an account</button>
             </div>
         </div>
     )

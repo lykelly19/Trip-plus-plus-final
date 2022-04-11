@@ -9,6 +9,7 @@ import Packing from './Features/Packing';
 import Budgeting from './Features/Budgeting';
 import Login from './Features/Auth/Login';
 import AuthButton from './Features/Auth/AuthButton';
+import Register from './Features/Auth/Register';
 // import CountView from './Features/CountView';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/itinerary" element ={<Itinerary/>}/>
             <Route path="/packing" element ={<Packing/>}/>
             <Route path="/login" element ={<Login/>}/>
+            <Route path="/register" element = {<Register/>}/>
           </Routes>
         </div>
 
