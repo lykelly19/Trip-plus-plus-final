@@ -11,7 +11,14 @@ export default class Itinerary extends Component {
     state = {
         show: false,
         items: [],
-        numItems: 1
+        numItems: 1,
+        prefill: {
+            "itemNumber": "",
+            "date": "",
+            "eventName": "",
+            "location": ""
+        },
+        prefillItem: null
     };
 
     showModal = e => {
@@ -22,7 +29,13 @@ export default class Itinerary extends Component {
 
     closeModal = () => {
         this.setState({
-            show: false
+            show: false,
+            prefill: {
+                "itemNumber": "",
+                "date": "",
+                "eventName": "",
+                "location": ""
+            }
         });
     }
 
@@ -32,26 +45,80 @@ export default class Itinerary extends Component {
         });
     }
 
-    onSubmitItineraryItem = () => {
 
-        console.log(this.state.items);
+    onSubmitItineraryItem = () => {
+        
+        // if this is editing an item, change item to have values equal to the newly added item
+        if(this.state.prefill["itemNumber"]) {
+
+            // from the list, remove the item with the same itemNumber
+            const data = this.state.items.filter(i => i.itemNumber !== this.state.prefill.itemNumber);
+
+            // set to original item number
+            this.state.items[this.state.items.length - 1]["itemNumber"] = this.state.prefill["itemNumber"];
+
+            // sort data
+            data.sort(function(a, b) {
+                return a.itemNumber - b.itemNumber;
+            });
+
+            this.setState({
+                items: data
+            })
+        }
 
         // close modal
         this.setState({
-            show: false
+            show: false,
+            prefill: {
+                "itemNumber": "",
+                "date": "",
+                "eventName": "",
+                "location": ""
+            }
+        });
+    }
+
+    // spliceRow = (index) => {
+
+    //     console.log("splice");
+    //     console.log(index);
+    //     // console.log(index);
+    //     // this.state.items.splice(index, 1)
+    //     // this.setState({ items: this.state.items })
+    // }
+
+
+    handleEdit = item => {
+
+        // set prefill data
+
+        // console.log(item.itemNumber);
+        // console.log(item.date);
+        // console.log(item.time);
+        // console.log(item.eventName);
+        // console.log(item.location);
+
+        this.setState({
+            show: true,
+            prefill: item
         });
 
-        // if(this.state.itemText){ //prevent empty item from being added
-        //     console.log(this.state.itemText);
-        // }
+        // this.setState(({ items }) => ({
+        //     items: items.filter(el => el.id !== item.id)
+        // }));
+    };
+
+    handleDel = item => {
+        console.log("delete");
     }
 
     render() {
         return (
             <div className="container">
-                { this.state.show && <ItineraryModal closeModal={this.closeModal} onSubmitItineraryItem={this.onSubmitItineraryItem} myItems={this.state.items} incrementNumItems={this.incrementNumItems} numItems={this.state.numItems}></ItineraryModal>}
+                { this.state.show && <ItineraryModal closeModal={this.closeModal} onSubmitItineraryItem={this.onSubmitItineraryItem} myItems={this.state.items} incrementNumItems={this.incrementNumItems} numItems={this.state.numItems} handleDel={this.handleDel} itemPrefill={this.state.prefill}></ItineraryModal>}
                 <div className="itinerary-container py-4 px-5 mt-4">
-                    <ItineraryTable items={this.state.items}></ItineraryTable>
+                    <ItineraryTable items={this.state.items} handleEdit={this.handleEdit}></ItineraryTable>
                 </div>
 
                 <Button className="mt-4 py-2 px-3" id="add-button" onClick={e=>{this.showModal();}}>Add new itinerary item</Button>  
@@ -65,7 +132,7 @@ export default class Itinerary extends Component {
 }
 
 
-export const ItineraryTable = ({ items }) => (
+export const ItineraryTable = ({ items, handleEdit }) => (
     <table id="itinerary-table" className="table table-striped table-borderless">
     <thead>
         <tr className="d-flex">
@@ -79,17 +146,17 @@ export const ItineraryTable = ({ items }) => (
     </thead>
     <tbody className="itinerary-items-container">
         {
-            items.map((items, i) => (
+            items.map((item, i) => (
 
                 <tr className="d-flex" key={i}>
-                    <th className="col-1">{items.itemNumber}</th>
-                    <th className="col-1">{items.date}</th>
-                    <th className="col-1">{items.time}</th>
-                    <th className="col-2">{items.eventName}</th>
-                    <th className="col-2">{items.location}</th>
-                    <th className="col-4">{items.notes}</th>
+                    <th className="col-1">{item.itemNumber}</th>
+                    <th className="col-1">{item.date}</th>
+                    <th className="col-1">{item.time}</th>
+                    <th className="col-2">{item.eventName}</th>
+                    <th className="col-2">{item.location}</th>
+                    <th className="col-4">{item.notes}</th>
                     <th className="col-1">
-                        <img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img>
+                        <button onClick={() => handleEdit(item)} className="editIconButton"><img src={editIcon} className="edit-icon" alt="edit itineary item icon"></img></button>
                     </th>
                 </tr>
             ))

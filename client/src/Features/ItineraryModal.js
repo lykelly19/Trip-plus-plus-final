@@ -4,6 +4,7 @@ import './ItineraryModal.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import TableDatePicker from "./TableDatePicker";
+import TableTimePicker from "./TableTimePicker";
 
 const modalStyle = {
     position: "fixed",
@@ -46,39 +47,37 @@ export default class Modal extends Component {
       return createPortal (
     
         <div style={modalStyle}>
-
             <div className="itinerary-modal">
                     <Button id="close-button" onClick={this.props.closeModal}>X</Button>
                     <form onSubmit={this.submitModalForm}>
 
                         <div className="modal-section" id="first-modal-section">
                             <p className="modal-heading">Event Name</p>
-                            <input></input>
+                            <input defaultValue={this.props.itemPrefill["eventName"]}></input>
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Date</p>
-                            <TableDatePicker
-                            />
+                            <TableDatePicker selected={this.props.itemPrefill["date"]}/>
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Time</p>
-                            <input></input>
+                            <input defaultValue={this.props.itemPrefill["time"]}></input>
+                            {/* <TableTimePicker/> */}
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Location</p>
-                            <input></input>
+                            <input defaultValue={this.props.itemPrefill["location"]}></input>
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Notes</p>
-                            <textarea></textarea>
+                            <textarea defaultValue={this.props.itemPrefill["location"]}></textarea>
                         </div>
                         <div className="modal-section">
-                            <Button id="delete-button">Delete</Button>
+                            <Button id="delete-button" onClick={this.props.handleDel}>Delete</Button>
                             <Button id="save-button" type="submit">Save</Button>
                         </div>
                     </form>
                 </div>
-
             </div>,
             document.getElementById("modal_root"),
         );
