@@ -52,15 +52,41 @@ export default class Itinerary extends Component {
         if(this.state.prefill["itemNumber"]) {
 
             // from the list, remove the item with the same itemNumber
+            this.state.items = this.state.items.filter(i => i.itemNumber !== this.state.prefill.itemNumber);
+        }
+
+        // sort by date
+        this.state.items.sort(function(a, b) {
+            let DateA = new Date(a.date);
+            let DateB = new Date(b.date);
+            return DateA - DateB;
+        });
+
+        // reset itinerary numbers
+        this.state.items.map((item, i) => item.itemNumber = i + 1);
+
+        // close modal
+        this.closeModal();
+    }
+
+    handleEdit = item => {
+
+        // set prefill data
+        this.setState({
+            show: true,
+            prefill: item
+        });
+
+    };
+
+
+    handleDel = (itemNumber) => {
+
+        // only delete item if the item has previously been saved
+        if(itemNumber !== "") {
+
+            // from the list, remove the item with the same itemNumber
             const data = this.state.items.filter(i => i.itemNumber !== this.state.prefill.itemNumber);
-
-            // set to original item number
-            this.state.items[this.state.items.length - 1]["itemNumber"] = this.state.prefill["itemNumber"];
-
-            // sort data
-            data.sort(function(a, b) {
-                return a.itemNumber - b.itemNumber;
-            });
 
             this.setState({
                 items: data
@@ -68,50 +94,9 @@ export default class Itinerary extends Component {
         }
 
         // close modal
-        this.setState({
-            show: false,
-            prefill: {
-                "itemNumber": "",
-                "date": "",
-                "eventName": "",
-                "location": ""
-            }
-        });
+        this.closeModal();
     }
 
-    // spliceRow = (index) => {
-
-    //     console.log("splice");
-    //     console.log(index);
-    //     // console.log(index);
-    //     // this.state.items.splice(index, 1)
-    //     // this.setState({ items: this.state.items })
-    // }
-
-
-    handleEdit = item => {
-
-        // set prefill data
-
-        // console.log(item.itemNumber);
-        // console.log(item.date);
-        // console.log(item.time);
-        // console.log(item.eventName);
-        // console.log(item.location);
-
-        this.setState({
-            show: true,
-            prefill: item
-        });
-
-        // this.setState(({ items }) => ({
-        //     items: items.filter(el => el.id !== item.id)
-        // }));
-    };
-
-    handleDel = item => {
-        console.log("delete");
-    }
 
     render() {
         return (

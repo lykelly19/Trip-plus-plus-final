@@ -70,10 +70,10 @@ export default class Modal extends Component {
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Notes</p>
-                            <textarea defaultValue={this.props.itemPrefill["location"]}></textarea>
+                            <textarea defaultValue={this.props.itemPrefill["notes"]}></textarea>
                         </div>
                         <div className="modal-section">
-                            <Button id="delete-button" onClick={this.props.handleDel}>Delete</Button>
+                            <Button id="delete-button" onClick={e => this.props.handleDel(this.props.itemPrefill["itemNumber"])}>Delete</Button>
                             <Button id="save-button" type="submit">Save</Button>
                         </div>
                     </form>
