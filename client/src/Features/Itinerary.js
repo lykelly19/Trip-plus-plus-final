@@ -86,12 +86,18 @@ export default class Itinerary extends Component {
         if(itemNumber !== "") {
 
             // from the list, remove the item with the same itemNumber
-            const data = this.state.items.filter(i => i.itemNumber !== this.state.prefill.itemNumber);
-
-            this.setState({
-                items: data
-            })
+            this.state.items = this.state.items.filter(i => i.itemNumber !== this.state.prefill.itemNumber);
         }
+
+        // sort by date
+        this.state.items.sort(function(a, b) {
+            let DateA = new Date(a.date);
+            let DateB = new Date(b.date);
+            return DateA - DateB;
+        });
+
+        // reset itinerary numbers
+        this.state.items.map((item, i) => item.itemNumber = i + 1);
 
         // close modal
         this.closeModal();
