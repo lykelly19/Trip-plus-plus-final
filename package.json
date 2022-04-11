@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/lykelly19/Trip-plus-plus-beta#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "react-time-picker": "^4.5.0"
   },
   "engines": {
     "node": "14.17.6"
