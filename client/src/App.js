@@ -1,6 +1,6 @@
 import './App.css';
 import logo from './trip-plus-plus.svg'
-import React, { useEffect } from "react";
+import React from "react";
 import {BrowserRouter as Router, Routes, Route, NavLink, useNavigate} from "react-router-dom";
 
 import Home from './Features/Home';

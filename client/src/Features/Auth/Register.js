@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase"
 import { createUserWithEmailAndPassword} from "firebase/auth";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate, useHistory } from "react-router-dom";
 
 export default function Register(){
     const [userRegisterationInfo, setUserRegisterationInfo] = useState({
@@ -24,7 +24,10 @@ export default function Register(){
         ).then(() => {
             registerNavigate("/");
         }).catch((err) => alert(err.message));
-        
+    }
+
+    const handleBackFromRegister = () => {
+        registerNavigate("/login");
     }
 
     return(
@@ -63,6 +66,7 @@ export default function Register(){
                 }}
             />
             <button onClick={handleRegister}>Register</button>
+            <button onClick={handleBackFromRegister}>Back</button>
         </div>
     )
 }
