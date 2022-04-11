@@ -4,31 +4,23 @@
     width: 100%;
     padding: 40px;
     margin: 10px;
-
 }
 
-
-.featureComponents{
-    padding-top: 50px;
-    padding-bottom: 75px;
-
-}
-.P-content{
+.P-content {
     width: 50%;
     background-color: #4A587B;
     border-radius: 25px;
     min-height: 200px;
     padding: 30px;
-    margin:auto;
-    
+    margin: auto;
 }
 
-
-.P-content h2{
+.P-content h2 {
     text-align: center;
     color: #fff;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .P-form {
     /*border: 3px solid #000;*/
     border-radius: 25px;
@@ -37,8 +29,7 @@
     margin: auto;
 }
 
-
-.inputDiv{
+.inputDiv {
     background-color: #fff;
     border-radius: 10px;
     display: inline-block;
@@ -48,14 +39,13 @@
     padding: 0;
 }
 
-.inputDiv input{
+.inputDiv input {
     padding: 10px;
     width: 90%;
     border-radius: 10px;
     box-sizing: border-box;
     float: left;
 }
-
 
 .inputDiv button {
     background-color: #C7FFF5;
@@ -70,72 +60,60 @@
 }
 
 .listDiv ul {
-  list-style-type: none;
-  padding: 10px;
- }
-
- 
-
- .listDiv ul li {
-   background-color: #BCFBFF;
-   border-radius: 25px;
-   margin: 15px;
-   padding: 10px;
-   font-family: Verdana, Geneva, Tahoma, sans-serif;
-   
- }
-
- .listDiv ul li button{
-     background-color: #BCFBFF;
-     border: 0px;
-     font-size: 16px;
-     color: #8DD0DF;
-     font-weight: 1000;
-     float: left;
- }
-
- .listDiv ul li input[type="checkbox"]{
-     float: inline-end;
-     border: 100px #000 solid;
-     
- }
-
- 
- .inputDiv input[type=text] {
-  border: none;
-  border-radius: 25px;
-  min-width: 400px;
-  float: left;
+    list-style-type: none;
+    padding: 10px;
 }
 
-.deleteAllDiv{
+.listDiv ul li {
+    background-color: #BCFBFF;
+    border-radius: 25px;
+    margin: 15px;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.listDiv ul li button {
+    background-color: #BCFBFF;
+    border: 0px;
+    font-size: 16px;
+    color: #8DD0DF;
+    font-weight: 1000;
+    float: left;
+}
+
+.listDiv ul li input[type="checkbox"] {
+    float: inline-end;
+    border: 100px #000 solid;
+}
+
+.inputDiv input[type=text] {
+    border: none;
+    border-radius: 25px;
+    min-width: 400px;
+    float: left;
+}
+
+.deleteAllDiv {
     display: inline-block;
     width: 100%;
     padding-bottom: 10px;
-
 }
 
-.deleteAllBtn button{
-  float: right;
+.deleteAllBtn button {
+    float: right;
 }
 
-
-.deleteAllDiv button{
-  border: none;
-  background-color:#4A587B;
-  color: #C7DDEA;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  float: right;
+.deleteAllDiv button {
+    border: none;
+    background-color: #4A587B;
+    color: #C7DDEA;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    float: right;
 }
-
-
-
 
 button .P-form-add {
-  height: 60px;
-  width: 60px;
+    height: 60px;
+    width: 60px;
 }
-
-
