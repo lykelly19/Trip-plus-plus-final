@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import './ItineraryModal.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import TableDatePicker from "./TableDatePicker";
 
 const modalStyle = {
     position: "fixed",
@@ -37,6 +38,10 @@ export default class Modal extends Component {
         this.props.onSubmitItineraryItem();
     }
 
+
+
+
+    
     render() {
       return createPortal (
     
@@ -52,7 +57,8 @@ export default class Modal extends Component {
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Date</p>
-                            <input></input>
+                            <TableDatePicker
+                            />
                         </div>
                         <div className="modal-section">
                             <p className="modal-heading">Time</p>
