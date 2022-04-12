@@ -1,6 +1,6 @@
 import React from "react";
 import "./index.css";
-import { Card, List, Form, Input, Button, InputNumber } from "antd";
+import { Card, List, Form, Input, Button, InputNumber, Select} from "antd";
 import {PlusCircleOutlined, CheckCircleFilled, CloseCircleOutlined} from "@ant-design/icons"
 import ColorPicker from "./ColorPicker";
 import DeleteDialog from "./DeleteDialog";
@@ -10,8 +10,14 @@ import { TooltipComponent, LegendComponent } from 'echarts/components';
 import { PieChart } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+import cityData from './data.json';
 const { useState, useEffect, useRef } = React;
 
+
+const cityMap = {};
+for(let item of cityData){
+  cityMap[item.id] = item;
+}
 //For echarts
 echarts.use([
   TooltipComponent,
@@ -20,7 +26,12 @@ echarts.use([
   CanvasRenderer,
   LabelLayout
 ]);
-
+function randomColor() {
+  var color = "#";
+  //random get 0-15 and use tostring (16) in to color
+  for (var i = 0; i < 6; i++) color+=parseInt(Math.random() * 16).toString(16);
+  return color;
+}
 function Index() {
   const [countList, setCountList] = useState([{
     id: 1,
@@ -30,8 +41,16 @@ function Index() {
     isNew: true,
   }]); //for the left input data{id:1,color:"",name:"",price:"",isNew:false}
   const [handleDeleteId, setHandleDeleteId] = useState(); //For Delete button
+  const [obj, setObj] = useState();
+  const [deleteAllFlag, setDeleteAllFlag] = useState(false);  
+  const [cityObj, setCityObj] = useState({});
   const formRef = useRef();
+  const colorRef = useRef({});
+  const initialColor = randomColor();
 
+  const reload = ()=>{
+    setObj({});
+  }
   useEffect(() => {
     //set for echart
     const chartDom = document.querySelector('.right-box');
@@ -73,9 +92,11 @@ function Index() {
   }, [countList]);
 
   function handleColorChange(id, color) {
+
     formRef.current.setFieldsValue({
       [`color_${id}`]: color,
     });
+    reload();
   }
 
   function handlePushItem() {
@@ -133,6 +154,10 @@ function Index() {
   }
 
   function handleDeleteOk(id) {
+    if(deleteAllFlag){
+      handleDeleteAll();
+      return;
+    }
     //delete the id
     const resultList = countList.filter(item=>item.id != id);
     setCountList(resultList);
@@ -143,6 +168,21 @@ function Index() {
     //clean the temp id
     setHandleDeleteId(0);
   }
+  const handleDeleteAll =()=>{
+    setCountList([]);
+    formRef.current && formRef.current.resetFields();
+    setDeleteAllFlag(false);
+    setHandleDeleteId();
+    handleDeleteCancel();
+  }
+  console.log('cityObj',cityObj)
+  const cityProps = (name) =>({
+    value: cityObj[name],
+    onChange: (value)=>{
+      setCityObj((prev)=>({...prev,[name]:value}))
+    }
+  });
+  console.log('countList',countList)
   return (
     <div id="container">
       <Card.Grid className="left-box">
@@ -165,13 +205,13 @@ function Index() {
                   color: item.color,
                   isNew: item.isNew,
                 }))}
-                renderItem={(item) => {
-                  console.log(item.color);
+                renderItem={(item,index) => {
+                  console.log('item',item,formRef.current&&formRef.current.getFieldsValue())
                   return (
                     <List.Item>
                       <ColorPicker
                         //colorpicker, and the default color
-                        color={item.color || (formRef.current && formRef.current.getFieldValue(`color_${item.id}`))}
+                        color={item.color || (formRef.current && formRef.current.getFieldValue(`color_${item.id}`))||initialColor}
                         onChange={handleColorChange.bind(null, item.id)}
                         disabled={!item.isNew}
                       />
@@ -179,7 +219,7 @@ function Index() {
                         item.isNew &&
                         <Form.Item
                         name={`color_${item.id}`}
-                        initialValue={item.color || "#44cef6"}
+                        initialValue={item.color || initialColor}
                         rules={[
                           {
                             required: true,
@@ -289,17 +329,72 @@ function Index() {
           <div className="button-container">
             <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
               <div style={{ height: 16 }} />
-              <Button type="primary" onClick={handleSave}>
+              <Button style={{color:'#fff',borderColor:'#a37cf0',background:'#a37cf0'}} shape='round' onClick={handleSave}>
                 Finish
+              </Button>
+              <Button type="danger" onClick={()=>{
+                setDeleteAllFlag(true);
+                handleItemDelete('-1');
+              }} style={{marginLeft:10}} shape='round'>
+                Delete All
               </Button>
             </Form.Item>
           </div>
         </Form>
       </Card.Grid>
+      <div className="medium-content">
+        <div style={{width: '100%',display: 'flex'}}>State <Select
+                    showSearch
+                    placeholder="Select a city"
+                    optionFilterProp="children"
+                    onChange={(value)=>{
+                      console.log('value',value);
+                      if(!value){
+                        setCityObj({});
+                        return;
+                      }
+                      const item = cityMap[value];
+                      const newCityObj = {
+                        food: item.prop1,
+                        ticket: item.prop2,
+                        hotel: item.prop3,
+                      }
+                      setCityObj(newCityObj);
+                    }}
+                    // onSearch={onSearch}
+                    style={{width:'60%',marginLeft:20}}
+                    filterOption={(input, option) =>
+                      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {cityData.map(item=><Select.Option value={item.id}>
+                      {item.name}
+                    </Select.Option>)}
+                  </Select>
+        </div>
+        <div style={{marginTop:30}}>Average Food 
+        </div>
+        <div style={{fontSize:14}}>
+          <div>
+            <InputNumber placeholder="Average Food"  style={{width:'100%'}} {...cityProps('food')}/>
+          </div>
+          <div style={{marginTop:30}}>Average Ticket
+          </div>
+          <div>
+            <InputNumber placeholder="Average Ticket"  style={{width:'100%'}} {...cityProps('ticket')}/>
+          </div>
+          <div style={{marginTop:30}}>Average Hotel
+          </div>
+          <div>
+            <InputNumber placeholder="Average Hotel"  style={{width:'100%'}} {...cityProps('hotel')}/>
+          </div>
+        </div>
+      </div>
       <div className="right-box"></div>
 
       <DeleteDialog
         // use handleDeleteId to boolean and check
+        deleteAllFlag={deleteAllFlag}
         show={handleDeleteId}
         handleOk={handleDeleteOk.bind(null, handleDeleteId)}
         handleCancel={handleDeleteCancel}
