@@ -12,12 +12,10 @@
     border-radius: 25px;
     min-height: 200px;
     padding: 30px;
-    margin: 20px;
-    
+    margin: auto;
 }
 
-
-.P-content h2{
+.P-content h2 {
     text-align: center;
     color: #4A587B;
     font-weight: 700;
@@ -25,6 +23,7 @@
 
   
 }
+
 .P-form {
     /*border: 3px solid #000;*/
     border-radius: 25px;
@@ -33,8 +32,7 @@
     margin: auto;
 }
 
-
-.inputDiv{
+.inputDiv {
     background-color: #fff;
     border-radius: 10px;
     display: inline-block;
@@ -43,14 +41,13 @@
     padding: 0;
 }
 
-.inputDiv input{
+.inputDiv input {
     padding: 10px;
     width: 90%;
     border-radius: 10px;
     box-sizing: border-box;
     float: left;
 }
-
 
 .inputDiv button {
     background-color: #C7FFF5;
@@ -114,15 +111,14 @@
   float: left;
 }
 
-.deleteAllDiv{
+.deleteAllDiv {
     display: inline-block;
     width: 100%;
     padding-bottom: 10px;
-
 }
 
-.deleteAllBtn button{
-  float: right;
+.deleteAllBtn button {
+    float: right;
 }
 
 
@@ -135,9 +131,6 @@
   font-weight: 800;
   float: right;
 }
-
-
-
 
 button .P-form-add {
   height: 60px;
