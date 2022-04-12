@@ -93,3 +93,7 @@ tbody tr th:first-child, thead tr th:first-child {
     font-weight: 900;
     font-size: 42px;
 }
+
+.editIconButton {
+    all: unset;
+}
