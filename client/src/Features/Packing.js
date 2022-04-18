@@ -1,41 +1,46 @@
 import React, { Component } from "react";
-import './packing.css'
+import "./packing.css";
 
 export default class Packing extends Component {
   state = {
     items: [],
-    itemText: ""
+    itemText: "",
+    isChecked: false,
   };
 
-  onChangeInput = e => {
+  onChangeInput = (e) => {
     this.setState({ itemText: e.target.value });
   };
 
   onSubmitItem = () => {
-    if(this.state.itemText){ //prevent empty item from being added
-    this.setState(({ items, itemText }) => ({
-      items: [...items, { id: items.length + 1, name: itemText, done: false }],
-      itemText: ""
-    }));
-  }
+    if (this.state.itemText) {
+      //prevent empty item from being added
+      this.setState(({ items, itemText }) => ({
+        items: [
+          ...items,
+          { id: items.length + 1, name: itemText, done: false },
+        ],
+        itemText: "",
+      }));
+    }
   };
 
-  onChangeBox = item => {
+  onChangeBox = (item) => {
     this.setState(({ items }) => ({
-      items: items.map(el =>
+      items: items.map((el) =>
         el.id === item.id ? { ...el, done: !el.done } : el
-      )
+      ),
     }));
   };
 
-  handleDel = item => {
+  handleDel = (item) => {
     this.setState(({ items }) => ({
-      items: items.filter(el => el.id !== item.id)
+      items: items.filter((el) => el.id !== item.id),
     }));
   };
   deleteAll = () => {
     this.setState(({ items }) => ({
-      items: []
+      items: [],
     }));
   };
 
@@ -43,27 +48,65 @@ export default class Packing extends Component {
     const { items, itemText } = this.state;
 
     return (
-      <div className="P-content">
-        <h2>Packing List:</h2>
-        <div className="deleteAllDiv">
-        <Button className="deleteAllBtn" onClick={this.deleteAll}>Delete All</Button>
-        </div>
-        <div className="inputDiv">
-        <Input value={itemText} onChange={this.onChangeInput} />
-        <Button className="P-form-add" onClick={this.onSubmitItem}>+</Button>
-        </div>
-        <div className="listDiv">
-        <List
-          list={items}
-          onChangeBox={this.onChangeBox}
-          handleDel={this.handleDel}
-        />
+      <div className="container">
+        <div className="card">
+          <div className="row g-0">
+            <div className="col-lg-8">
+              <div className="card-body p-md-5 mx-md-4">
+                {/*
+                <div className="text-center reg-intro">
+                  <h2>Your packing list</h2>
+    </div>*/}
+                <div className="deleteAllDiv">
+                  <button
+                    className="deleteAllBtn btn box-shadow"
+                    onClick={this.deleteAll}
+                  >
+                    Delete All
+                  </button>
+                </div>
+                <div className="inputDiv">
+                  <input
+                    className="pack-input form-control"
+                    value={itemText}
+                    placeholder="Type something here"
+                    onChange={this.onChangeInput}
+                  />
+                  <button
+                    className="addBtn btn box-shadow P-form-add"
+                    onClick={this.onSubmitItem}
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="container listDiv">
+                  <List
+                    list={items}
+                    onChangeBox={this.onChangeBox}
+                    handleDel={this.handleDel}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="packing-side col-lg-4 d-flex align-items-center">
+              <div className="px-3 py-4 p-md-5 mx-md 4">
+                <h4>Some suggestions for your packing list</h4>
+                {/*<h2>Your packing list</h2>*/}
+                <p className="small mb-0">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
+                  iure ratione quasi molestiae quia? Aliquam quia sapiente aut
+                  voluptas, deleniti ab saepe adipisci accusamus quisquam dicta
+                  eligendi placeat molestiae impedit.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
-
+/*
 export const Button = ({ onClick, children }) => (
   <button type="button" className="btn" onClick={onClick}>
     {children}
@@ -77,22 +120,30 @@ export const Checkbox = ({ onClick, defaultChecked }) => (
 export const Input = ({ value, onChange }) => (
   <input type="text" value={value} onChange={onChange} />
 );
-
+*/
 export const List = ({ list, onChangeBox, handleDel }) => (
-  <ul>
-    {list.map(item => (
+  <ul className="">
+    {/* flex-container*/}
+    {list.map((item) => (
       <li
+        className={item.done ? "checked" : null}
         key={item.id}
         style={{ textDecoration: item.done ? "line-through" : null }}
+        onClick={() => onChangeBox(item)}
+        defaultChecked={item.done}
       >
-
-         <Button className="deleteButton btn" onClick={() => handleDel(item)}>X</Button>
-        {item.name}
-        <Checkbox className="checkbox"
+        {/*
+        <input
+          type="checkbox"
+          className="checkbox p-2"
           onClick={() => onChangeBox(item)}
           defaultChecked={item.done}
-        />
-        
+    />*/}
+        {item.name}
+        {/*box-shadow p-2*/}
+        <span className="deleteBtn" onClick={() => handleDel(item)}>
+          X
+        </span>
       </li>
     ))}
   </ul>

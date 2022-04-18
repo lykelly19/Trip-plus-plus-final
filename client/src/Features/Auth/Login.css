@@ -25,6 +25,7 @@
     background-color: #a37cf0;
     border-radius: 0px;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .sign-in-btn:hover {
@@ -40,7 +41,8 @@
 }
 
 .create-new-btn:hover {
-    border: none;
+    /*border: none;*/
+    border-color: transparent;
     color: white;
     background-color: #bd2e95;
     text-shadow: 2px 2px 4px #000000;

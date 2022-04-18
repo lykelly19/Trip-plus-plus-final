@@ -58,6 +58,7 @@ body {
     /*background-color: #c8b4d0;*/
     background-color: #bd2e95;
     text-shadow: 2px 2px 4px #000000;
+    border-color: transparent;
     border: none;
 }
 
@@ -124,8 +125,7 @@ body {
     display: flex;
     justify-content: center;
     margin: 0 auto;
-}
-*/
+}*/
 
 .footer {
     display: flex;
