@@ -81,17 +81,18 @@ export default class Modal extends Component {
               ></textarea>
             </div>
             <div className="modal-section">
-              <Button
+              <button
+                className="btn"
                 id="delete-button"
                 onClick={(e) =>
                   this.props.handleDel(this.props.itemPrefill["itemNumber"])
                 }
               >
                 Delete
-              </Button>
-              <Button id="save-button" type="submit">
+              </button>
+              <button className="btn" id="save-button" type="submit">
                 Save
-              </Button>
+              </button>
             </div>
           </form>
         </div>

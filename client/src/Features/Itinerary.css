@@ -18,12 +18,20 @@
 
 .itinerary-items-container {
     /*background-color: #D8D3E7;*/
-    background-color: #eee;
+    /*background-color: #eee;*/
     border-radius: 0px;
 }
 
 tbody {
     border-radius: 0px;
+}
+
+.table>tbody {
+    /* vertical-align: middle !important;*/
+}
+
+.table>:not(:first-child) {
+    border-top: none;
 }
 
 
@@ -62,7 +70,7 @@ tbody {
     /*
     background-color: #ECECEC;
     */
-    background: #eee;
+    /*background: #eee;*/
 }
 
 .table-striped>tbody>tr:nth-child(even) {
@@ -72,6 +80,8 @@ tbody {
     background: #f9f9f9;
 }
 
+
+/*
 #itinerary-table thead tr {
     margin-bottom: 10px;
 }
@@ -79,6 +89,7 @@ tbody {
 #itinerary-table tbody tr {
     height: 60px;
 }
+*/
 
 #itinerary-table tbody th {
     font-weight: 400;
@@ -105,17 +116,6 @@ tbody tr:last-child {
 }
 */
 
-
-/*
-.table-striped>tbody>tr:nth-child(odd):first-child>th:first-child {
-    border-top-left-radius: 20px;
-}
-
-.table-striped>tbody>tr:nth-child(odd):first-child>th:last-child {
-    border-top-right-radius: 20px;
-}
-*/
-
 thead {
     /*color: #2E294E;*/
     color: #333333;
@@ -130,13 +130,16 @@ thead {
 
 /* Add padding for itinerary number column*/
 
+
+/*
 tbody tr th:first-child,
 thead tr th:first-child {
     padding-left: 20px;
 }
+*/
 
 .table>tbody>tr>td {
-    vertical-align: middle;
+    /*vertical-align: middle;*/
 }
 
 #itinerary-map {
@@ -159,4 +162,27 @@ thead tr th:first-child {
 
 .editIconButton {
     all: unset;
+}
+
+.it-del-div {
+    position: relative;
+}
+
+.itinerary-delete-btn {
+    cursor: pointer;
+    border-radius: 0px;
+    /*border: 1px solid #333333;*/
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.itinerary-delete-btn:hover {
+    border: none;
+    /*padding: calc(20px+1px);*/
+    color: white;
+    background-color: #bd2e95;
+    text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
 }
