@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import Popup from "reactjs-popup";
 import "./packing.css";
+import "reactjs-popup/dist/index.css";
 
 export default class Packing extends Component {
   state = {
@@ -13,6 +15,7 @@ export default class Packing extends Component {
       swtich to input el*/
   toggleInput = (item) => {
     this.setState({ isEditing: item });
+    item.editing = true;
   };
 
   /* when form input out of focus and if text is empty it deletes li*/
@@ -22,6 +25,12 @@ export default class Packing extends Component {
       this.handleDel(item);
       this.setState({ isEditing: false });
     }
+
+    /* exits out of edit mode for all items */
+    for (var i = 0; i < this.state.items.length; i++) {
+      if (this.state.items[i] != null) this.state.items[i].editing = false;
+    }
+
     this.setState({ isEditing: false });
   };
 
@@ -52,12 +61,18 @@ export default class Packing extends Component {
       this.setState(({ items, itemText }) => ({
         items: [
           ...items,
-          { id: items.length + 1, name: itemText, done: false },
+          { id: items.length + 1, name: itemText, done: false, editing: false },
         ],
         itemText: "",
         isEditing: false,
       }));
     }
+  };
+
+  /* wanted the orig input to also be able to have key enter input
+   but function is not working*/
+  onSubmitItem2 = (e) => {
+    if (e.key === "Enter") this.onSubmitItem();
   };
 
   onChangeBox = (item) => {

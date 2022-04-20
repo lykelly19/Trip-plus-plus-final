@@ -422,4 +422,30 @@ input:focus {
     border-radius: 3px;
 }
 
-*/
+
+        padding: 9px;
+        letter-spacing: 1px;
+        border: 0px;
+        float: inline-end;
+        margin: 10px;
+        border: none;
+        border-radius: 30px;
+        font-weight: 800;
+        height: 40px;
+        width: 80px;
+    
+        background-color: #AFAFAF;
+        border: none;
+        border-radius: 30px;
+        color: #4B5267;
+      
+    }
+
+
+
+  .input-edit{
+      border: none;
+      background-color: #fff;
+
+  }
+  */
