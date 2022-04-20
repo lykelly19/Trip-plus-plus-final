@@ -121,7 +121,7 @@ export default function Register() {
             </div>
             <div className="reg-side col-lg-6 d-flex align-items-center">
               <div className="px-3 py-4 p-md-5 mx-md 4">
-                <h4>About Us</h4>
+                <h4>Why make an account?</h4>
                 <p className="small mb-0">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
                   iure ratione quasi molestiae quia? Aliquam quia sapiente aut
