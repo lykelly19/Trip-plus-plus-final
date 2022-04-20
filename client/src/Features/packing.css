@@ -233,12 +233,8 @@ button .P-form-add {
 
   .input-edit{
       border: none;
-      background-color: #ECECEC;
+      background-color: #fff;
 
   }
 
 
-  input:focus{
-      border: 3px solid #4A587B;
-      border-radius: 3px;;
-  }
