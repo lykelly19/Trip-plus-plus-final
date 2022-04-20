@@ -116,6 +116,7 @@ body {
   */
     padding-top: 25px;
     padding-bottom: 75px;
+    display: flex;
 }
 
 

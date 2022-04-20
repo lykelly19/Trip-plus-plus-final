@@ -1,19 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
-
 * {
     font-family: Roboto;
 }
 
+
+/*
 .itinerary-container {
     background-color: #D8D3E7;
     border-radius: 30px;
 }
+*/
 
-.itinerary-items-container {
-    background-color: #D8D3E7;
-    border-radius: 50px;
+.itinerary-container {
+    background-color: white;
+    border-radius: 0px;
 }
 
+.itinerary-items-container {
+    /*background-color: #D8D3E7;*/
+    background-color: #eee;
+    border-radius: 0px;
+}
+
+tbody {
+    border-radius: 0px;
+}
+
+
+/*
 #add-button {
     background-color: #4B5267;
     border-radius: 50px;
@@ -22,13 +36,40 @@
     float: right;
     font-size: 20px;
 }
+*/
+
+#add-button {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #a37cf0;
+    border-radius: 0px;
+    font-weight: bold;
+    float: right;
+    border: none;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#add-button:hover {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #bd2e95;
+}
 
 .table-striped>tbody>tr:nth-child(odd)>th {
-   background-color: #ECECEC;
+    /*
+    background-color: #ECECEC;
+    */
+    background: #eee;
 }
 
 .table-striped>tbody>tr:nth-child(even) {
+    /*
     background-color: #EDEDED;
+    */
+    background: #f9f9f9;
 }
 
 #itinerary-table thead tr {
@@ -43,17 +84,29 @@
     font-weight: 400;
 }
 
+
 /* all th from first row of itinerary table */
+
 #itinerary-table thead th {
     font-weight: 900;
     font-size: 18px;
 }
 
-tbody tr:last-child{
+#itinerary-table tbody th {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+
+/*
+tbody tr:last-child {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
+*/
 
+
+/*
 .table-striped>tbody>tr:nth-child(odd):first-child>th:first-child {
     border-top-left-radius: 20px;
 }
@@ -61,9 +114,11 @@ tbody tr:last-child{
 .table-striped>tbody>tr:nth-child(odd):first-child>th:last-child {
     border-top-right-radius: 20px;
 }
+*/
 
 thead {
-    color: #2E294E;
+    /*color: #2E294E;*/
+    color: #333333;
 }
 
 .edit-icon {
@@ -72,9 +127,16 @@ thead {
     margin-left: 25px;
 }
 
+
 /* Add padding for itinerary number column*/
-tbody tr th:first-child, thead tr th:first-child {
+
+tbody tr th:first-child,
+thead tr th:first-child {
     padding-left: 20px;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
 }
 
 #itinerary-map {
@@ -89,7 +151,8 @@ tbody tr th:first-child, thead tr th:first-child {
 }
 
 #map-section h2 {
-    color: #2E294E;
+    /*color: #2E294E;*/
+    color: #333333;
     font-weight: 900;
     font-size: 42px;
 }

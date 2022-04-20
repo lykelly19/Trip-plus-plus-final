@@ -39,41 +39,100 @@ export default function Register() {
 
   return (
     <div>
-      <input
-        type="email"
-        placeholder="Email"
-        value={userRegisterationInfo.email}
-        onChange={(e) => {
-          setUserRegisterationInfo({
-            ...userRegisterationInfo,
-            email: e.target.value,
-          });
-        }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={userRegisterationInfo.password}
-        onChange={(e) => {
-          setUserRegisterationInfo({
-            ...userRegisterationInfo,
-            password: e.target.value,
-          });
-        }}
-      />
-      <input
-        type="password"
-        placeholder="Confirm Password"
-        value={userRegisterationInfo.confirmPassword}
-        onChange={(e) => {
-          setUserRegisterationInfo({
-            ...userRegisterationInfo,
-            confirmPassword: e.target.value,
-          });
-        }}
-      />
-      <button onClick={handleRegister}>Register</button>
-      <button onClick={handleBackFromRegister}>Back</button>
+      <div className="loginContainer col-12">
+        <div className="card">
+          <div className="row g-0">
+            <div className="col-lg-6">
+              <div className="card-body p-md-5 mx-md-4">
+                <div className="text-center reg-intro">
+                  <h4>Create your Trip++ account</h4>
+                  <p>One account, just for you :)</p>
+                </div>
+                {/*<form onSubmit={handleRegister}>*/}
+                <div className="container">
+                  <div className="form-outline mb-4">
+                    <input
+                      className="form-control"
+                      type="email"
+                      placeholder="Email"
+                      value={userRegisterationInfo.email}
+                      onChange={(e) => {
+                        setUserRegisterationInfo({
+                          ...userRegisterationInfo,
+                          email: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                  <div className="form-outline mb-4">
+                    <input
+                      className="form-control"
+                      type="password"
+                      placeholder="Password"
+                      value={userRegisterationInfo.password}
+                      onChange={(e) => {
+                        setUserRegisterationInfo({
+                          ...userRegisterationInfo,
+                          password: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                  <div className="form-outline mb-4">
+                    <input
+                      className="form-control"
+                      type="password"
+                      placeholder="Confirm Password"
+                      value={userRegisterationInfo.confirmPassword}
+                      onChange={(e) => {
+                        setUserRegisterationInfo({
+                          ...userRegisterationInfo,
+                          confirmPassword: e.target.value,
+                        });
+                      }}
+                    />
+                  </div>
+                  <div className="text-center box-shadow pt-1 mb-5 pb-1">
+                    <button
+                      className="reg-btn btn btn-block input-block-level col-12"
+                      onClick={handleRegister}
+                    >
+                      Register
+                    </button>
+                    {/*
+                    <input
+                      type="submit"
+                      className="reg-btn btn btn-block input-block-level col-12"
+                      value="Register"
+                    />
+                    */}
+                  </div>
+                  <div className="d-flex align-items-center justify-content-center pb-4">
+                    <button
+                      className="back-btn btn box-shadow"
+                      onClick={handleBackFromRegister}
+                    >
+                      Go Back
+                    </button>
+                  </div>
+                </div>
+                {/*</form>*/}
+              </div>
+            </div>
+            <div className="reg-side col-lg-6 d-flex align-items-center">
+              <div className="px-3 py-4 p-md-5 mx-md 4">
+                <h4>About Us</h4>
+                <p className="small mb-0">
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
+                  iure ratione quasi molestiae quia? Aliquam quia sapiente aut
+                  voluptas, deleniti ab saepe adipisci accusamus quisquam dicta
+                  eligendi placeat molestiae impedit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

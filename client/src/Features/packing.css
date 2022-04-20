@@ -3,6 +3,183 @@
     font-family: Roboto;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+
+/* Style the header */
+
+.inputDiv {
+    padding: 30px 40px;
+    text-align: center;
+}
+
+
+/* Clear floats after the header */
+
+.inputDiv:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.pack-input {
+    margin: 0;
+    border-radius: 0;
+    width: 85%;
+    padding: 10px;
+    float: left;
+    /*font-size: 16px;*/
+}
+
+.addBtn {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #a37cf0;
+    border-radius: 0px;
+    font-weight: bold;
+    float: left;
+    padding: 10px;
+    width: 15%;
+}
+
+.addBtn:hover {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #bd2e95;
+}
+
+.listDiv ul {
+    margin: 0;
+    padding: 0;
+}
+
+.listDiv ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.listDiv ul li:nth-child(odd) {
+    background: #f9f9f9;
+}
+
+.listDiv ul li:hover {
+    background: #ddd;
+}
+
+
+/* When clicked on, add a background color and strike out text */
+
+.listDiv ul li.checked {
+    /*background: #888;*/
+    background: #333333;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+.listDiv ul li.checked .deleteBtn {
+    /*border: 1px solid white;*/
+}
+
+
+/* Add a "checked" mark when clicked on */
+
+.listDiv ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+.deleteAllBtn {
+    border-radius: 0px;
+    border: 1px solid #333333;
+}
+
+.deleteAllBtn:hover {
+    border-color: transparent;
+    /*
+    border: none;
+    padding-top: calc(0.375+5px);
+    padding-bottom: calc(0.375+5px);
+    padding-left: calc(0.75+5px);
+    padding-right: calc(0.75+5px);
+    /*padding: calc(20px+1px);*/
+    color: white;
+    background-color: #bd2e95;
+    text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
+    /*0.375rem 0.75rem*/
+}
+
+.editBtn {
+    border-radius: 0px;
+    /*border: 1px solid #333333;*/
+    position: absolute;
+    right: 40px;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.editBtn:hover {
+    color: white;
+    background-color: #bd2e95;
+    text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
+}
+
+.deleteBtn {
+    border-radius: 0px;
+    /*border: 1px solid #333333;*/
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.deleteBtn:hover {
+    border: none;
+    /*padding: calc(20px+1px);*/
+    color: white;
+    background-color: #bd2e95;
+    text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
+}
+
+.box-shadow {
+    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 5%);
+}
+
+.packing-side {
+    background-color: #f9f9f9;
+}
+
+.packing-side h4 {
+    padding-bottom: 1em;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+/*
 .packing {
     background-color: #ECEBF3;
     margin: auto;
@@ -29,6 +206,9 @@
 
 .P-form {
     /*border: 3px solid #000;*/
+
+
+/*
     border-radius: 25px;
     background-color: #4A587B;
     padding: 25px;
@@ -240,5 +420,6 @@ button .P-form-add {
 input:focus {
     border: 3px solid #4A587B;
     border-radius: 3px;
-    ;
 }
+
+*/
