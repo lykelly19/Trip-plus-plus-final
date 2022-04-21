@@ -121,6 +121,7 @@ export default class Packing extends Component {
                     value={itemText}
                     placeholder="Type something here"
                     onChange={this.onChangeInput}
+                    onKeyDown={this.onSubmitItem2}
                   />
                   <button
                     className="addBtn btn box-shadow P-form-add"
@@ -182,12 +183,21 @@ export const List = ({
         onClick={() => onChangeBox(item)}
         defaultChecked={item.done}
       >
-        <span>{item.name}</span>
+        <span>
+          <p style={{ display: item.editing? "none": null}}   onDoubleClick={() => toggleInput(item)} >{item.name}</p>
+          <input className="input-edit" style={{ display: item.editing? null: "none"}} 
+                  type="text" value={item.name}
+                  onChange={onChangeInputEdit} onKeyDown={doneEdit2} onBlur={doneEdit} />
+        
+        </span>
         {/*box-shadow p-2*/}
+
+
+        
 
         <span
           className="editBtn"
-          style={{ display: isEditing ? "none" : null }}
+          style={{ display: item.editingditing ? "none" : null }}
           onClick={() => toggleInput(item)}
         >
           EDIT
