@@ -26,10 +26,6 @@ tbody {
     border-radius: 0px;
 }
 
-.table>tbody {
-    /* vertical-align: middle !important;*/
-}
-
 .table>:not(:first-child) {
     border-top: none;
 }
@@ -49,14 +45,15 @@ tbody {
 #add-button {
     text-shadow: 2px 2px 4px #000000;
     color: white;
-    /*background-color: #8c90b3;*/
     background-color: #a37cf0;
     border-radius: 0px;
     font-weight: bold;
     float: right;
     border: none;
-    font-weight: 700;
-    font-size: 20px;
+    /*font-weight: 700;*/
+    font-weight: bold;
+    /*font-size: 20px;*/
+    font-size: larger;
 }
 
 #add-button:hover {
@@ -137,10 +134,6 @@ thead tr th:first-child {
     padding-left: 20px;
 }
 */
-
-.table>tbody>tr>td {
-    /*vertical-align: middle;*/
-}
 
 #itinerary-map {
     width: 800px;
