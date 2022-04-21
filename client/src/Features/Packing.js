@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Popup from 'reactjs-popup';
-import './packing.css'
+import './packing.css';
 import 'reactjs-popup/dist/index.css';
+
 
 export default class Packing extends Component {
   state = {
@@ -16,6 +17,9 @@ export default class Packing extends Component {
       swtich to input el*/
   toggleInput = item => {
       this.setState( { isEditing: item});
+      item.editing = true;
+
+
   };
 
   
@@ -29,7 +33,17 @@ export default class Packing extends Component {
       this.handleDel(item)
       this.setState({ isEditing: false}); 
     }
+
+  
+    /* exits out of edit mode for all items */
+    for(var i = 0; i < this.state.items.length; i++){
+      if(this.state.items[i] != null)
+      this.state.items[i].editing = false;
+    }
+
     this.setState({ isEditing: false});
+
+
   };
 
   /* Doneedit is just with the enter key */
@@ -61,8 +75,8 @@ export default class Packing extends Component {
 
   onSubmitItem = () => {
     if(this.state.itemText){ //prevent empty item from being added
-    this.setState(({ items, itemText, setToggle }) => ({
-      items: [...items, { id: items.length + 1, name: itemText, done: false }],
+    this.setState(({ items, itemText}) => ({
+      items: [...items, { id: items.length + 1, name: itemText, done: false, editing: false}],
       itemText: "",
       isEditing: false
     }));
@@ -72,9 +86,8 @@ export default class Packing extends Component {
   /* wanted the orig input to also be able to have key enter input
    but function is not working*/
   onSubmitItem2 = e =>{
-    if(e.key === 'Enter'){
+    if(e.key === 'Enter')
        this.onSubmitItem();
-    }
   }
 
   onChangeBox = item => {
@@ -157,7 +170,7 @@ export default class Packing extends Component {
 
         </div>
         <div className="inputDiv">
-        <Input value={itemText} onChange={this.onChangeInput} onKeyDown={this.onSubmitItem2}/>
+        <Input value={itemText} onChange={this.onChangeInput} onSubmitItem2={this.onSubmitItem2}/>
         <Button className="P-form-add" onClick={this.onSubmitItem}>+</Button>
         </div>
         <div className="listDiv">
@@ -166,7 +179,6 @@ export default class Packing extends Component {
           onChangeBox={this.onChangeBox}
           handleDel={this.handleDel}
           toggleInput={this.toggleInput}
-          isEditing={this.state.isEditing}
           doneEdit={this.doneEdit}
           doneEdit2 = {this.doneEdit2}
           onChangeInputEdit={this.onChangeInputEdit}
@@ -191,7 +203,7 @@ export const Input = ({ value, onChange, onSubmitItem2 }) => (
   <input type="text" value={value} onChange={onChange} onKeyDown={onSubmitItem2} />
 );
 
-export const List = ({ list, onChangeBox, handleDel, toggleInput, onChangeInputEdit, isEditing, doneEdit, doneEdit2}) => (
+export const List = ({ list, onChangeBox, handleDel, toggleInput, onChangeInputEdit, doneEdit, doneEdit2}) => (
   <ul>
     {list.map(item => (
       <li
@@ -208,13 +220,11 @@ export const List = ({ list, onChangeBox, handleDel, toggleInput, onChangeInputE
 
       {/* toggles between p and input element
          bug: does it for ALL when i want only One to be swtiched*/}
-      <p style={{ display: isEditing? "none": null}}>{item.name}</p>
-      <input className="input-edit" style={{ display: isEditing? null: "none"}} type="text" value={item.name}
+      <p  className={'p'+item.id}  style={{ display: item.editing? "none": null}}  onDoubleClick={() => toggleInput(item)} >{item.name}</p>
+      <input className="input-edit" autoFocus className={'i'+item.id}  style={{ display: item.editing? null: "none"}} type="text" value={item.name}
        onChange={onChangeInputEdit} onKeyDown={doneEdit2} onBlur={doneEdit} />
 
 
-
-        <button style= {{ display: isEditing? "none": null}} onClick={() => toggleInput(item)}> EDIT </button>
         <Button className="deleteButton btn" onClick={() => handleDel(item)}>X</Button>
         
         
