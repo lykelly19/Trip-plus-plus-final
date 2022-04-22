@@ -49,12 +49,16 @@ export default class Modal extends Component {
               X
             </button>
           </div>
+          <div className="container itm-header">
+            <h4>Enter your event's details below</h4>
+          </div>
           <form className="it-form" onSubmit={this.submitModalForm}>
             <div className="form-group modal-section" id="first-modal-section">
               <label for="event" className="modal-heading">
                 Event Name
               </label>
               <input
+                type="text"
                 className="form-control"
                 id="event"
                 defaultValue={this.props.itemPrefill["eventName"]}
@@ -74,9 +78,18 @@ export default class Modal extends Component {
               <label for="time" className="modal-heading">
                 Time
               </label>
+              {/*
               <input
                 id="time"
                 className="form-control"
+                defaultValue={this.props.itemPrefill["time"]}
+              ></input>
+    */}
+              <input
+                type="time"
+                id="time"
+                className="form-control"
+                name="appt"
                 defaultValue={this.props.itemPrefill["time"]}
               ></input>
               {/* <TableTimePicker/> */}
@@ -86,6 +99,7 @@ export default class Modal extends Component {
                 Location
               </label>
               <input
+                type="text"
                 id="location"
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}

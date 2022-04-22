@@ -142,7 +142,7 @@ export default class Itinerary extends Component {
         </button>
 
         <div id="map-section">
-          <h2 className="text-center pb-3">Map</h2>
+          <h4 className="text-center pb-3">Map</h4>
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12111.098223862644!2d22.91428943685055!3d40.63485351944406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a8390b30348339%3A0xcc9bc9976b0cada1!2sPort%20of%20Thessaloniki!5e0!3m2!1sen!2sus!4v1648344303067!5m2!1sen!2sus"
             id="itinerary-map"
@@ -170,7 +170,13 @@ export const ItineraryTable = ({ items, handleEdit }) => (
     </thead>
     <tbody className="itinerary-items-container">
       {items.map((item, i) => (
-        <tr className="d-flex" key={i}>
+        <tr
+          className="d-flex"
+          key={i}
+          onClick={() => handleEdit(item)}
+          data-bs-toggle="tooltip"
+          title="edit this event"
+        >
           {/*my-auto*/}
           <th className="col-1 align-middle my-auto">{item.itemNumber}</th>
           <td className="col-1 align-middle">{item.date}</td>
@@ -179,7 +185,13 @@ export const ItineraryTable = ({ items, handleEdit }) => (
           <td className="col-2">{item.location}</td>
           <td className="col-4">{item.notes}</td>
           <td className="it-del-div col-1">
-            <span className="itinerary-delete-btn">X</span>
+            <span
+              data-bs-toggle="tooltip"
+              title="delete"
+              className="itinerary-delete-btn"
+            >
+              X
+            </span>
             {/*}
             <button onClick={() => handleEdit(item)} className="editIconButton">
               <img

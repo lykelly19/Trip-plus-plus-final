@@ -181,18 +181,29 @@ export const List = ({
         /*style={{ textDecoration: item.done ? "line-through" : null }}*/
         onClick={() => onChangeBox(item)}
         defaultChecked={item.done}
+        data-bs-toggle="tooltip"
+        title={
+          item.done ? "click here to uncheck" : "click here to check this off"
+        }
       >
         <span>{item.name}</span>
         {/*box-shadow p-2*/}
 
         <span
           className="editBtn"
+          data-bs-toggle="tooltip"
+          title="click here to edit this packing item"
           style={{ display: isEditing ? "none" : null }}
           onClick={() => toggleInput(item)}
         >
           EDIT
         </span>
-        <span className="deleteBtn" onClick={() => handleDel(item)}>
+        <span
+          className="deleteBtn"
+          data-bs-toggle="tooltip"
+          title="delete"
+          onClick={() => handleDel(item)}
+        >
           X
         </span>
       </li>

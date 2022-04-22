@@ -5,21 +5,36 @@
 
 
 /*
-.itinerary-container {
-    background-color: #D8D3E7;
-    border-radius: 30px;
+table {
+    table-layout: fixed;
+    width: 100%
+}
+
+td {
+    word-wrap: break-word;
 }
 */
 
 .itinerary-container {
     background-color: white;
     border-radius: 0px;
+    padding-top: 15px;
 }
 
 .itinerary-items-container {
     /*background-color: #D8D3E7;*/
     /*background-color: #eee;*/
     border-radius: 0px;
+}
+
+.itinerary-items-container>tr:hover {
+    cursor: pointer;
+    transition: 0.2s;
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 tbody {
@@ -162,12 +177,14 @@ thead tr th:first-child {
 }
 
 .itinerary-delete-btn {
+    box-sizing: border-box;
     cursor: pointer;
     border-radius: 0px;
-    /*border: 1px solid #333333;*/
     position: absolute;
     right: 0;
     top: 0;
+    bottom: 0;
+    /*float: right;*/
     padding: 12px 16px 12px 16px;
 }
 
