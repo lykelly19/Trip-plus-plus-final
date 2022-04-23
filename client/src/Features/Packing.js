@@ -3,6 +3,11 @@ import Popup from "reactjs-popup";
 import "./packing.css";
 import "reactjs-popup/dist/index.css";
 
+import { CommonItems } from "./Suggestions.js";
+
+import { db } from "../firebase.js";
+import { collection, getDocs } from "firebase/firestore";
+
 export default class Packing extends Component {
   state = {
     items: [],
@@ -11,6 +16,11 @@ export default class Packing extends Component {
     /*isChecked: false,*/
   };
 
+  getUsers = async () => {
+    const usersCollectionRef = collection(db, "users");
+    const data = await getDocs(usersCollectionRef);
+    console.log(data);
+  };
   /* editing has been clicked 
       swtich to input el*/
   toggleInput = (item) => {
@@ -48,6 +58,16 @@ export default class Packing extends Component {
     itemsnew[index].name = e.target.value;
     this.setState(({ items }) => ({
       items: itemsnew,
+    }));
+  };
+
+  addSuggestion = (item) => {
+    this.setState(({ items }) => ({
+      items: [
+        ...items,
+        { id: items.length + 1, name: item, done: false, editing: false },
+      ],
+      isEditing: false,
     }));
   };
 
@@ -96,6 +116,9 @@ export default class Packing extends Component {
 
   render() {
     const { items, itemText, isEditing } = this.state;
+    const comItems = CommonItems;
+    console.log(comItems);
+    this.getUsers();
 
     return (
       <div className="container">
@@ -121,6 +144,7 @@ export default class Packing extends Component {
                     value={itemText}
                     placeholder="Type something here"
                     onChange={this.onChangeInput}
+                    onKeyDown={this.onSubmitItem2}
                   />
                   <button
                     className="addBtn btn box-shadow P-form-add"
@@ -144,15 +168,10 @@ export default class Packing extends Component {
               </div>
             </div>
             <div className="packing-side col-lg-4 d-flex align-items-center">
-              <div className="px-3 py-4 p-md-5 mx-md 4">
+              <div className="px-3 py-4 p-md-5 mx-md container sugDiv">
                 <h4>Some suggestions for your packing list</h4>
                 {/*<h2>Your packing list</h2>*/}
-                <p className="small mb-0">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
-                  iure ratione quasi molestiae quia? Aliquam quia sapiente aut
-                  voluptas, deleniti ab saepe adipisci accusamus quisquam dicta
-                  eligendi placeat molestiae impedit.
-                </p>
+                <SugList list={comItems} AddSuggestion={this.addSuggestion} />
               </div>
             </div>
           </div>
@@ -161,6 +180,20 @@ export default class Packing extends Component {
     );
   }
 }
+
+export const SugList = ({ list, AddSuggestion }) => (
+  <ul>
+    {/* flex-container*/}
+    {list.map((item, index) => (
+      <li className="SugList" key={index}>
+        {item}
+        <span className="sugBtn btn" onClick={() => AddSuggestion(item)}>
+          Add
+        </span>
+      </li>
+    ))}
+  </ul>
+);
 
 export const List = ({
   list,
@@ -177,7 +210,7 @@ export const List = ({
     {list.map((item) => (
       <li
         className={item.done ? "checked" : null}
-        key={item.id}
+        key={item}
         /*style={{ textDecoration: item.done ? "line-through" : null }}*/
         onClick={() => onChangeBox(item)}
         defaultChecked={item.done}
@@ -186,14 +219,31 @@ export const List = ({
           item.done ? "click here to uncheck" : "click here to check this off"
         }
       >
-        <span>{item.name}</span>
+        <span>
+          <p
+            style={{ display: item.editing ? "none" : null }}
+            onDoubleClick={() => toggleInput(item)}
+          >
+            {item.name}
+          </p>
+          <input
+            className="input-edit"
+            style={{ display: item.editing ? null : "none" }}
+            type="text"
+            value={item.name}
+            onChange={onChangeInputEdit}
+            onKeyDown={doneEdit2}
+            onBlur={doneEdit}
+          />
+        </span>
         {/*box-shadow p-2*/}
 
         <span
           className="editBtn"
           data-bs-toggle="tooltip"
           title="click here to edit this packing item"
-          style={{ display: isEditing ? "none" : null }}
+          /*style={{ display: isEditing ? "none" : null }}*/
+          style={{ display: item.editingditing ? "none" : null }}
           onClick={() => toggleInput(item)}
         >
           EDIT
