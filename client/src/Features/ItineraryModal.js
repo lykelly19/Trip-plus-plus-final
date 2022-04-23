@@ -4,6 +4,7 @@ import "./ItineraryModal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import TableDatePicker from "./TableDatePicker";
+import Autocomplete from "react-google-autocomplete";
 
 const modalStyle = {
   position: "fixed",
@@ -68,10 +69,23 @@ export default class Modal extends Component {
             </div>
             <div className="modal-section">
               <p className="modal-heading">Location</p>
-              <input
+
+              <Autocomplete
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}
-              ></input>
+                apiKey={""}
+                onPlaceSelected={(place) => {
+                  console.log(place);
+                }}
+                options={{
+                  types: ["geocode", "establishment"]
+                }}      
+                placeholder=""
+              />
+              {/* <input
+                className="form-control"
+                defaultValue={this.props.itemPrefill["location"]}
+              ></input> */}
             </div>
             <div className="modal-section">
               <p className="modal-heading">Notes</p>
