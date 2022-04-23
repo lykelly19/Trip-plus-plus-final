@@ -16,7 +16,13 @@ const modalStyle = {
   backgroundColor: "rgba(0,0,0,.2)",
 };
 
+var currCoordinates = {
+  lat: null,
+  lng: null
+}
+
 export default class Modal extends Component {
+
   submitModalForm = (event) => {
     // add validation
 
@@ -30,6 +36,8 @@ export default class Modal extends Component {
       formItems[formItemsKeys[i]] = event.target[i].value;
 
     formItems["itemNumber"] = this.props.numItems;
+    formItems["lat"] = currCoordinates["lat"];
+    formItems["lng"] = currCoordinates["lng"];
 
     this.props.incrementNumItems();
 
@@ -73,9 +81,9 @@ export default class Modal extends Component {
               <Autocomplete
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}
-                apiKey={""}
                 onPlaceSelected={(place) => {
-                  console.log(place);
+                  currCoordinates["lat"] = place.geometry.location.lat();
+                  currCoordinates["lng"] = place.geometry.location.lng();
                 }}
                 options={{
                   types: ["geocode", "establishment"]

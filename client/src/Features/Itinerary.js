@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import ItineraryModal from "./ItineraryModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import editIcon from "./edit-event-icon.png";
+import MapContainer from "./Map";
 
 export default class Itinerary extends Component {
   state = {
@@ -17,6 +18,8 @@ export default class Itinerary extends Component {
       location: "",
     },
     prefillItem: null,
+    locationCoordinates: [],
+    defaultCoordinates: { lat: 41.3851, lng: 2.1734 }
   };
 
   showModal = (e) => {
@@ -61,6 +64,25 @@ export default class Itinerary extends Component {
 
     // reset itinerary numbers
     this.state.items.map((item, i) => (item.itemNumber = i + 1));
+
+    // create location coordinates array
+    const arr = this.state.items.map(element => (
+      { 
+        name: element.itemNumber,
+        location: {
+          lat: element.lat, 
+          lng: element.lng 
+        }
+      }
+    ));
+
+    // get only the valid coordinates
+    let validCoordinates = arr.filter(e => e.location.lat !== null);
+    this.state.locationCoordinates = validCoordinates;
+
+    // set the default location to be the first element with a valid location
+    if(validCoordinates.length > 0)
+      this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
 
     // close modal
     this.closeModal();
@@ -140,15 +162,9 @@ export default class Itinerary extends Component {
         >
           Add itinerary item
         </button>
-
         <div id="map-section">
           <h2 className="text-center pb-3">Map</h2>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12111.098223862644!2d22.91428943685055!3d40.63485351944406!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a8390b30348339%3A0xcc9bc9976b0cada1!2sPort%20of%20Thessaloniki!5e0!3m2!1sen!2sus!4v1648344303067!5m2!1sen!2sus"
-            id="itinerary-map"
-            className="mx-auto"
-            title="itineraryMap"
-          ></iframe>
+          <MapContainer myCoordinates={this.state.locationCoordinates} defaultCoordinates={this.state.defaultCoordinates} className="mx-auto"></MapContainer>
         </div>
       </div>
     );

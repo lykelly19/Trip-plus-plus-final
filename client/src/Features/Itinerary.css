@@ -142,12 +142,6 @@ thead tr th:first-child {
     /*vertical-align: middle;*/
 }
 
-#itinerary-map {
-    width: 800px;
-    height: 450px;
-    display: block;
-}
-
 #map-section {
     padding-top: 120px;
     padding-bottom: 100px;
