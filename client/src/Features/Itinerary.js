@@ -19,7 +19,11 @@ export default class Itinerary extends Component {
     },
     prefillItem: null,
     locationCoordinates: [],
-    defaultCoordinates: { lat: 41.3851, lng: 2.1734 }
+    defaultCoordinates: { lat: 41.3851, lng: 2.1734 },
+    currCoordinates: {
+      lat: null,
+      lng: null
+    }
   };
 
   showModal = (e) => {
@@ -37,6 +41,10 @@ export default class Itinerary extends Component {
         eventName: "",
         location: "",
       },
+      currCoordinates: {
+        lat: null,
+        lng: null
+      }
     });
   };
 
@@ -144,13 +152,24 @@ export default class Itinerary extends Component {
     // delete coordinates from map
     this.state.locationCoordinates = this.state.locationCoordinates.filter(element => element.location.lat != item.lat && element.location.lng != item.lng);
 
+    // create location coordinates array
+    const arr = this.state.items.map(element => (
+      { 
+        name: element.itemNumber,
+        location: {
+          lat: element.lat, 
+          lng: element.lng 
+        }
+      }
+    ));
+
     // get only the valid coordinates
-    let validCoordinates = this.state.locationCoordinates.filter(e => e.location.lat !== null);
+    let validCoordinates = arr.filter(e => e.location.lat !== null);
+    this.state.locationCoordinates = validCoordinates;
 
     // set the default location to be the first element with a valid location
     if(validCoordinates.length > 0)
-     this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
-
+      this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
   };
 
   handleDel = (itemNumber) => {
@@ -189,6 +208,7 @@ export default class Itinerary extends Component {
             numItems={this.state.numItems}
             handleDel={this.handleDel}
             itemPrefill={this.state.prefill}
+            currCoordinates={this.state.currCoordinates}
           ></ItineraryModal>
         )}
         <div className="itinerary-container table-responsive-sm card px-5">

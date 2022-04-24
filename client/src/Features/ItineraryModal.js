@@ -15,11 +15,6 @@ const modalStyle = {
   backgroundColor: "rgba(0,0,0,.2)",
 };
 
-var currCoordinates = {
-  lat: null,
-  lng: null
-}
-
 export default class Modal extends Component {
 
   submitModalForm = (event) => {
@@ -35,8 +30,8 @@ export default class Modal extends Component {
       formItems[formItemsKeys[i]] = event.target[i].value;
 
     formItems["itemNumber"] = this.props.numItems;
-    formItems["lat"] = currCoordinates["lat"];
-    formItems["lng"] = currCoordinates["lng"];
+    formItems["lat"] = this.props.currCoordinates["lat"];
+    formItems["lng"] = this.props.currCoordinates["lng"];
 
     this.props.incrementNumItems();
 
@@ -95,13 +90,13 @@ export default class Modal extends Component {
               ></input>
             </div>
             <div className="modal-section">
-              <p className="modal-heading">Location</p>
+              <label className="modal-heading">Location</label>
               <Autocomplete
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}
                 onPlaceSelected={(place) => {
-                  currCoordinates["lat"] = place.geometry.location.lat();
-                  currCoordinates["lng"] = place.geometry.location.lng();
+                  this.props.currCoordinates["lat"] = place.geometry.location.lat();
+                  this.props.currCoordinates["lng"] = place.geometry.location.lng();
                 }}
                 options={{
                   types: ["geocode", "establishment"]
