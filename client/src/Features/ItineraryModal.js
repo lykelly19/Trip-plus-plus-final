@@ -48,29 +48,57 @@ export default class Modal extends Component {
   render() {
     return createPortal(
       <div style={modalStyle}>
-        <div className="card itinerary-modal">
-          <Button id="close-button" onClick={this.props.closeModal}>
-            X
-          </Button>
-          <form onSubmit={this.submitModalForm}>
-            <div className="modal-section" id="first-modal-section">
-              <p className="modal-heading">Event Name</p>
+        <div className="itinerary-modal">
+          <div>
+            <button
+              className="btn"
+              id="close-button"
+              onClick={this.props.closeModal}
+            >
+              X
+            </button>
+          </div>
+          <div className="container itm-header">
+            <h4>Enter your event's details below</h4>
+          </div>
+          <form className="it-form" onSubmit={this.submitModalForm}>
+            <div className="form-group modal-section" id="first-modal-section">
+              <label for="event" className="modal-heading">
+                Event Name
+              </label>
               <input
+                type="text"
                 className="form-control"
+                id="event"
                 defaultValue={this.props.itemPrefill["eventName"]}
               ></input>
             </div>
-            <div className="modal-section">
-              <p className="modal-heading">Date</p>
+            <div className="form-group modal-section">
+              <label for="date" className="modal-heading">
+                Date
+              </label>
               <TableDatePicker
+                id="date"
                 className="datePicker form-control"
                 selected={this.props.itemPrefill["date"]}
               />
             </div>
-            <div className="modal-section">
-              <p className="modal-heading">Time</p>
+            <div className="form-group modal-section">
+              <label for="time" className="modal-heading">
+                Time
+              </label>
+              {/*
               <input
+                id="time"
                 className="form-control"
+                defaultValue={this.props.itemPrefill["time"]}
+              ></input>
+    */}
+              <input
+                type="time"
+                id="time"
+                className="form-control"
+                name="appt"
                 defaultValue={this.props.itemPrefill["time"]}
               ></input>
               {/* <TableTimePicker/> */}
@@ -95,14 +123,17 @@ export default class Modal extends Component {
                 defaultValue={this.props.itemPrefill["location"]}
               ></input> */}
             </div>
-            <div className="modal-section">
-              <p className="modal-heading">Notes</p>
+            <div className="form-group modal-section">
+              <label for="notes" className="modal-heading">
+                Notes
+              </label>
               <textarea
+                id="notes"
                 className="form-control"
                 defaultValue={this.props.itemPrefill["notes"]}
               ></textarea>
             </div>
-            <div className="modal-section">
+            <div className="d-flex justify-content-end py-3 modal-section">
               <button
                 className="btn"
                 id="delete-button"

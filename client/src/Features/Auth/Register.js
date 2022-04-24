@@ -66,6 +66,9 @@ export default function Register() {
                   </div>
                   <div className="form-outline mb-4">
                     <input
+                      data-bs-toggle="popover"
+                      data-bs-trigger="focus"
+                      data-bs-content="Password must be 8 characters long"
                       className="form-control"
                       type="password"
                       placeholder="Password"

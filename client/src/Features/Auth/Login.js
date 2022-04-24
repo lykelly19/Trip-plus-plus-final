@@ -95,10 +95,11 @@ export default function Login() {
               <div className="px-3 py-4 p-md-5 mx-md 4">
                 <h4>About Us</h4>
                 <p className="small mb-0">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
-                  iure ratione quasi molestiae quia? Aliquam quia sapiente aut
-                  voluptas, deleniti ab saepe adipisci accusamus quisquam dicta
-                  eligendi placeat molestiae impedit.
+                  Seasonal basmati pomegranate tofu creamy cauliflower alfredo
+                  sauce mint banh mi salad rolls shiitake mushrooms red curry
+                  tofu noodles picnic chickpea crust pizza habanero golden
+                  lentils comforting pumpkin spice latte lime açai fiery fruit
+                  bento box grenadillo.
                 </p>
               </div>
             </div>

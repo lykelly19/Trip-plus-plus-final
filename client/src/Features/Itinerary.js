@@ -186,7 +186,13 @@ export const ItineraryTable = ({ items, handleEdit }) => (
     </thead>
     <tbody className="itinerary-items-container">
       {items.map((item, i) => (
-        <tr className="d-flex" key={i}>
+        <tr
+          className="d-flex"
+          key={i}
+          onClick={() => handleEdit(item)}
+          data-bs-toggle="tooltip"
+          title="edit this event"
+        >
           {/*my-auto*/}
           <th className="col-1 align-middle my-auto">{item.itemNumber}</th>
           <td className="col-1 align-middle">{item.date}</td>
@@ -195,7 +201,13 @@ export const ItineraryTable = ({ items, handleEdit }) => (
           <td className="col-2">{item.location}</td>
           <td className="col-4">{item.notes}</td>
           <td className="it-del-div col-1">
-            <span className="itinerary-delete-btn">X</span>
+            <span
+              data-bs-toggle="tooltip"
+              title="delete"
+              className="itinerary-delete-btn"
+            >
+              X
+            </span>
             {/*}
             <button onClick={() => handleEdit(item)} className="editIconButton">
               <img
