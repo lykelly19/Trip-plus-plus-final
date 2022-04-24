@@ -83,6 +83,7 @@ export default function Register() {
                   </div>
                   <div className="form-outline mb-4">
                     <input
+                      id="confirm"
                       className="form-control"
                       type="password"
                       placeholder="Confirm Password"

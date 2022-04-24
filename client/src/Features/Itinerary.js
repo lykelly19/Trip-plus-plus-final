@@ -111,7 +111,7 @@ export default class Itinerary extends Component {
             itemPrefill={this.state.prefill}
           ></ItineraryModal>
         )}
-        <div className="itinerary-container table-responsive-sm card px-5">
+        <div className="itinerary-container table-responsive-sm card">
           {" "}
           {/*py-4 px-5 mt-4*/}
           <ItineraryTable
@@ -178,7 +178,7 @@ export const ItineraryTable = ({ items, handleEdit }) => (
           title="edit this event"
         >
           {/*my-auto*/}
-          <th className="col-1 align-middle my-auto">{item.itemNumber}</th>
+          <th className="col-1 align-middle">{item.itemNumber}</th>
           <td className="col-1 align-middle">{item.date}</td>
           <td className="col-1 align-middle">{item.time}</td>
           <td className="col-2">{item.eventName}</td>
