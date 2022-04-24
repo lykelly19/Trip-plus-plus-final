@@ -96,7 +96,35 @@ export default class Itinerary extends Component {
     });
   };
 
+  handleDelX = (item) => {
+
+    this.setState({
+      show: false
+    });
+
+    console.log(this.state.items);
+    // from the list, remove the item with the same itemNumber
+    this.state.items = this.state.items.filter(
+      (i) => i.itemNumber !== item.itemNumber
+    );
+  
+    console.log(this.state.items);
+
+    // sort by date
+    this.state.items.sort(function (a, b) {
+      let DateA = new Date(a.date);
+      let DateB = new Date(b.date);
+      return DateA - DateB;
+    });
+
+    // reset itinerary numbers
+    this.state.items.map((item, i) => (item.itemNumber = i + 1));
+
+
+  };
+
   handleDel = (itemNumber) => {
+    
     // only delete item if the item has previously been saved
     if (itemNumber !== "") {
       // from the list, remove the item with the same itemNumber
@@ -104,6 +132,8 @@ export default class Itinerary extends Component {
         (i) => i.itemNumber !== this.state.prefill.itemNumber
       );
     }
+
+    console.log(this.state.items);
 
     // sort by date
     this.state.items.sort(function (a, b) {
@@ -139,6 +169,7 @@ export default class Itinerary extends Component {
           <ItineraryTable
             items={this.state.items}
             handleEdit={this.handleEdit}
+            handleDelX={this.handleDelX}
           ></ItineraryTable>
         </div>
         {/*
@@ -171,7 +202,7 @@ export default class Itinerary extends Component {
   }
 }
 
-export const ItineraryTable = ({ items, handleEdit }) => (
+export const ItineraryTable = ({ items, handleEdit, handleDelX }) => (
   <table id="itinerary-table" className="table table-striped table-hover">
     {/*table-borderless*/}
     <thead>
@@ -189,18 +220,47 @@ export const ItineraryTable = ({ items, handleEdit }) => (
         <tr
           className="d-flex"
           key={i}
-          onClick={() => handleEdit(item)}
-          data-bs-toggle="tooltip"
-          title="edit this event"
         >
           {/*my-auto*/}
-          <th className="col-1 align-middle my-auto">{item.itemNumber}</th>
-          <td className="col-1 align-middle">{item.date}</td>
-          <td className="col-1 align-middle">{item.time}</td>
-          <td className="col-2">{item.eventName}</td>
-          <td className="col-2">{item.location}</td>
-          <td className="col-4">{item.notes}</td>
-          <td className="it-del-div col-1">
+          <th className="col-1 align-middle my-auto" 
+            onClick={() => handleEdit(item)}
+            data-bs-toggle="tooltip"
+            title="edit this event">
+            {item.itemNumber}
+          </th>
+          <td className="col-1 align-middle"
+            onClick={() => handleEdit(item)}
+            data-bs-toggle="tooltip"
+            title="edit this event">
+            {item.date}
+          </td>
+          <td className="col-1 align-middle"
+            onClick={() => handleEdit(item)}
+            data-bs-toggle="tooltip"
+            title="edit this event">
+            {item.time}
+          </td>
+          <td className="col-2"
+            onClick={() => handleEdit(item)}
+            data-bs-toggle="tooltip"
+            title="edit this event">
+            {item.eventName}
+          </td>
+          <td className="col-2"
+            onClick={() => handleEdit(item)}
+            data-bs-toggle="tooltip"
+            title="edit this event">
+            {item.location}</td>
+          <td className="col-4"            
+            onClick={() => handleEdit(item)}
+            data-bs-toggle="tooltip"
+            title="edit this event">
+            {item.notes}
+          </td>
+
+          
+          <td className="it-del-div col-1"
+            onClick={() => handleDelX(item)}>
             <span
               data-bs-toggle="tooltip"
               title="delete"
