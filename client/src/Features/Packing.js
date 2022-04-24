@@ -170,8 +170,11 @@ export default class Packing extends Component {
             <div className="packing-side col-lg-4 d-flex align-items-center">
               <div className="px-3 py-4 p-md-5 mx-md container sugDiv">
                 <h4>Some suggestions for your packing list</h4>
+                <p>Click one to add it to your list</p>
                 {/*<h2>Your packing list</h2>*/}
-                <SugList list={comItems} AddSuggestion={this.addSuggestion} />
+                <div className="sugList-container">
+                  <SugList list={comItems} AddSuggestion={this.addSuggestion} />
+                </div>
               </div>
             </div>
           </div>
@@ -185,11 +188,13 @@ export const SugList = ({ list, AddSuggestion }) => (
   <ul>
     {/* flex-container*/}
     {list.map((item, index) => (
-      <li className="SugList" key={index}>
+      <li className="SugList" key={index} onClick={() => AddSuggestion(item)}>
         {item}
+        {/*
         <span className="sugBtn btn" onClick={() => AddSuggestion(item)}>
           Add
         </span>
+    */}
       </li>
     ))}
   </ul>
@@ -234,18 +239,27 @@ export const List = ({
             onChange={onChangeInputEdit}
             onKeyDown={doneEdit2}
             onBlur={doneEdit}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            autoFocus
           />
         </span>
         {/*box-shadow p-2*/}
 
         <span
-          className="editBtn"
+          className="editBtn fas"
           data-bs-toggle="tooltip"
           title="click here to edit this packing item"
           /*style={{ display: isEditing ? "none" : null }}*/
-          style={{ display: item.editingditing ? "none" : null }}
-          onClick={() => toggleInput(item)}
+          style={{ display: item.editing ? "none" : null }}
+          /*onClick={() => toggleInput(item)}*/
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleInput(item);
+          }}
         >
+          {/*&#xf304;*/}
           EDIT
         </span>
         <span

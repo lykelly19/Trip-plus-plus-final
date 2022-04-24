@@ -46,7 +46,7 @@
     border-radius: 0;
 }
 
-.sugBtn{
+.sugBtn {
     background-color: #a37cf0;
     border-radius: 0px;
     text-shadow: 2px 2px 4px #000000;
@@ -56,7 +56,8 @@
     margin-top: -3%;
 }
 
-.addBtn:hover, .sugBtn:hover {
+.addBtn:hover,
+.sugBtn:hover {
     text-shadow: 2px 2px 4px #000000;
     color: white;
     /*background-color: #8c90b3;*/
@@ -68,10 +69,15 @@
     padding: 0;
 }
 
-.listDiv ul li{
+.listDiv p {
+    margin-bottom: 0px;
+}
+
+.listDiv ul li {
     cursor: pointer;
     position: relative;
     padding: 12px 8px 12px 40px;
+    /*padding: 6px 8px 6px 40px;*/
     list-style-type: none;
     background: #eee;
     font-size: 18px;
@@ -83,25 +89,48 @@
     user-select: none;
 }
 
+.sugList-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
 
-.sugDiv ul li{
+.sugDiv ul {
+    /*
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-shadow: 0 0.25rem 0.75rem rgb(163 124 240 / 50%);
+    */
+    padding-left: 0rem;
+    box-shadow: 0 0.25rem 0.75rem rgb(163 124 240 / 75%);
+}
+
+.sugDiv ul li {
     cursor: pointer;
     position: relative;
-    padding: 12px 8px 12px 40px;
+    /*padding: 12px 8px 12px 40px;*/
+    padding: 12px;
     list-style-type: none;
-    background: #eee;
-
+    /*background: #eee;*/
+    background: #F1F1F1;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-
-.sugDiv ul li:nth-child(odd){
-    background: #fff
+.sugDiv ul li:nth-child(odd) {
+    background: #fff;
+    /*background: white;*/
 }
 
-.listDiv ul li:nth-child(odd){
+.sugDiv ul li:hover {
+    background: #bd2e95;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.listDiv ul li:nth-child(odd) {
     background: #f9f9f9;
 }
-
 
 .listDiv ul li:hover {
     background: #ddd;
@@ -158,12 +187,16 @@
     /*0.375rem 0.75rem*/
 }
 
-.editBtn  {
+.checked .editBtn {
+    display: none;
+}
+
+.editBtn {
     border-radius: 0px;
-    /*border: 1px solid #333333;*/
     position: absolute;
     right: 40px;
     top: 0;
+    bottom: 0;
     padding: 12px 16px 12px 16px;
 }
 
@@ -179,10 +212,11 @@
     position: absolute;
     right: 0;
     top: 0;
+    bottom: 0;
     padding: 12px 16px 12px 16px;
 }
 
-.deleteBtn:hover{
+.deleteBtn:hover {
     border: none;
     /*padding: calc(20px+1px);*/
     color: white;
@@ -199,9 +233,22 @@
     background-color: #f9f9f9;
 }
 
-.packing-side h4 {
+.packing-side h4 {}
+
+.packing-side p {
+    text-align: center;
     padding-bottom: 1em;
     border-bottom: 1px solid #e5e5e5;
+}
+
+.input-edit {
+    padding: 0px;
+    margin: 0px;
+    border-color: #e5e5e5;
+}
+
+.input-edit:focus {
+    border-color: #a37cf0;
 }
 
 
