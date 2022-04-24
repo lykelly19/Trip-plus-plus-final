@@ -4,6 +4,7 @@ import "./ItineraryModal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import TableDatePicker from "./TableDatePicker";
+import Autocomplete from "react-google-autocomplete";
 
 const modalStyle = {
   position: "fixed",
@@ -15,7 +16,13 @@ const modalStyle = {
   backgroundColor: "rgba(0,0,0,.2)",
 };
 
+var currCoordinates = {
+  lat: null,
+  lng: null
+}
+
 export default class Modal extends Component {
+
   submitModalForm = (event) => {
     // add validation
 
@@ -29,6 +36,8 @@ export default class Modal extends Component {
       formItems[formItemsKeys[i]] = event.target[i].value;
 
     formItems["itemNumber"] = this.props.numItems;
+    formItems["lat"] = currCoordinates["lat"];
+    formItems["lng"] = currCoordinates["lng"];
 
     this.props.incrementNumItems();
 
@@ -94,16 +103,25 @@ export default class Modal extends Component {
               ></input>
               {/* <TableTimePicker/> */}
             </div>
-            <div className="form-group modal-section">
-              <label for="location" className="modal-heading">
-                Location
-              </label>
-              <input
-                type="text"
-                id="location"
+            <div className="modal-section">
+              <p className="modal-heading">Location</p>
+
+              <Autocomplete
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}
-              ></input>
+                onPlaceSelected={(place) => {
+                  currCoordinates["lat"] = place.geometry.location.lat();
+                  currCoordinates["lng"] = place.geometry.location.lng();
+                }}
+                options={{
+                  types: ["geocode", "establishment"]
+                }}      
+                placeholder=""
+              />
+              {/* <input
+                className="form-control"
+                defaultValue={this.props.itemPrefill["location"]}
+              ></input> */}
             </div>
             <div className="form-group modal-section">
               <label for="notes" className="modal-heading">

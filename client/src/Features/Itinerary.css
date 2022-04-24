@@ -152,6 +152,10 @@ thead tr th:first-child {
 }
 */
 
+.table>tbody>tr>td {
+    /*vertical-align: middle;*/
+}
+
 #itinerary-map {
     width: 800px;
     height: 450px;
