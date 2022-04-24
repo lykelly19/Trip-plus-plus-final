@@ -25,7 +25,7 @@ export default class MapContainer extends Component {
                         )
                     })
                 }
-                </GoogleMap>
+            </GoogleMap>
         )
     }
 }
