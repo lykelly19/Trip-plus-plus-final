@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate, useHistory } from "react-router-dom";
+import { createUser } from "../DB/users";
 import "./Register.css";
 
 export default function Register() {
@@ -28,6 +29,9 @@ export default function Register() {
       userRegisterationInfo.password
     )
       .then(() => {
+        onAuthStateChanged(auth, (user) => {
+          createUser(user.uid);
+        })
         registerNavigate("/");
       })
       .catch((err) => alert(err.message));
