@@ -59,6 +59,18 @@ export default class Itinerary extends Component {
     this.state.items.sort(function (a, b) {
       let DateA = new Date(a.date);
       let DateB = new Date(b.date);
+
+      // create Date object with
+      if(a.time) {
+        DateA.setHours(a.time.substr(0 ,a.time.indexOf(":")));
+        DateA.setMinutes(a.time.substr(a.time.indexOf(":")+1));
+      }
+
+      if(b.time) {
+        DateB.setHours(b.time.substr(0 ,b.time.indexOf(":")));
+        DateB.setMinutes(b.time.substr(b.time.indexOf(":")+1));
+      }
+
       return DateA - DateB;
     });
 
@@ -111,6 +123,18 @@ export default class Itinerary extends Component {
     this.state.items.sort(function (a, b) {
       let DateA = new Date(a.date);
       let DateB = new Date(b.date);
+
+      // create Date object with
+      if(a.time) {
+        DateA.setHours(a.time.substr(0 ,a.time.indexOf(":")));
+        DateA.setMinutes(a.time.substr(a.time.indexOf(":")+1));
+      }
+
+      if(b.time) {
+        DateB.setHours(b.time.substr(0 ,b.time.indexOf(":")));
+        DateB.setMinutes(b.time.substr(b.time.indexOf(":")+1));
+      }
+
       return DateA - DateB;
     });
 

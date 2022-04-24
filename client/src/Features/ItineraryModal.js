@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { createPortal } from "react-dom";
 import "./ItineraryModal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import TableDatePicker from "./TableDatePicker";
 import Autocomplete from "react-google-autocomplete";
 
@@ -87,13 +86,6 @@ export default class Modal extends Component {
               <label for="time" className="modal-heading">
                 Time
               </label>
-              {/*
-              <input
-                id="time"
-                className="form-control"
-                defaultValue={this.props.itemPrefill["time"]}
-              ></input>
-    */}
               <input
                 type="time"
                 id="time"
@@ -101,11 +93,9 @@ export default class Modal extends Component {
                 name="appt"
                 defaultValue={this.props.itemPrefill["time"]}
               ></input>
-              {/* <TableTimePicker/> */}
             </div>
             <div className="modal-section">
               <p className="modal-heading">Location</p>
-
               <Autocomplete
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}
@@ -118,10 +108,6 @@ export default class Modal extends Component {
                 }}      
                 placeholder=""
               />
-              {/* <input
-                className="form-control"
-                defaultValue={this.props.itemPrefill["location"]}
-              ></input> */}
             </div>
             <div className="form-group modal-section">
               <label for="notes" className="modal-heading">
