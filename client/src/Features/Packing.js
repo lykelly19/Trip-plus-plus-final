@@ -6,7 +6,7 @@ import "reactjs-popup/dist/index.css";
 import { CommonItems } from "./Suggestions.js";
 
 import { db } from "../firebase.js";
-import { collection, getDocs } from "firebase/firestore";
+import { deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 export default class Packing extends Component {
   state = {
@@ -14,13 +14,11 @@ export default class Packing extends Component {
     itemText: "",
     isEditing: false /* var is false if no edit is done or is the item object if true*/,
     /*isChecked: false,*/
+
   };
 
-  getUsers = async () => {
-    const usersCollectionRef = collection(db, "users");
-    const data = await getDocs(usersCollectionRef);
-    console.log(data);
-  };
+  
+
   /* editing has been clicked 
       swtich to input el*/
   toggleInput = (item) => {
@@ -75,13 +73,37 @@ export default class Packing extends Component {
     this.setState({ itemText: e.target.value });
   };
 
+
+  submitToDB = (id, name) =>{
+    const data = {
+      id: id,
+      name: name,
+      done: false,
+    };
+
+   const ref = (doc(db, "users", "userID"));
+
+    
+    updateDoc(ref, {
+      Packing: arrayUnion(data)
+  });
+    
+  }
   onSubmitItem = () => {
     if (this.state.itemText) {
       //prevent empty item from being added
+      var theid = this.state.items.length + 1;
+
+
+
+      this.submitToDB(theid, this.state.itemText);
+      
+
+      
       this.setState(({ items, itemText }) => ({
         items: [
           ...items,
-          { id: items.length + 1, name: itemText, done: false, editing: false },
+          { id: theid, name: itemText, done: false, editing: false },
         ],
         itemText: "",
         isEditing: false,
@@ -94,6 +116,12 @@ export default class Packing extends Component {
   onSubmitItem2 = (e) => {
     if (e.key === "Enter") this.onSubmitItem();
   };
+
+
+  updateDoneStatus = (item) => {
+    
+  }
+
 
   onChangeBox = (item) => {
     this.setState(({ items }) => ({
@@ -108,17 +136,27 @@ export default class Packing extends Component {
       items: items.filter((el) => el.id !== item.id),
     }));
   };
+
+  deleteDB = () => {
+    const ref = (doc(db, "users", "userID"));
+
+    updateDoc(ref, {
+      Packing: deleteField()
+    });
+
+  }
   deleteAll = () => {
+
+    this.deleteDB();
     this.setState(({ items }) => ({
       items: [],
     }));
   };
 
   render() {
+
     const { items, itemText, isEditing } = this.state;
     const comItems = CommonItems;
-    console.log(comItems);
-    this.getUsers();
 
     return (
       <div className="container">
@@ -183,6 +221,8 @@ export default class Packing extends Component {
     );
   }
 }
+
+
 
 export const SugList = ({ list, AddSuggestion }) => (
   <ul>
