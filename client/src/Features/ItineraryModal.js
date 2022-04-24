@@ -25,6 +25,19 @@ export default class Modal extends Component {
     const formItems = {};
     const formItemsKeys = ["eventName", "date", "time", "location", "notes"];
 
+    // check if all input fields are empty
+    let empty = true;
+    for (let i = 0; i < 5; i++) 
+      if (event.target[i].value) {
+        empty = false;
+        break;
+      }
+    
+    if (empty) {
+      this.props.closeModal();
+      return;
+    }
+
     // add the five items into formItems
     for (let i = 0; i < 5; i++)
       formItems[formItemsKeys[i]] = event.target[i].value;
