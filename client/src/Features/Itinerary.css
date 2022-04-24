@@ -111,8 +111,10 @@ tbody {
 /* all th from first row of itinerary table */
 
 #itinerary-table thead th {
-    font-weight: 900;
-    font-size: 18px;
+    /*font-weight: 900;*/
+    /*font-size: 18px;*/
+    font-size: large;
+    font-weight: bold;
 }
 
 #itinerary-table tbody th {

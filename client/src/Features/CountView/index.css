@@ -148,3 +148,11 @@ body {
     font-weight: bold;
     /*0.375rem 0.75rem*/
 }
+
+.ant-input {
+    border-radius: 0px !important;
+}
+
+.ant-input:hover {
+    border-color: #a37cf0;
+}

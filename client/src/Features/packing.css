@@ -108,12 +108,13 @@
     cursor: pointer;
     position: relative;
     /*padding: 12px 8px 12px 40px;*/
-    padding: 12px;
+    padding: 2px;
     list-style-type: none;
     /*background: #eee;*/
     background: #F1F1F1;
     text-align: center;
     border-bottom: 1px solid #e5e5e5;
+    font-size: large;
 }
 
 .sugDiv ul li:nth-child(odd) {

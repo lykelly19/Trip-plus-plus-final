@@ -46,6 +46,7 @@
     color: white;
     background-color: #bd2e95;
     text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
 }
 
 .box-shadow {
@@ -54,6 +55,7 @@
 
 .reg-side h4 {
     color: white;
+    padding-bottom: 100px;
 }
 
 .reg-side {
