@@ -16,14 +16,12 @@ import Budgeting from "./Features/Budgeting";
 import Login from "./Features/Auth/Login";
 import AuthButton from "./Features/Auth/AuthButton";
 import Register from "./Features/Auth/Register";
-import { readUserByID } from "./Features/DB/users";
 
 // import CountView from './Features/CountView';
 
 function App() {
   return (
     <div className="container" id="pageWrapper">
-      <button onClick={()=>readUserByID("vjHyPtC19SNeel8kd2vw2DV4hPX2")}>test</button>
       <Router>
         <header className="header">
           <div className="row d-flex flex-row flex-nowrap justify-content-between align-items-center">
