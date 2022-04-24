@@ -3,10 +3,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import "./Login.css";
+import {authErrors} from "./AuthErrorMessages"
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
   const routerNavigate = useNavigate();
 
   const handleEmailChanges = (e) => {
@@ -17,13 +19,20 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
+  const handleErrorMessage = (errCode) =>{
+    setErrMessage(authErrors[errCode]);
+  }
+
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         routerNavigate("/");
       })
       .catch((err) => {
-        alert(err.message);
+        //console.log(authErrors["email-already-in-use"])
+        //setErrMessage(err.message);
+        handleErrorMessage(err.message);
+        //alert(err.message);
       });
   };
 
@@ -62,6 +71,9 @@ export default function Login() {
                       value={password}
                       onChange={handlePasswordChanges}
                     ></input>
+                  </div>
+                  <div className="ErrMessage">
+                    {errMessage}
                   </div>
                   <div className="text-center box-shadow pt-1 mb-5 pb-1">
                     <button

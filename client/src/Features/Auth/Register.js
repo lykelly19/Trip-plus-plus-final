@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate, useHistory } from "react-router-dom";
+<<<<<<< HEAD
 import { createUser } from "../DB/users";
+=======
+import { authErrors} from "./AuthErrorMessages"
+>>>>>>> 2ff0777... adding error message to login/register
 import "./Register.css";
 
 export default function Register() {
@@ -11,6 +15,11 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [errMessage, setErrMessage] = useState("");
+
+  const handleErrorMessage = (errCode) =>{
+    setErrMessage(authErrors[errCode]);
+  }
 
   const registerNavigate = useNavigate();
 
@@ -18,7 +27,7 @@ export default function Register() {
     if (
       userRegisterationInfo.password !== userRegisterationInfo.confirmPassword
     ) {
-      alert(
+      setErrMessage(
         "Password entered does not match, please confirm that the password are the same"
       );
       return;
@@ -34,7 +43,9 @@ export default function Register() {
         })
         registerNavigate("/");
       })
-      .catch((err) => alert(err.message));
+      .catch((err) => {
+        handleErrorMessage(err.message);
+      });
   };
 
   const handleBackFromRegister = () => {
@@ -100,6 +111,9 @@ export default function Register() {
                       }}
                     />
                   </div>
+                  <div className="ErrMessage">
+                    {errMessage}
+                  </div>
                   <div className="text-center box-shadow pt-1 mb-5 pb-1">
                     <button
                       className="reg-btn btn btn-block input-block-level col-12"
@@ -118,8 +132,7 @@ export default function Register() {
                   <div className="d-flex align-items-center justify-content-center pb-4">
                     <button
                       className="back-btn btn box-shadow"
-                      onClick={handleBackFromRegister}
-                    >
+                      onClick={handleBackFromRegister}>
                       Go Back
                     </button>
                   </div>
