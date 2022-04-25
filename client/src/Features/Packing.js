@@ -8,8 +8,11 @@ import { CommonItems } from "./Suggestions.js";
 import { db } from "../firebase.js";
 import { deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
+import { readPacking } from "./DB/readPacking.js";
+
 export default class Packing extends Component {
   state = {
+    fb: readPacking(),
     items: [],
     itemText: "",
     isEditing: false /* var is false if no edit is done or is the item object if true*/,
@@ -18,6 +21,10 @@ export default class Packing extends Component {
   };
 
   
+
+ initItems = () => {
+  this.setState.items = this.state.fb;
+ };
 
   /* editing has been clicked 
       swtich to input el*/
@@ -66,7 +73,7 @@ export default class Packing extends Component {
         { id: items.length + 1, name: item, done: false, editing: false },
       ],
       isEditing: false,
-    }));
+    }))
   };
 
   onChangeInput = (e) => {
@@ -98,7 +105,6 @@ export default class Packing extends Component {
 
       this.submitToDB(theid, this.state.itemText);
       
-
       
       this.setState(({ items, itemText }) => ({
         items: [
@@ -153,9 +159,19 @@ export default class Packing extends Component {
     }));
   };
 
-  render() {
 
+  constructor(props) {
+    super(props)
+    this.setState.items = this.state.fb;
+
+    console.log("this state: " + this.state.fb);
+    console.log('This is first method called upon initialization')
+}
+
+  render() {
     const { items, itemText, isEditing } = this.state;
+
+
     const comItems = CommonItems;
 
     return (
