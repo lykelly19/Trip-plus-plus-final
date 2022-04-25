@@ -110,6 +110,7 @@ export default class Modal extends Component {
                 onPlaceSelected={(place) => {
                   this.props.currCoordinates["lat"] = place.geometry.location.lat();
                   this.props.currCoordinates["lng"] = place.geometry.location.lng();
+                  this.props.currCoordinates["modalChange"] = true;
                 }}
                 options={{
                   types: ["geocode", "establishment"]
@@ -128,7 +129,7 @@ export default class Modal extends Component {
               ></textarea>
             </div>
             <div className="d-flex justify-content-end py-3 modal-section">
-              <button
+              {/* <button
                 className="btn"
                 id="delete-button"
                 onClick={(e) =>
@@ -136,7 +137,7 @@ export default class Modal extends Component {
                 }
               >
                 Delete
-              </button>
+              </button> */}
               <button className="btn" id="save-button" type="submit">
                 Save
               </button>

@@ -22,7 +22,8 @@ export default class Itinerary extends Component {
     defaultCoordinates: { lat: 41.3851, lng: 2.1734 },
     currCoordinates: {
       lat: null,
-      lng: null
+      lng: null,
+      modalChange: false
     }
   };
 
@@ -43,7 +44,8 @@ export default class Itinerary extends Component {
       },
       currCoordinates: {
         lat: null,
-        lng: null
+        lng: null,
+        modalChange: false
       }
     });
   };
@@ -57,10 +59,18 @@ export default class Itinerary extends Component {
   onSubmitItineraryItem = () => {
     // if this is editing an item, change item to have values equal to the newly added item
     if (this.state.prefill["itemNumber"]) {
+
       // from the list, remove the item with the same itemNumber
       this.state.items = this.state.items.filter(
         (i) => i.itemNumber !== this.state.prefill.itemNumber
       );
+
+      // // if the location has not changed, then keep it as it previously was
+      if(!this.state.currCoordinates.modalChange) {
+        // get current item (the last item) and change the lat and long
+        this.state.items[this.state.items.length-1].lat = this.state.prefill.lat;
+        this.state.items[this.state.items.length-1].lng = this.state.prefill.lng;
+      }
     }
 
     // sort by date
@@ -68,7 +78,6 @@ export default class Itinerary extends Component {
       let DateA = new Date(a.date);
       let DateB = new Date(b.date);
 
-      // create Date object with
       if(a.time) {
         DateA.setHours(a.time.substr(0 ,a.time.indexOf(":")));
         DateA.setMinutes(a.time.substr(a.time.indexOf(":")+1));
