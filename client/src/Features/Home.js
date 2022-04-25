@@ -6,6 +6,8 @@ import ItineraryPreview from "./Itinerary Preview.png";
 import PackingPreview from "./Packing Preview.png";
 import BudgetingPreviewChart from "./Budget Preview Chart.png";
 
+
+import PackingWidget from "./PackingWidget";
 export function AddWeather() {
   const script = document.createElement("script");
   script.innerHTML =
@@ -82,7 +84,7 @@ const Home = () => {
               </div>
               <div className="card-body">
                 <p className="card-text" id="numItems">
-                  5
+                  <PackingWidget />
                 </p>
               </div>
             </div>
