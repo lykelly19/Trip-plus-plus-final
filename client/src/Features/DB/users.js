@@ -6,6 +6,7 @@ const createUser = async (user) => {
         budgeting: [],
         itinerary: [],
         packing:[],
+        leftToPack: 0
     }
     await setDoc(doc(db, "users", user), docData);
 }

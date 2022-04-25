@@ -3,24 +3,27 @@ import Popup from "reactjs-popup";
 import "./packing.css";
 import "reactjs-popup/dist/index.css";
 
+
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+
 import { CommonItems } from "./Suggestions.js";
 
 import { db } from "../firebase.js";
-import { collection, getDocs } from "firebase/firestore";
+import { increment, deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
+
+import { readPacking, getUserID} from "./DB/readingfb.js";
 
 export default class Packing extends Component {
   state = {
+    fb: readPacking(),
     items: [],
     itemText: "",
     isEditing: false /* var is false if no edit is done or is the item object if true*/,
     /*isChecked: false,*/
+
   };
 
-  getUsers = async () => {
-    const usersCollectionRef = collection(db, "users");
-    const data = await getDocs(usersCollectionRef);
-    console.log(data);
-  };
   /* editing has been clicked 
       swtich to input el*/
   toggleInput = (item) => {
@@ -62,30 +65,59 @@ export default class Packing extends Component {
   };
 
   addSuggestion = (item) => {
+    const theid = this.state.items.length + 1; 
     this.setState(({ items }) => ({
       items: [
         ...items,
-        { id: items.length + 1, name: item, done: false, editing: false },
+        { id: theid, name: item, done: false, editing: false },
       ],
       isEditing: false,
-    }));
+    }))
+
+    this.submitToDB(theid, item);
   };
 
   onChangeInput = (e) => {
     this.setState({ itemText: e.target.value });
   };
 
+
+  submitToDB = (id, name) =>{
+    const data = {
+      id: id,
+      name: name,
+      done: false,
+    };
+
+   const ref = (doc(db, "users", getUserID()));
+
+    updateDoc(ref, {
+      packing: arrayUnion(data),
+      leftToPack: increment(1),
+  
+    });
+    
+  };
+
+
+
   onSubmitItem = () => {
     if (this.state.itemText) {
       //prevent empty item from being added
+      var theid = this.state.items.length + 1;
+
+    
       this.setState(({ items, itemText }) => ({
         items: [
           ...items,
-          { id: items.length + 1, name: itemText, done: false, editing: false },
+          { id: theid, name: itemText, done: false, editing: false },
         ],
         itemText: "",
         isEditing: false,
       }));
+
+
+      this.submitToDB(theid, this.state.itemText);
     }
   };
 
@@ -95,30 +127,74 @@ export default class Packing extends Component {
     if (e.key === "Enter") this.onSubmitItem();
   };
 
+
+  
+
   onChangeBox = (item) => {
+    const ref = (doc(db, "users", getUserID()));
+
+    if(item.done){
+      updateDoc(ref, {
+        leftToPack: increment(1)
+      });
+    }else{
+      updateDoc(ref, {
+        leftToPack: increment(-1)
+      });
+    }
+
     this.setState(({ items }) => ({
       items: items.map((el) =>
         el.id === item.id ? { ...el, done: !el.done } : el
       ),
     }));
+
   };
 
   handleDel = (item) => {
+    const ref = (doc(db, "users", getUserID()));
+
+    if(item.done){
+      updateDoc(ref, {
+        leftToPack: increment(-1)
+      });}
+
     this.setState(({ items }) => ({
       items: items.filter((el) => el.id !== item.id),
     }));
+
   };
+
+  deleteDB = () => {
+
+    const ref = (doc(db, "users", getUserID()));
+
+    updateDoc(ref, {
+      packing: deleteField(),
+      leftToPack: 0,
+    });
+
+  }
   deleteAll = () => {
+
+    this.deleteDB();
     this.setState(({ items }) => ({
       items: [],
     }));
   };
 
+
+  constructor(props) {
+    super(props)
+
+    console.log('This is first method called upon initialization')
+}
+
   render() {
     const { items, itemText, isEditing } = this.state;
+
+
     const comItems = CommonItems;
-    console.log(comItems);
-    this.getUsers();
 
     return (
       <div className="container">
@@ -183,6 +259,8 @@ export default class Packing extends Component {
     );
   }
 }
+
+
 
 export const SugList = ({ list, AddSuggestion }) => (
   <ul>
