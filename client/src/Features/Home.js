@@ -27,9 +27,7 @@ const Home = () => {
         <div class="weatherDiv col-md-7">
           <a
             className="weatherwidget-io mx-auto"
-            href="https://forecast7.com/en/52d5213d40/berlin/"
-            data-label_1="BERLIN"
-            data-label_2="WEATHER"
+            href="https://forecast7.com/en/28d54n81d38/orlando/" data-label_1="ORLANDO" data-label_2="WEATHER" 
             theme="dark"
           >
             BERLIN WEATHER
@@ -59,8 +57,8 @@ const Home = () => {
                 </p>
               </div>
               <div className="card-body">
-                <p className="card-text">2/21/2022 @ 7:21 PM</p>
-                <p className="card-text">Visit Thessaliniki</p>
+                <p className="card-text">3/20/2022 @ 12:00 PM</p>
+                <p className="card-text">Arrive at Airport</p>
               </div>
             </div>
           </div>
@@ -70,10 +68,9 @@ const Home = () => {
                 <p className="card-title">Your budget</p>
               </div>
               <div className="card-body">
-                <img
-                  src={BudgetingPreviewChart}
-                  alt="preview budgeting donut chart"
-                ></img>
+                <p className="card-text" id="numItems">
+                  $500
+                </p>
               </div>
             </div>
           </div>
