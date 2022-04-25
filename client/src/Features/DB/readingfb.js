@@ -5,17 +5,33 @@ import { auth } from "../../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const readPacking = async () =>{
-    const docRef = doc(db, "users", "userID");
+    const docRef = doc(db, "users", getUserID());
     const docSnapshot = await getDoc(docRef);
 
     if(docSnapshot.exists()){
-        console.log("Document data:", docSnapshot.data());
+        console.log("Document data:", docSnapshot.data().packing);
     } else {
         console.log("No such document!");
     }
 
-    return docSnapshot.data.packing;
+    return docSnapshot.data().packing;
 }
+
+
+
+const readLeftToPack = async () =>{
+  const docRef = doc(db, "users", getUserID());
+  const docSnapshot = await getDoc(docRef);
+
+  if(docSnapshot.exists()){
+    return docSnapshot.data().leftToPack;
+  } else {
+      console.log("No such document!");
+  }
+
+}
+
+
 
 
 const getUserID = () => {
@@ -34,4 +50,4 @@ const getUserID = () => {
     }
 }
 
-export {readPacking, getUserID};
+export {readPacking, getUserID, readLeftToPack};

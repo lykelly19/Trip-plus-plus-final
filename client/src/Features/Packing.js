@@ -10,7 +10,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { CommonItems } from "./Suggestions.js";
 
 import { db } from "../firebase.js";
-import { deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { increment, deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 import { readPacking, getUserID} from "./DB/readingfb.js";
 
@@ -23,13 +23,6 @@ export default class Packing extends Component {
     /*isChecked: false,*/
 
   };
-
-
-
-
- initItems = () => {
-  this.setState.items = this.state.fb;
- };
 
   /* editing has been clicked 
       swtich to input el*/
@@ -72,13 +65,16 @@ export default class Packing extends Component {
   };
 
   addSuggestion = (item) => {
+    const theid = this.state.items.length + 1; 
     this.setState(({ items }) => ({
       items: [
         ...items,
-        { id: items.length + 1, name: item, done: false, editing: false },
+        { id: theid, name: item, done: false, editing: false },
       ],
       isEditing: false,
     }))
+
+    this.submitToDB(theid, item);
   };
 
   onChangeInput = (e) => {
@@ -96,7 +92,9 @@ export default class Packing extends Component {
    const ref = (doc(db, "users", getUserID()));
 
     updateDoc(ref, {
-      Packing: arrayUnion(data)
+      packing: arrayUnion(data),
+      leftToPack: increment(1),
+  
     });
     
   };
@@ -108,11 +106,7 @@ export default class Packing extends Component {
       //prevent empty item from being added
       var theid = this.state.items.length + 1;
 
-
-
-      this.submitToDB(theid, this.state.itemText);
-      
-      
+    
       this.setState(({ items, itemText }) => ({
         items: [
           ...items,
@@ -121,6 +115,9 @@ export default class Packing extends Component {
         itemText: "",
         isEditing: false,
       }));
+
+
+      this.submitToDB(theid, this.state.itemText);
     }
   };
 
@@ -131,23 +128,41 @@ export default class Packing extends Component {
   };
 
 
-  updateDoneStatus = (item) => {
-    
-  }
-
+  
 
   onChangeBox = (item) => {
+    const ref = (doc(db, "users", getUserID()));
+
+    if(item.done){
+      updateDoc(ref, {
+        leftToPack: increment(1)
+      });
+    }else{
+      updateDoc(ref, {
+        leftToPack: increment(-1)
+      });
+    }
+
     this.setState(({ items }) => ({
       items: items.map((el) =>
         el.id === item.id ? { ...el, done: !el.done } : el
       ),
     }));
+
   };
 
   handleDel = (item) => {
+    const ref = (doc(db, "users", getUserID()));
+
+    if(item.done){
+      updateDoc(ref, {
+        leftToPack: increment(-1)
+      });}
+
     this.setState(({ items }) => ({
       items: items.filter((el) => el.id !== item.id),
     }));
+
   };
 
   deleteDB = () => {
@@ -155,7 +170,8 @@ export default class Packing extends Component {
     const ref = (doc(db, "users", getUserID()));
 
     updateDoc(ref, {
-      Packing: deleteField()
+      packing: deleteField(),
+      leftToPack: 0,
     });
 
   }
@@ -170,9 +186,7 @@ export default class Packing extends Component {
 
   constructor(props) {
     super(props)
-    this.setState.items = this.state.fb;
 
-    console.log("this state: " + this.state.fb);
     console.log('This is first method called upon initialization')
 }
 
