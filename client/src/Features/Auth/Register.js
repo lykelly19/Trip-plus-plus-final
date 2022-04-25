@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigate, useHistory } from "react-router-dom";
-<<<<<<< HEAD
 import { createUser } from "../DB/users";
-=======
 import { authErrors} from "./AuthErrorMessages"
->>>>>>> 2ff0777... adding error message to login/register
 import "./Register.css";
 
 export default function Register() {
