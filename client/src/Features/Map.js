@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const mapStyles = {        
     width: "800px",
@@ -21,11 +21,11 @@ export default class MapContainer extends Component {
                 {
                     this.props.myCoordinates.map(item => {
                         return (
-                        <Marker key={item.name} position={item.location}/>
+                            <Marker key={item.name} position={item.location} label={item.name.toString()}></Marker>
                         )
                     })
                 }
-                </GoogleMap>
+            </GoogleMap>
         )
     }
 }
