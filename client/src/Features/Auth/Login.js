@@ -9,6 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
+
   const routerNavigate = useNavigate();
 
   const handleEmailChanges = (e) => {
@@ -19,9 +20,9 @@ export default function Login() {
     setPassword(e.target.value);
   };
 
-  const handleErrorMessage = (errCode) =>{
+  const handleErrorMessage = (errCode) => {
     setErrMessage(authErrors[errCode]);
-  }
+  };
 
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -53,10 +54,23 @@ export default function Login() {
                 </div>
                 {/*<form onSubmit={handleSignIn}>*/}
                 <div className="container">
+                  <div
+                    style={{ display: !errMessage ? "none" : null }}
+                    className="ErrMessage"
+                  >
+                    {errMessage}
+                  </div>
                   <div className="form-outline mb-4">
                     <input
                       id="email-login"
-                      className="form-control"
+                      className={
+                        errMessage ===
+                          "The email address is badly formatted." ||
+                        errMessage ===
+                          "There is no user record of this email. The user does not exist."
+                          ? "form-control err-box"
+                          : "form-control"
+                      }
                       type="email"
                       placeholder="email"
                       value={email}
@@ -65,16 +79,22 @@ export default function Login() {
                   </div>
                   <div className="form-outline mb-4">
                     <input
-                      className="form-control"
+                      className={
+                        errMessage === "The password you entered is incorrect"
+                          ? "form-control err-box"
+                          : "form-control"
+                      }
                       type="password"
                       placeholder="password"
                       value={password}
                       onChange={handlePasswordChanges}
                     ></input>
                   </div>
+                  {/*
                   <div className="ErrMessage">
                     {errMessage}
                   </div>
+  */}
                   <div className="text-center box-shadow pt-1 mb-5 pb-1">
                     <button
                       className="sign-in-btn btn btn-block input-block-level col-12"
