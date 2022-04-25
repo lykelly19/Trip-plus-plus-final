@@ -3,12 +3,16 @@ import Popup from "reactjs-popup";
 import "./packing.css";
 import "reactjs-popup/dist/index.css";
 
+
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+
 import { CommonItems } from "./Suggestions.js";
 
 import { db } from "../firebase.js";
 import { deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
-import { readPacking } from "./DB/readPacking.js";
+import { readPacking, getUserID} from "./DB/readingfb.js";
 
 export default class Packing extends Component {
   state = {
@@ -20,7 +24,8 @@ export default class Packing extends Component {
 
   };
 
-  
+
+
 
  initItems = () => {
   this.setState.items = this.state.fb;
@@ -88,14 +93,16 @@ export default class Packing extends Component {
       done: false,
     };
 
-   const ref = (doc(db, "users", "userID"));
+   const ref = (doc(db, "users", getUserID()));
 
-    
     updateDoc(ref, {
       Packing: arrayUnion(data)
-  });
+    });
     
-  }
+  };
+
+
+
   onSubmitItem = () => {
     if (this.state.itemText) {
       //prevent empty item from being added
@@ -144,7 +151,8 @@ export default class Packing extends Component {
   };
 
   deleteDB = () => {
-    const ref = (doc(db, "users", "userID"));
+
+    const ref = (doc(db, "users", getUserID()));
 
     updateDoc(ref, {
       Packing: deleteField()
