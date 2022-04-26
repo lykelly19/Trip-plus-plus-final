@@ -57,8 +57,8 @@ const Home = () => {
                 </p>
               </div>
               <div className="card-body">
-                <p className="card-text">Orlando International Airport</p>
-                <p className="card-text">4/29/2022</p>
+                <p className="card-text">No upcoming items</p>
+                <p className="card-text"></p>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ const Home = () => {
               </div>
               <div className="card-body">
                 <p className="card-text" id="numItems">
-                  $200
+                  $0
                 </p>
               </div>
             </div>
@@ -81,7 +81,6 @@ const Home = () => {
               </div>
               <div className="card-body">
                 <p className="card-text" id="numItems">
-                  3
                   <PackingWidget />
                 </p>
               </div>

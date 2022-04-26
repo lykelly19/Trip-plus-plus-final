@@ -1,79 +1,103 @@
 [
     {
     "id":1,
-    "name":"Alabama",
-    "prop1": 100,
-    "prop2":200,
-    "prop3": 200
+    "name":"New York",
+    "prop1": 46,
+    "prop2":36,
+    "prop3": 102
     },
     {
     "id":2,
-    "name":"Alaska",
-    "prop1": 300,
-    "prop2":100,
-    "prop3": 100
+    "name":"Massachusetts",
+    "prop1": 40,
+    "prop2":28,
+    "prop3": 132
     },
     {
     "id":3,
-    "name":"Arizona",
-    "prop1": 400,
-    "prop2":500,
-    "prop3": 600
+    "name":"Hawaii",
+    "prop1": 61,
+    "prop2":29,
+    "prop3": 171
     },
     {
     "id":4,
-    "name":"Arkansas",
-    "prop1": 100,
-    "prop2":200,
-    "prop3": 200
+    "name":"Florida",
+    "prop1": 48,
+    "prop2":37,
+    "prop3": 96
     },
     {
     "id":5,
     "name":"California",
-    "prop1": 100,
-    "prop2":200,
-    "prop3": 200
+    "prop1": 37,
+    "prop2":32,
+    "prop3": 92
     },
     {
     "id":6,
-    "name":"Colorado"
+    "name":"Texas",
+    "prop1": 34,
+    "prop2":39,
+    "prop3": 62
     },
     {
     "id":7,
-    "name":"Connecticut"
+    "name":"Maine",
+    "prop1": 41,
+    "prop2":34,
+    "prop3": 86
     },
     {
     "id":8,
-    "name":"Delaware"
+    "name":"michigan",
+    "prop1": 29,
+    "prop2":24,
+    "prop3": 52
     },
     {
     "id":9,
-    "name":"Florida",
-    "prop1": 100,
-    "prop2":200,
-    "prop3": 200
-    
+    "name":"Kansas",
+    "prop1": 33,
+    "prop2":27,
+    "prop3": 68
     },
     {
     "id":10,
-    "name":"Georgia"
+    "name":"Georgia",
+    "prop1": 31,
+    "prop2":29,
+    "prop3": 78
     },
     {
     "id":11,
-    "name":"Hawaii"
+    "name":"Maryland",
+    "prop1": 34,
+    "prop2":32,
+    "prop3": 79
+
     },
     {
     "id":12,
-    "name":"Idaho"
+    "name":"New Jersey",
+    "prop1": 44,
+    "prop2":39,
+    "prop3": 89
     },
     {
     "id":13,
-    "name":"Illinois"
+    "name":"New Hampshire",
+    "prop1": 42,
+    "prop2":24,
+    "prop3": 71
     },
     {
     "id":14,
-    "name":"Indiana"
-    },
+    "name":"New Mexico",
+    "prop1": 32,
+    "prop2":24,
+    "prop3": 84
+     },
     {
     "id":15,
     "name":"Iowa"
