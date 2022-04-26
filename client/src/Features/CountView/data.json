@@ -48,7 +48,11 @@
     },
     {
     "id":9,
-    "name":"Florida"
+    "name":"Florida",
+    "prop1": 100,
+    "prop2":200,
+    "prop3": 200
+    
     },
     {
     "id":10,
