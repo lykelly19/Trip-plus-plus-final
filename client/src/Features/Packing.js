@@ -16,7 +16,7 @@ import { readPacking, getUserID} from "./DB/readingfb.js";
 
 export default class Packing extends Component {
   state = {
-    fb: readPacking(),
+    fb: [],
     items: [],
     itemText: "",
     isEditing: false /* var is false if no edit is done or is the item object if true*/,
@@ -184,11 +184,30 @@ export default class Packing extends Component {
   };
 
 
+
+  /* this function initiziale the state with firestore storage */
+
   constructor(props) {
     super(props)
+    var fbArray= []; 
+  
+    readPacking().then((data) => {
+        fbArray= data;
+        for(var i = 0; i <  fbArray.length; i++){
+          const obj = { id: fbArray[i].id, name: fbArray[i].name, done: fbArray.done, editing: false };
 
-    console.log('This is first method called upon initialization')
-}
+          this.setState(({ items }) => ({
+            items: [
+              ...items,
+              obj,
+            ],
+          }));
+          
+        }
+    }).catch((error) => {
+        console.log("error in init packing")
+    });
+  }
 
   render() {
     const { items, itemText, isEditing } = this.state;
