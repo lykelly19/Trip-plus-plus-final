@@ -1,7 +1,9 @@
 import "./Itinerary.css";
 import React, { Component } from "react";
+import Button from "react-bootstrap/Button";
 import ItineraryModal from "./ItineraryModal";
 import "bootstrap/dist/css/bootstrap.min.css";
+import editIcon from "./edit-event-icon.png";
 import MapContainer from "./Map";
 import { readFirstLocation, getUserID} from "./DB/readingfb.js";
 import { db } from "../firebase.js";
@@ -131,7 +133,6 @@ export default class Itinerary extends Component {
     });
   };
 
-<<<<<<< HEAD
 
 
 /* function that wrties data to fb for firstLocation field*/
@@ -145,8 +146,6 @@ export default class Itinerary extends Component {
   }
 
 
-=======
->>>>>>> 7ca60ba (merge with main branch)
   handleDelX = (item) => {
 
     this.setState({

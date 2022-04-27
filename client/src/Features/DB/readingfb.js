@@ -33,7 +33,6 @@ const readLeftToPack = async () =>{
 
 
 
-<<<<<<< HEAD
 const readItinerary = async () =>{
   const docRef = doc(db, "users", getUserID());
   const docSnapshot = await getDoc(docRef);
@@ -65,8 +64,6 @@ const readFirstLocation = async () =>{
 
 
 
-=======
->>>>>>> 7ca60ba (merge with main branch)
 
 const getUserID = () => {
 
@@ -84,8 +81,4 @@ const getUserID = () => {
     }
 }
 
-<<<<<<< HEAD
 export {readPacking, getUserID, readLeftToPack, readItinerary, readFirstLocation};
-=======
-export {readPacking, getUserID, readLeftToPack};
->>>>>>> 7ca60ba (merge with main branch)

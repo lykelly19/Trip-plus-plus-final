@@ -1,13 +1,12 @@
 import React from "react";
 import "./widget.css";
 import "./Home.css";
+import BudgetingPreview from "./Budgeting Preview.png";
+import ItineraryPreview from "./Itinerary Preview.png";
+import PackingPreview from "./Packing Preview.png";
 import BudgetingPreviewChart from "./Budget Preview Chart.png";
 
-<<<<<<< HEAD
 import ItineraryWidget from "./ItineraryWidget";
-=======
-
->>>>>>> 7ca60ba (merge with main branch)
 import PackingWidget from "./PackingWidget";
 export function AddWeather() {
   const script = document.createElement("script");
