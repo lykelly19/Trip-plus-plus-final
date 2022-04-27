@@ -6,16 +6,23 @@ import {readFirstLocation} from './DB/readingfb.js'
 function ItineraryWidget() {
 
     const [name, setName] = useState('set a name for your event');
-    const [loc, setLoc] = useState('set a loc');
+    const [loc, setLoc] = useState('select a location');
     const [time, setTime] = useState('set a time');
     const [date, setDate] = useState('set a date');
    
     useEffect(() => {
         readFirstLocation().then((data) => {
-            console.log(data);
+
+            if(data.eventName != '')
             setName(data.eventName);
+
+            if(data.location != '')
             setLoc(data.location);
-            setTime(data.setTime);
+
+            if(data.time != "")
+            setTime(data.time);
+
+            if(data.date != '')
             setDate(data.date);
         }).catch((error) => {
             console.log( error + "error in It");

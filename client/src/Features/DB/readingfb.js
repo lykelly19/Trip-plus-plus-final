@@ -38,7 +38,7 @@ const readItinerary = async () =>{
   const docSnapshot = await getDoc(docRef);
 
   if(docSnapshot.exists()){
-      console.log("Document data:", docSnapshot.data().itinerary);
+      console.log("Document data in IT:", docSnapshot.data().itinerary);
   } else {
       console.log("No such document!");
   }
@@ -53,7 +53,7 @@ const readFirstLocation = async () =>{
   const docSnapshot = await getDoc(docRef);
 
   if(docSnapshot.exists()){
-      console.log("Document data:", docSnapshot.data().firstLocation);
+      console.log("Document data in FL :", docSnapshot.data().firstLocation);
   } else {
       console.log("No such document!");
   }
