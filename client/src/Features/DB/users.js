@@ -7,7 +7,11 @@ const createUser = async (user) => {
         itinerary: [],
         packing:[],
         leftToPack: 0,
+<<<<<<< HEAD
         firstLocation: {eventName: "select an event name", date: "select a time", time: "select a time", location: "select a location"}
+=======
+        firstLocation: {eventName: "no where", date: "select a time", time: "select a time"}
+>>>>>>> 49cdc9b (added it widget)
     }
     await setDoc(doc(db, "users", user), docData);
 }
