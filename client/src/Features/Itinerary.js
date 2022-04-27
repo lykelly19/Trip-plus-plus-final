@@ -135,7 +135,7 @@ export default class Itinerary extends Component {
 
 
 
-/* function that wrties data to fb fir firstLocation field*/
+/* function that wrties data to fb for firstLocation field*/
   submitFirstLocToDB = (data) => {
     const ref = (doc(db, "users", getUserID()));
 
