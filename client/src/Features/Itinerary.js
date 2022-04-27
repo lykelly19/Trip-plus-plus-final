@@ -117,6 +117,9 @@ export default class Itinerary extends Component {
       this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
 
 
+
+    //left in the end so it submits when its reorder too 
+    //and updates the fb to the correct first location
     this.submitFirstLocToDB(this.state.items[0]);
     // close modal
     this.closeModal();
@@ -131,16 +134,15 @@ export default class Itinerary extends Component {
   };
 
 
+
+/* function that wrties data to fb fir firstLocation field*/
   submitFirstLocToDB = (data) => {
     const ref = (doc(db, "users", getUserID()));
 
     updateDoc(ref, {
       firstLocation: data
     });
-
-    console.log(readFirstLocation());
-
-    
+   
   }
 
 
