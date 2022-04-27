@@ -33,7 +33,9 @@ export default class Packing extends Component {
 
   /* when form input out of focus and if text is empty it deletes li*/
   doneEdit = () => {
+    const ref = (doc(db, "users", getUserID()));
     var item = this.state.isEditing;
+ 
     if (item.name == "") {
       this.handleDel(item);
       this.setState({ isEditing: false });
@@ -43,6 +45,12 @@ export default class Packing extends Component {
     for (var i = 0; i < this.state.items.length; i++) {
       if (this.state.items[i] != null) this.state.items[i].editing = false;
     }
+
+
+    //updates item to fb
+    updateDoc(ref, {
+      packing: this.state.items
+    });
 
     this.setState({ isEditing: false });
   };
@@ -65,7 +73,7 @@ export default class Packing extends Component {
   };
 
   addSuggestion = (item) => {
-    const theid = this.state.items.length + 1; 
+    const theid = this.randomNum();
     this.setState(({ items }) => ({
       items: [
         ...items,
@@ -100,17 +108,20 @@ export default class Packing extends Component {
   };
 
 
+  randomNum = () => {
+    return Math.floor(Math.random() * 100000);
+  }
 
   onSubmitItem = () => {
     if (this.state.itemText) {
       //prevent empty item from being added
-      var theid = this.state.items.length + 1;
+      var theid = this.randomNum();
 
     
       this.setState(({ items, itemText }) => ({
         items: [
           ...items,
-          { id: theid, name: itemText, done: false, editing: false },
+          { id: theid , name: itemText, done: false, editing: false },
         ],
         itemText: "",
         isEditing: false,
@@ -131,8 +142,15 @@ export default class Packing extends Component {
   
 
   onChangeBox = (item) => {
+
+    var val = !item.done;
+
     const ref = (doc(db, "users", getUserID()));
 
+    var cp = this.state.items; //db copy
+
+  
+    //keeps track of packing widget
     if(item.done){
       updateDoc(ref, {
         leftToPack: increment(1)
@@ -143,28 +161,51 @@ export default class Packing extends Component {
       });
     }
 
+    //changes state
     this.setState(({ items }) => ({
       items: items.map((el) =>
-        el.id === item.id ? { ...el, done: !el.done } : el
+        el.id === item.id ? { ...el, done: val} : el
       ),
     }));
+
+    //updates property for db
+    for(var i = 0; i < cp.length; i++){
+        if(cp[i].id == item.id){
+           cp[i].done = val;
+        }
+    }
+    
+    updateDoc(ref, {
+      packing: cp
+    });
 
   };
 
   handleDel = (item) => {
     const ref = (doc(db, "users", getUserID()));
 
-    if(item.done){
-      updateDoc(ref, {
-        leftToPack: increment(-1)
-      });}
-
+  
+    var cp = this.state.items;
+ 
     this.setState(({ items }) => ({
       items: items.filter((el) => el.id !== item.id),
     }));
 
+    var k = cp.filter((el) => el.id !== item.id);
+  
+    if(item.done){
+      updateDoc(ref, {
+        leftToPack: increment(-1),
+      });}
+
+    updateDoc(ref, {
+      packing: k
+    });
+
+
   };
 
+ 
   deleteDB = () => {
 
     const ref = (doc(db, "users", getUserID()));
@@ -194,7 +235,7 @@ export default class Packing extends Component {
     readPacking().then((data) => {
         fbArray= data;
         for(var i = 0; i <  fbArray.length; i++){
-          const obj = { id: fbArray[i].id, name: fbArray[i].name, done: fbArray.done, editing: false };
+          const obj = { id: fbArray[i].id, name: fbArray[i].name, done: fbArray[i].done, editing: false };
 
           this.setState(({ items }) => ({
             items: [
