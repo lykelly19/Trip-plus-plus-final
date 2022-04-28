@@ -251,7 +251,6 @@ export default class Packing extends Component {
   } */
 
 
-
   componentDidMount() {
     setTimeout(() => {
       var fbArray= []; 
