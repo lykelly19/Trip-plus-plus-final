@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { createPortal } from "react-dom";
 import "./ItineraryModal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Button from "react-bootstrap/Button";
 import TableDatePicker from "./TableDatePicker";
 import Autocomplete from "react-google-autocomplete";
 
@@ -16,11 +15,6 @@ const modalStyle = {
   backgroundColor: "rgba(0,0,0,.2)",
 };
 
-var currCoordinates = {
-  lat: null,
-  lng: null
-}
-
 export default class Modal extends Component {
 
   submitModalForm = (event) => {
@@ -31,13 +25,26 @@ export default class Modal extends Component {
     const formItems = {};
     const formItemsKeys = ["eventName", "date", "time", "location", "notes"];
 
+    // check if all input fields are empty
+    let empty = true;
+    for (let i = 0; i < 5; i++) 
+      if (event.target[i].value) {
+        empty = false;
+        break;
+      }
+    
+    if (empty) {
+      this.props.closeModal();
+      return;
+    }
+
     // add the five items into formItems
     for (let i = 0; i < 5; i++)
       formItems[formItemsKeys[i]] = event.target[i].value;
 
     formItems["itemNumber"] = this.props.numItems;
-    formItems["lat"] = currCoordinates["lat"];
-    formItems["lng"] = currCoordinates["lng"];
+    formItems["lat"] = this.props.currCoordinates["lat"];
+    formItems["lng"] = this.props.currCoordinates["lng"];
 
     this.props.incrementNumItems();
 
@@ -87,13 +94,6 @@ export default class Modal extends Component {
               <label for="time" className="modal-heading">
                 Time
               </label>
-              {/*
-              <input
-                id="time"
-                className="form-control"
-                defaultValue={this.props.itemPrefill["time"]}
-              ></input>
-    */}
               <input
                 type="time"
                 id="time"
@@ -101,27 +101,22 @@ export default class Modal extends Component {
                 name="appt"
                 defaultValue={this.props.itemPrefill["time"]}
               ></input>
-              {/* <TableTimePicker/> */}
             </div>
             <div className="modal-section">
-              <p className="modal-heading">Location</p>
-
+              <label className="modal-heading">Location</label>
               <Autocomplete
                 className="form-control"
                 defaultValue={this.props.itemPrefill["location"]}
                 onPlaceSelected={(place) => {
-                  currCoordinates["lat"] = place.geometry.location.lat();
-                  currCoordinates["lng"] = place.geometry.location.lng();
+                  this.props.currCoordinates["lat"] = place.geometry.location.lat();
+                  this.props.currCoordinates["lng"] = place.geometry.location.lng();
+                  this.props.currCoordinates["modalChange"] = true;
                 }}
                 options={{
                   types: ["geocode", "establishment"]
                 }}      
                 placeholder=""
               />
-              {/* <input
-                className="form-control"
-                defaultValue={this.props.itemPrefill["location"]}
-              ></input> */}
             </div>
             <div className="form-group modal-section">
               <label for="notes" className="modal-heading">
@@ -134,7 +129,7 @@ export default class Modal extends Component {
               ></textarea>
             </div>
             <div className="d-flex justify-content-end py-3 modal-section">
-              <button
+              {/* <button
                 className="btn"
                 id="delete-button"
                 onClick={(e) =>
@@ -142,7 +137,7 @@ export default class Modal extends Component {
                 }
               >
                 Delete
-              </button>
+              </button> */}
               <button className="btn" id="save-button" type="submit">
                 Save
               </button>
