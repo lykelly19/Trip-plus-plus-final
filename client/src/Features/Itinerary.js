@@ -1,9 +1,7 @@
 import "./Itinerary.css";
 import React, { Component } from "react";
-import Button from "react-bootstrap/Button";
 import ItineraryModal from "./ItineraryModal";
 import "bootstrap/dist/css/bootstrap.min.css";
-import editIcon from "./edit-event-icon.png";
 import MapContainer from "./Map";
 import { readFirstLocation, getUserID} from "./DB/readingfb.js";
 import { db } from "../firebase.js";

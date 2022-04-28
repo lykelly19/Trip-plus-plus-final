@@ -1,9 +1,6 @@
 import React from "react";
 import "./widget.css";
 import "./Home.css";
-import BudgetingPreview from "./Budgeting Preview.png";
-import ItineraryPreview from "./Itinerary Preview.png";
-import PackingPreview from "./Packing Preview.png";
 import BudgetingPreviewChart from "./Budget Preview Chart.png";
 
 <<<<<<< HEAD
