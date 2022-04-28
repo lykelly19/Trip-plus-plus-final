@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./index.css";
 import { Card, List, Form, Input, Button, InputNumber, Select } from "antd";
 import {
@@ -14,9 +14,15 @@ import { TooltipComponent, LegendComponent } from "echarts/components";
 import { PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
+import firebase from 'firebase/compat/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 import cityData from "./data.json";
-const { useState, useEffect, useRef } = React;
 
+
+
+
+const { useState, useEffect, useRef } = React;
 const cityMap = {};
 for (let item of cityData) {
   cityMap[item.id] = item;
@@ -29,6 +35,8 @@ echarts.use([
   CanvasRenderer,
   LabelLayout,
 ]);
+
+
 function randomColor() {
   var color = "#";
   //random get 0-15 and use tostring (16) in to color
@@ -186,14 +194,22 @@ function Index() {
     setHandleDeleteId();
     handleDeleteCancel();
   };
-  console.log("cityObj", cityObj);
+  
   const cityProps = (name) => ({
     value: cityObj[name],
     onChange: (value) => {
       setCityObj((prev) => ({ ...prev, [name]: value }));
     },
   });
-  console.log("countList", countList);
+  const numberChange = (rule,numberValue,callback) => {
+    if (numberValue < 0) {
+      // callback('please input positive number!')
+      return Promise.reject(new Error('please input positive number!'))
+      
+    }else{
+      return  Promise.resolve();
+    }
+  }
   return (
     <div id="container">
       <Card.Grid className="left-box card">
@@ -204,23 +220,22 @@ function Index() {
           wrapperCol={{ span: 16 }}
           autoComplete="off"
         >
+          <div className="horizontal-center horizontal-center-add">
+            <span
+              className="newBtn btn box-shadow"
+              onClick={handlePushItem}
+            >
+              {/*<PlusCircleOutlined style={{ fontSize: 20 }} />*/}
+              Add
+            </span>
+          </div>
           <div className="list-container">
             <div className="color-list list-box">
               {/* color */}
               <List
                 size="small"
                 split={false}
-                header={
-                  <div className="horizontal-center">
-                    <span
-                      className="newBtn btn box-shadow"
-                      onClick={handlePushItem}
-                    >
-                      {/*<PlusCircleOutlined style={{ fontSize: 20 }} />*/}
-                      Add
-                    </span>
-                  </div>
-                }
+                header={<> </>}
                 dataSource={countList.map((item) => ({
                   id: item.id,
                   color: item.color,
@@ -299,7 +314,7 @@ function Index() {
                   }
                   return (
                     <List.Item>
-                      <div style={{ height: 56 }}>{item.name}</div>
+                      <div style={{width:"100%",height:"56px",textAlign:"center",lineHeight: "33px"}}>{item.name}</div>
                     </List.Item>
                   );
                 }}
@@ -328,6 +343,9 @@ function Index() {
                               required: true,
                               message: "Please input lastest price!",
                             },
+                            {
+                              validator: numberChange,
+                            },
                           ]}
                         >
                           <InputNumber />
@@ -337,7 +355,7 @@ function Index() {
                   }
                   return (
                     <List.Item>
-                      <div style={{ height: 56 }}>{item.price}</div>
+                      <div  style={{width:"100%",height:"56px",textAlign:"center",lineHeight: "33px"}}>{item.price}</div>
                     </List.Item>
                   );
                 }}
@@ -360,7 +378,7 @@ function Index() {
                 renderItem={(item) => {
                   return (
                     <List.Item>
-                      <div style={{ height: 56, marginTop: 2 }}>
+                      <div style={{ height: 49, marginTop: 8 }}>
                         <span
                           className="budget-delete-btn"
                           onClick={handleItemDelete.bind(
@@ -439,29 +457,37 @@ function Index() {
             ))}
           </Select>
         </div>
-        <div style={{ marginTop: 30 }}>Average Food</div>
+        {/* title  */}
+        <h4 className="average-title"> Average daily expenses</h4>
+        <div style={{ marginTop: 30,fontSize: "14px" }}>Average Food</div>
         <div style={{ fontSize: 14 }}>
           <div>
             <InputNumber
+              addonBefore="$"
               placeholder="Average Food"
               style={{ width: "100%" }}
               {...cityProps("food")}
+              disabled
             />
           </div>
-          <div style={{ marginTop: 30 }}>Average Ticket</div>
+          <div style={{ marginTop: 30 }}>Average Trafic</div>
           <div>
             <InputNumber
-              placeholder="Average Ticket"
+              addonBefore="$"
+              placeholder="Average trafic"
               style={{ width: "100%" }}
               {...cityProps("ticket")}
+              disabled
             />
           </div>
           <div style={{ marginTop: 30 }}>Average Hotel</div>
           <div>
             <InputNumber
+              addonBefore="$"
               placeholder="Average Hotel"
               style={{ width: "100%" }}
               {...cityProps("hotel")}
+              disabled
             />
           </div>
         </div>
