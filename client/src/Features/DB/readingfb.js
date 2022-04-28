@@ -33,6 +33,37 @@ const readLeftToPack = async () =>{
 
 
 
+const readItinerary = async () =>{
+  const docRef = doc(db, "users", getUserID());
+  const docSnapshot = await getDoc(docRef);
+
+  if(docSnapshot.exists()){
+      console.log("Document data in IT:", docSnapshot.data().itinerary);
+  } else {
+      console.log("No such document!");
+  }
+
+  return docSnapshot.data().itinerary;
+}
+
+
+
+const readFirstLocation = async () =>{
+  const docRef = doc(db, "users", getUserID());
+  const docSnapshot = await getDoc(docRef);
+
+  if(docSnapshot.exists()){
+      console.log("Document data in FL :", docSnapshot.data().firstLocation);
+  } else {
+      console.log("No such document!");
+  }
+
+  return docSnapshot.data().firstLocation;
+}
+
+
+
+
 
 const getUserID = () => {
 
@@ -50,4 +81,4 @@ const getUserID = () => {
     }
 }
 
-export {readPacking, getUserID, readLeftToPack};
+export {readPacking, getUserID, readLeftToPack, readItinerary, readFirstLocation};
