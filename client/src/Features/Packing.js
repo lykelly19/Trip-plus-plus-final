@@ -226,7 +226,7 @@ export default class Packing extends Component {
 
 
 
-  /* this function initiziale the state with firestore storage */
+  /* this function initiziale the state with firestore storage 
 
   constructor(props) {
     super(props)
@@ -247,9 +247,35 @@ export default class Packing extends Component {
         }
     }).catch((error) => {
         console.log("error in init packing")
-    });
+    }); 
+  } */
+
+
+
+  componentDidMount() {
+    setTimeout(() => {
+      var fbArray= []; 
+  
+        readPacking().then((data) => {
+            fbArray= data;
+            for(var i = 0; i <  fbArray.length; i++){
+              const obj = { id: fbArray[i].id, name: fbArray[i].name, done: fbArray[i].done, editing: false };
+
+              this.setState(({ items }) => ({
+                items: [
+                  ...items,
+                  obj,
+                ],
+              }));
+              
+            }
+        }).catch((error) => {
+            console.log("error in init packing")
+        });
+    }, 1000)
   }
 
+  
   render() {
     const { items, itemText, isEditing } = this.state;
 
