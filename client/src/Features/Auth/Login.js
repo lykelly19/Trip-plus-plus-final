@@ -127,11 +127,9 @@ export default function Login() {
               <div className="px-3 py-4 p-md-5 mx-md 4">
                 <h4>About Us</h4>
                 <p className="small mb-0">
-                  Seasonal basmati pomegranate tofu creamy cauliflower alfredo
-                  sauce mint banh mi salad rolls shiitake mushrooms red curry
-                  tofu noodles picnic chickpea crust pizza habanero golden
-                  lentils comforting pumpkin spice latte lime açai fiery fruit
-                  bento box grenadillo.
+                  Trip++ is an all-in-one trip planning dashboard that alleviates the stress that comes from trip planning 
+                  and budgeting through three primary features: itinerary creation, trip budgeting, and packing list tracking. 
+                  Trip++ is a valuable resource that will help ensure trips are filled with long-lasting memories instead of stressful mid-trip planning.
                 </p>
               </div>
             </div>
