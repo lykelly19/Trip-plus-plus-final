@@ -178,10 +178,11 @@ export default function Register() {
               <div className="px-3 py-4 p-md-5 mx-md 4">
                 <h4>Why make an account?</h4>
                 <p className="small mb-0">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
-                  iure ratione quasi molestiae quia? Aliquam quia sapiente aut
-                  voluptas, deleniti ab saepe adipisci accusamus quisquam dicta
-                  eligendi placeat molestiae impedit.
+                  Although there are related applications available on the market which may allow users to 
+                  create packing checklists, help with budgeting their trip, and create an itinerary, there 
+                  still doesn't exist a service that seamlessly integrates all of these functionalities into 
+                  one intuitive, easy-to-use application. With Trip++, you can easily plan your trip and save 
+                  on the go. Trip++ is your ultimate smart trip planner which will save you time and stress.
                 </p>
               </div>
             </div>
