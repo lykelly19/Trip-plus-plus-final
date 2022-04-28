@@ -6,8 +6,12 @@ const createUser = async (user) => {
         budgeting: [],
         itinerary: [],
         packing:[],
+<<<<<<< HEAD
         leftToPack: 0,
         firstLocation: {eventName: "select an event name", date: "select a time", time: "select a time", location: "select a location"}
+=======
+        leftToPack: 0
+>>>>>>> 7ca60ba (merge with main branch)
     }
     await setDoc(doc(db, "users", user), docData);
 }

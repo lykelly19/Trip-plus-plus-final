@@ -133,6 +133,7 @@ export default class Itinerary extends Component {
     });
   };
 
+<<<<<<< HEAD
 
 
 /* function that wrties data to fb for firstLocation field*/
@@ -146,6 +147,8 @@ export default class Itinerary extends Component {
   }
 
 
+=======
+>>>>>>> 7ca60ba (merge with main branch)
   handleDelX = (item) => {
 
     this.setState({
