@@ -4,9 +4,6 @@ import "./packing.css";
 import "reactjs-popup/dist/index.css";
 
 
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
-
 import { CommonItems } from "./Suggestions.js";
 
 import { db } from "../firebase.js";
@@ -19,6 +16,7 @@ export default class Packing extends Component {
     fb: [],
     items: [],
     itemText: "",
+    suggestions: CommonItems,
     isEditing: false /* var is false if no edit is done or is the item object if true*/,
     /*isChecked: false,*/
 
@@ -72,7 +70,7 @@ export default class Packing extends Component {
     }));
   };
 
-  addSuggestion = (item) => {
+  addSuggestion = (item, list) => {
     const theid = this.randomNum();
     this.setState(({ items }) => ({
       items: [
@@ -82,8 +80,16 @@ export default class Packing extends Component {
       isEditing: false,
     }))
 
+    //now delete
+    this.setState(({ suggestions }) => ({
+      suggestions: list.filter((el) => el !== item),
+    }));
+
+
     this.submitToDB(theid, item);
   };
+
+
 
   onChangeInput = (e) => {
     this.setState({ itemText: e.target.value });
@@ -221,6 +227,7 @@ export default class Packing extends Component {
     this.deleteDB();
     this.setState(({ items }) => ({
       items: [],
+      suggestions: CommonItems,
     }));
   };
 
@@ -276,10 +283,8 @@ export default class Packing extends Component {
 
   
   render() {
-    const { items, itemText, isEditing } = this.state;
+    const { items, itemText, isEditing, suggestions } = this.state;
 
-
-    const comItems = CommonItems;
 
     return (
       <div className="container">
@@ -334,7 +339,7 @@ export default class Packing extends Component {
                 <p>Click one to add it to your list</p>
                 {/*<h2>Your packing list</h2>*/}
                 <div className="sugList-container">
-                  <SugList list={comItems} AddSuggestion={this.addSuggestion} />
+                  <SugList list={suggestions} AddSuggestion={this.addSuggestion} />
                 </div>
               </div>
             </div>
@@ -351,7 +356,7 @@ export const SugList = ({ list, AddSuggestion }) => (
   <ul>
     {/* flex-container*/}
     {list.map((item, index) => (
-      <li className="SugList" key={index} onClick={() => AddSuggestion(item)}>
+      <li className="SugList" key={index} onClick={() => AddSuggestion(item, list)}>
         {item}
         {/*
         <span className="sugBtn btn" onClick={() => AddSuggestion(item)}>
