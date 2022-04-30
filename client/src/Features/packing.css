@@ -94,6 +94,15 @@
     padding-right: 2rem;
 }
 
+.packingDiv {}
+
+.sugDiv {
+    position: absolute;
+    top: 0;
+    /*left: 0;
+    right: 0px;*/
+}
+
 .sugDiv ul {
     /*
     padding-left: 2rem;
@@ -232,6 +241,8 @@
 
 .packing-side {
     background-color: #f9f9f9;
+    position: relative;
+    min-height: 700px;
 }
 
 .packing-side h4 {}

@@ -122,7 +122,7 @@ export default class Packing extends Component {
 
     return (
       <div className="container">
-        <div className="card">
+        <div className="card packingDiv">
           <div className="row g-0">
             <div className="col-lg-8">
               <div className="card-body p-md-5 mx-md-4">

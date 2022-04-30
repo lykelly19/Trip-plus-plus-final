@@ -154,5 +154,54 @@ body {
 }
 
 .ant-input:hover {
-    border-color: #a37cf0;
+    border: 1px solid #a37cf0 !important;
+}
+
+.ant-input:focus {
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(163, 124, 240) !important;
+    border: 1px solid #a37cf0 !important;
+}
+
+.ant-input-number {
+    border-radius: 0px !important;
+}
+
+.ant-input-number:focus {
+    outline: none !important;
+    border: 1px solid #a37cf0 !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(163, 124, 240) !important;
+}
+
+.ant-input-number:hover {
+    outline: none !important;
+    border: 1px solid #a37cf0 !important;
+}
+
+.ant-input-number-focused {
+    border: none !important;
+}
+
+.ant-select:hover {
+    outline: none !important;
+    border: none !important;
+}
+
+.ant-select-focused {
+    outline: none !important;
+    border: none !important;
+}
+
+.ant-select-single:focus {
+    outline: none !important;
+    border: none !important;
+}
+
+.ant-select-selection.ant-select-selection--single:hover {
+    outline: none !important;
+    border: 1px solid #a37cf0 !important;
+}
+
+.ant-select-selection {
+    outline: none !important;
+    border: 1px solid #a37cf0 !important;
 }
