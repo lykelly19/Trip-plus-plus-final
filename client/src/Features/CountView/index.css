@@ -1,0 +1,165 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    /* background-color: #f0f0f0; */
+    padding-top: 0px;
+    padding-top: -8px;
+    margin-top: -40px;
+    height: 800px;
+    width: 1400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#container form{height: 100%;}
+#container .list-container {
+    height: 85%;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+
+
+/* #container .button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+} */
+
+#container .left-box {
+    width: 33%;
+    height: 85%;
+    /* background-color: white; */
+    border-radius: 0px;
+    opacity: 0.8;
+    padding: 40px;
+    margin-top: 0px;
+}
+
+#container .right-box {
+    width: 34%;
+    height: 80%;
+}
+
+#container .horizontal-center {
+    display: flex;
+    justify-content: center;
+}
+
+
+#container .horizontal-center-add{
+    margin: 10px 20px;
+    justify-content: flex-end;
+}
+
+.medium-content {
+    width: 33%;
+    height: 85%;
+    /*border: 1px solid #9b9b9b;*/
+    border-radius: 0px;
+    background-color: white;
+    /*border: 1px solid #000;*/
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+.budget-delete-btn {
+    cursor: pointer;
+    border-radius: 0px;
+    padding: 12px 16px 12px 16px;
+}
+
+.budget-delete-btn:hover {
+    color: white;
+    background-color: #bd2e95;
+    text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
+}
+
+.outer-color {
+    cursor: pointer;
+}
+
+.newBtn {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #a37cf0;
+    border-radius: 0px;
+    font-weight: bold;
+}
+
+.newBtn:hover {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #bd2e95;
+}
+
+.doneBtn {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #a37cf0;
+    border-radius: 0px;
+    font-weight: bold;
+    /*padding: 10px;*/
+}
+
+.doneBtn:hover {
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    /*background-color: #8c90b3;*/
+    background-color: #bd2e95;
+}
+
+.deleteAllBtn {
+    border-radius: 0px;
+    border: 1px solid #333333;
+}
+
+.deleteAllBtn:hover {
+    border-color: transparent;
+    /*
+    border: none;
+    padding-top: calc(0.375+5px);
+    padding-bottom: calc(0.375+5px);
+    padding-left: calc(0.75+5px);
+    padding-right: calc(0.75+5px);
+    /*padding: calc(20px+1px);*/
+    color: white;
+    background-color: #bd2e95;
+    text-shadow: 2px 2px 4px #000000;
+    font-weight: bold;
+    /*0.375rem 0.75rem*/
+}
+
+.name-list .ant-form-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.average-title{padding: 20px 0 0 0;}
+

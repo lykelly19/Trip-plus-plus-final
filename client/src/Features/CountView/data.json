@@ -1,0 +1,177 @@
+[
+    {
+    "id":1,
+    "name":"New York",
+    "prop1": 46,
+    "prop2":36,
+    "prop3": 102
+    },
+    {
+    "id":2,
+    "name":"Massachusetts",
+    "prop1": 40,
+    "prop2":28,
+    "prop3": 132
+    },
+    {
+    "id":3,
+    "name":"Hawaii",
+    "prop1": 61,
+    "prop2":29,
+    "prop3": 171
+    },
+    {
+    "id":4,
+    "name":"Florida",
+    "prop1": 48,
+    "prop2":37,
+    "prop3": 96
+    },
+    {
+    "id":5,
+    "name":"California",
+    "prop1": 37,
+    "prop2":32,
+    "prop3": 92
+    },
+    {
+    "id":6,
+    "name":"Texas",
+    "prop1": 34,
+    "prop2":39,
+    "prop3": 62
+    },
+    {
+    "id":7,
+    "name":"Maine",
+    "prop1": 41,
+    "prop2":34,
+    "prop3": 86
+    },
+    {
+    "id":8,
+    "name":"michigan",
+    "prop1": 29,
+    "prop2":24,
+    "prop3": 52
+    },
+    {
+    "id":9,
+    "name":"Kansas",
+    "prop1": 33,
+    "prop2":27,
+    "prop3": 68
+    },
+    {
+    "id":10,
+    "name":"Georgia",
+    "prop1": 31,
+    "prop2":29,
+    "prop3": 78
+    },
+    {
+    "id":11,
+    "name":"Maryland",
+    "prop1": 34,
+    "prop2":32,
+    "prop3": 79
+
+    },
+    {
+    "id":12,
+    "name":"New Jersey",
+    "prop1": 44,
+    "prop2":39,
+    "prop3": 89
+    },
+    {
+    "id":13,
+    "name":"New Hampshire",
+    "prop1": 42,
+    "prop2":24,
+    "prop3": 71
+    },
+    {
+    "id":14,
+    "name":"New Mexico",
+    "prop1": 32,
+    "prop2":24,
+    "prop3": 84
+     },
+    {
+    "id":15,
+    "name":"Iowa"
+    },
+    {
+    "id":16,
+    "name":"Kansas"
+    },
+    {
+    "id":17,
+    "name":"Kentucky"
+    },
+    {
+    "id":18,
+    "name":"Louisiana"
+    },
+    {
+    "id":19,
+    "name":"Maine"
+    },
+    {
+    "id":20,
+    "name":"Maryland"
+    },
+    {
+    "id":21,
+    "name":"Massachusetts"
+    },
+    {
+    "id":22,
+    "name":"Michigan"
+    },
+    {
+    "id":23,
+    "name":"Minnesota"
+    },
+    {
+    "id":24,
+    "name":"Mississippi"
+    },
+    {
+    "id":25,
+    "name":"Missouri"
+    },
+    {
+    "id":26,
+    "name":"Montana"
+    },
+    {
+    "id":27,
+    "name":"Nebraska"
+    },
+    {
+    "id":28,
+    "name":"Nevada"
+    },
+    {
+    "id":29,
+    "name":"New Hampshire"
+    },
+    {
+    "id":30,
+    "name":"New Jersey"
+    },
+    {
+    "id":31,
+    "name":"New Mexico"
+    },
+    {
+    "id":32,
+    "name":"New York"
+    },
+    {
+    "id":33,
+    "name":"North Carolina"
+    }
+]
