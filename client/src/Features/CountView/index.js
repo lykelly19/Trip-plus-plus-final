@@ -2,9 +2,7 @@ import React, { useCallback } from "react";
 import "./index.css";
 import { Card, List, Form, Input, Button, InputNumber, Select } from "antd";
 import {
-  PlusCircleOutlined,
   CheckCircleFilled,
-  CloseCircleOutlined,
 } from "@ant-design/icons";
 import ColorPicker from "./ColorPicker";
 import DeleteDialog from "./DeleteDialog";
@@ -14,13 +12,16 @@ import { TooltipComponent, LegendComponent } from "echarts/components";
 import { PieChart } from "echarts/charts";
 import { LabelLayout } from "echarts/features";
 import { CanvasRenderer } from "echarts/renderers";
-import firebase from 'firebase/compat/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import { db } from "../../firebase";
+import {
+  getDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import cityData from "./data.json";
-
-
-
+import { get as getObjData } from "lodash";
+import { isEmpty } from "@firebase/util";
+import {  getUserID} from "../DB/readingfb.js";
 
 const { useState, useEffect, useRef } = React;
 const cityMap = {};
@@ -36,15 +37,15 @@ echarts.use([
   LabelLayout,
 ]);
 
-
 function randomColor() {
   var color = "#";
   //random get 0-15 and use tostring (16) in to color
   for (var i = 0; i < 6; i++)
     color += parseInt(Math.random() * 16).toString(16);
-  return color;
+    return color;
 }
 function Index() {
+
   const [countList, setCountList] = useState([
     {
       id: 1,
@@ -58,20 +59,43 @@ function Index() {
   const [obj, setObj] = useState();
   const [deleteAllFlag, setDeleteAllFlag] = useState(false);
   const [cityObj, setCityObj] = useState({});
+  const [allPrice, setAllPrice] = useState(0);
   const formRef = useRef();
   const colorRef = useRef({});
   const initialColor = randomColor();
+  
 
   const reload = () => {
     setObj({});
   };
-  useEffect(() => {
+  useEffect(async () => {
+    const firebaseDoc = doc(db,"users",getUserID());
+    const budgetList = await getDoc(firebaseDoc);
+    // set for allPrice
+    if (budgetList.exists()) {
+      setCountList(isEmpty(budgetList.data().budgetList) ?  [
+        {
+          id: 1,
+          color: "",
+          name: "",
+          price: 1,
+          isNew: true,
+        },
+      ]:budgetList.data().budgetList)
+    }
+    
+    // const price = await setDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:budgetList});
+  },[])
+  useEffect(async () => {
+    const allPrice = countList.reduce((a,b)=>{return a + b.price},0);
+    setAllPrice(allPrice)
     //set for echart
     const chartDom = document.querySelector(".right-box");
     const myChart = echarts.init(chartDom);
     const colorList = countList
       .map((item) => item.color)
       .filter((item) => item);
+      console.log(colorList,'colorLIst')
     myChart.setOption({
       tooltip: {
         trigger: "item",
@@ -138,7 +162,7 @@ function Index() {
     //check if that is empty
     if (!formRef.current) return;
     //checking
-    formRef.current.validateFields().then((data) => {
+    formRef.current.validateFields().then(async(data) => {
       //deal data with a for loop（color_1=>{id:1，name:"color",value:"#f00"}）
       let cl = cloneDeep(countList);
       for (let key in data) {
@@ -157,8 +181,12 @@ function Index() {
           }
         });
       }
+      const allPrice = cl.reduce((a,b)=>{return a + b.price},0);
+      const budgetList = await updateDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:cl});
       setCountList(cl);
       cb && cb(cl);
+      
+      
     });
   }
 
@@ -172,7 +200,7 @@ function Index() {
       });
   }
 
-  function handleDeleteOk(id) {
+  async function handleDeleteOk(id) {
     if (deleteAllFlag) {
       handleDeleteAll();
       return;
@@ -180,36 +208,56 @@ function Index() {
     //delete the id
     const resultList = countList.filter((item) => item.id != id);
     setCountList(resultList);
+    const allPrice = resultList.reduce((a,b)=>{return a + b.price},0);
+    const budgetList = await updateDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:resultList});
     handleDeleteCancel();
   }
 
   function handleDeleteCancel() {
     //clean the temp id
+    
     setHandleDeleteId(0);
   }
-  const handleDeleteAll = () => {
+  const handleDeleteAll = async() => {
     setCountList([]);
     formRef.current && formRef.current.resetFields();
     setDeleteAllFlag(false);
+    const budgetList = await updateDoc(doc(db,"users",getUserID()),{allPrice:0,budgetList:[
+      {
+        id: 1,
+        color: "",
+        name: "",
+        price: 1,
+        isNew: true,
+      },
+    ]});
+    setCountList([
+      {
+        id: 1,
+        color: "",
+        name: "",
+        price: 1,
+        isNew: true,
+      },
+    ])
     setHandleDeleteId();
     handleDeleteCancel();
   };
-  
+
   const cityProps = (name) => ({
     value: cityObj[name],
     onChange: (value) => {
       setCityObj((prev) => ({ ...prev, [name]: value }));
     },
   });
-  const numberChange = (rule,numberValue,callback) => {
+  const numberChange = (rule, numberValue, callback) => {
     if (numberValue < 0) {
       // callback('please input positive number!')
-      return Promise.reject(new Error('please input positive number!'))
-      
-    }else{
-      return  Promise.resolve();
+      return Promise.reject(new Error("please input positive number!"));
+    } else {
+      return Promise.resolve();
     }
-  }
+  };
   return (
     <div id="container">
       <Card.Grid className="left-box card">
@@ -221,10 +269,7 @@ function Index() {
           autoComplete="off"
         >
           <div className="horizontal-center horizontal-center-add">
-            <span
-              className="newBtn btn box-shadow"
-              onClick={handlePushItem}
-            >
+            <span className="newBtn btn box-shadow" onClick={handlePushItem}>
               {/*<PlusCircleOutlined style={{ fontSize: 20 }} />*/}
               Add
             </span>
@@ -236,7 +281,8 @@ function Index() {
                 size="small"
                 split={false}
                 header={<> </>}
-                dataSource={countList.map((item) => ({
+                dataSource={countList.map((item) => (
+                  {
                   id: item.id,
                   color: item.color,
                   isNew: item.isNew,
@@ -314,7 +360,16 @@ function Index() {
                   }
                   return (
                     <List.Item>
-                      <div style={{width:"100%",height:"56px",textAlign:"center",lineHeight: "33px"}}>{item.name}</div>
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "56px",
+                          textAlign: "center",
+                          lineHeight: "33px",
+                        }}
+                      >
+                        {item.name}
+                      </div>
                     </List.Item>
                   );
                 }}
@@ -355,7 +410,16 @@ function Index() {
                   }
                   return (
                     <List.Item>
-                      <div  style={{width:"100%",height:"56px",textAlign:"center",lineHeight: "33px"}}>{item.price}</div>
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "56px",
+                          textAlign: "center",
+                          lineHeight: "33px",
+                        }}
+                      >
+                        {item.price}
+                      </div>
                     </List.Item>
                   );
                 }}
@@ -433,7 +497,6 @@ function Index() {
             placeholder="Select a city"
             optionFilterProp="children"
             onChange={(value) => {
-              console.log("value", value);
               if (!value) {
                 setCityObj({});
                 return;
@@ -459,7 +522,7 @@ function Index() {
         </div>
         {/* title  */}
         <h4 className="average-title"> Average daily expenses</h4>
-        <div style={{ marginTop: 30,fontSize: "14px" }}>Average Food</div>
+        <div style={{ marginTop: 30, fontSize: "14px" }}>Average Food</div>
         <div style={{ fontSize: 14 }}>
           <div>
             <InputNumber
