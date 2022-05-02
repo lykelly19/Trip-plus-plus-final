@@ -16,7 +16,7 @@ import { db } from "../../firebase";
 import {
   getDoc,
   doc,
-  setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import cityData from "./data.json";
 import { get as getObjData } from "lodash";
@@ -182,7 +182,7 @@ function Index() {
         });
       }
       const allPrice = cl.reduce((a,b)=>{return a + b.price},0);
-      const budgetList = await setDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:cl});
+      const budgetList = await updateDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:cl});
       setCountList(cl);
       cb && cb(cl);
       
@@ -209,7 +209,7 @@ function Index() {
     const resultList = countList.filter((item) => item.id != id);
     setCountList(resultList);
     const allPrice = resultList.reduce((a,b)=>{return a + b.price},0);
-    const budgetList = await setDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:resultList});
+    const budgetList = await updateDoc(doc(db,"users",getUserID()),{allPrice:allPrice,budgetList:resultList});
     handleDeleteCancel();
   }
 
@@ -222,7 +222,7 @@ function Index() {
     setCountList([]);
     formRef.current && formRef.current.resetFields();
     setDeleteAllFlag(false);
-    const budgetList = await setDoc(doc(db,"users",getUserID()),{allPrice:0,budgetList:[
+    const budgetList = await updateDoc(doc(db,"users",getUserID()),{allPrice:0,budgetList:[
       {
         id: 1,
         color: "",
