@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import ItineraryModal from "./ItineraryModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapContainer from "./Map";
-import { readFirstLocation, getUserID} from "./DB/readingfb.js";
+import { readItinerary, getUserID} from "./DB/readingfb.js";
 import { db } from "../firebase.js";
 import { increment, deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
@@ -119,6 +119,7 @@ export default class Itinerary extends Component {
     //left in the end so it submits when its reorder too 
     //and updates the fb to the correct first location
     this.submitFirstLocToDB(this.state.items[0]);
+    this.submitToDB();
     // close modal
     this.closeModal();
   };
@@ -142,6 +143,41 @@ export default class Itinerary extends Component {
     });
    
   }
+
+
+  submitToDB = () =>{
+
+    const items = this.state.items;
+
+    const ref = (doc(db, "users", getUserID()));
+    var datas = [];
+    updateDoc(ref, {
+      itinerary: deleteField(),
+  
+    });
+
+    for(var i = 0; i < items.length; i++){
+    const data = {
+      date: items[i].date, 
+      eventName: items[i].eventName,
+      itemNumber: items[i].itemNumber, 
+      lat: items[i].lat,
+      lng: items[i].lng, 
+      location: items[i].location, 
+      notes: items[i].notes, 
+      time: items[i].time,
+    };
+
+
+    updateDoc(ref, {
+      itinerary: arrayUnion(data),
+  
+    });
+
+
+  }
+    
+  };
 
 
   handleDelX = (item) => {
@@ -223,6 +259,34 @@ export default class Itinerary extends Component {
     // close modal
     this.closeModal();
   };
+
+
+  componentDidMount() {
+    setTimeout(() => {
+      var fbArray= []; 
+  
+        readItinerary().then((data) => {
+            fbArray= data;
+            for(var i = 0; i <  fbArray.length; i++){
+              const obj = { 
+                date: fbArray[i].date, eventName: fbArray[i].eventName,
+                 itemNumber: fbArray[i].itemNumber, lat: fbArray[i].lat,
+                 lng: fbArray[i].lng, location: fbArray[i].location, 
+                 notes: fbArray[i].notes, time: fbArray[i].time };
+
+              this.setState(({ items }) => ({
+                items: [
+                  ...items,
+                  obj,
+                ],
+              }));
+              
+            }
+        }).catch((error) => {
+            console.log("error in init it")
+        });
+    }, 1000)
+  }
 
   render() {
     return (
