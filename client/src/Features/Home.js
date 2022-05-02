@@ -9,8 +9,7 @@ import {
 import { getUserID} from "./DB/readingfb";
 import BudgetingPreviewChart from "./Budget Preview Chart.png";
 import { isEmpty } from "@firebase/util";
-
-
+import ItineraryWidget from "./ItineraryWidget";
 import PackingWidget from "./PackingWidget";
 export function AddWeather() {
   const script = document.createElement("script");
@@ -83,8 +82,7 @@ const Home = () => {
                 </p>
               </div>
               <div className="card-body">
-                <p className="card-text">2/21/2022 @ 7:21 PM</p>
-                <p className="card-text">Visit Thessaliniki</p>
+                <ItineraryWidget className="card-text"/> 
               </div>
             </div>
           </div>

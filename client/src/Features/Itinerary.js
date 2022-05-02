@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import ItineraryModal from "./ItineraryModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapContainer from "./Map";
+import { readFirstLocation, getUserID} from "./DB/readingfb.js";
+import { db } from "../firebase.js";
+import { increment, deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
 export default class Itinerary extends Component {
   state = {
@@ -111,6 +114,11 @@ export default class Itinerary extends Component {
     if(validCoordinates.length > 0)
       this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
 
+
+
+    //left in the end so it submits when its reorder too 
+    //and updates the fb to the correct first location
+    this.submitFirstLocToDB(this.state.items[0]);
     // close modal
     this.closeModal();
   };
@@ -122,6 +130,19 @@ export default class Itinerary extends Component {
       prefill: item,
     });
   };
+
+
+
+/* function that wrties data to fb for firstLocation field*/
+  submitFirstLocToDB = (data) => {
+    const ref = (doc(db, "users", getUserID()));
+
+    updateDoc(ref, {
+      firstLocation: data
+    });
+   
+  }
+
 
   handleDelX = (item) => {
 
