@@ -62,6 +62,21 @@ const readFirstLocation = async () =>{
 }
 
 
+const readSuggestions = async () =>{
+  const docRef = doc(db, "users", getUserID());
+  const docSnapshot = await getDoc(docRef);
+
+  if(docSnapshot.exists()){
+      console.log("Document data in FL :", docSnapshot.data().suggestionsLeft);
+  } else {
+      console.log("No such document!");
+  }
+
+  return docSnapshot.data().suggestionsLeft;
+}
+
+
+
 
 
 
@@ -81,4 +96,4 @@ const getUserID = () => {
     }
 }
 
-export {readPacking, getUserID, readLeftToPack, readItinerary, readFirstLocation};
+export {readPacking, getUserID, readLeftToPack, readItinerary, readFirstLocation, readSuggestions};

@@ -1,13 +1,14 @@
 import {db} from "../../firebase"
 import {setDoc, collection, getDocs, doc, getDoc} from "firebase/firestore";
-
+import { CommonItems } from "../Suggestions.js"
 const createUser = async (user) => {
     const docData = {
         budgeting: [],
         itinerary: [],
         packing:[],
         leftToPack: 0,
-        firstLocation: {eventName: "select an event name", date: "select a time", time: "select a time", location: "select a location"}
+        firstLocation: {eventName: "select an event name", date: "select a time", time: "select a time", location: "select a location"},
+        suggestionsLeft: CommonItems,
     }
     await setDoc(doc(db, "users", user), docData);
 }

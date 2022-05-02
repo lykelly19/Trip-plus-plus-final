@@ -3,20 +3,19 @@ import Popup from "reactjs-popup";
 import "./packing.css";
 import "reactjs-popup/dist/index.css";
 
-
 import { CommonItems } from "./Suggestions.js";
 
 import { db } from "../firebase.js";
-import { increment, deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { increment, deleteField, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
-import { readPacking, getUserID} from "./DB/readingfb.js";
+import { readPacking, getUserID, readSuggestions} from "./DB/readingfb.js";
 
 export default class Packing extends Component {
   state = {
     fb: [],
     items: [],
     itemText: "",
-    suggestions: CommonItems,
+    suggestions: [],
     isEditing: false /* var is false if no edit is done or is the item object if true*/,
     /*isChecked: false,*/
 
@@ -71,6 +70,7 @@ export default class Packing extends Component {
   };
 
   addSuggestion = (item, list) => {
+    const ref = (doc(db, "users", getUserID()));
     const theid = this.randomNum();
     this.setState(({ items }) => ({
       items: [
@@ -80,11 +80,19 @@ export default class Packing extends Component {
       isEditing: false,
     }))
 
+    const cp = list.filter((el) => el !== item);
     //now delete
     this.setState(({ suggestions }) => ({
-      suggestions: list.filter((el) => el !== item),
+      suggestions: cp
     }));
 
+
+
+
+    //update to fb
+    updateDoc(ref, {
+      suggestionsLeft: cp,
+    });
 
     this.submitToDB(theid, item);
   };
@@ -223,44 +231,36 @@ export default class Packing extends Component {
 
   }
   deleteAll = () => {
+    const ref = (doc(db, "users", getUserID()));
 
     this.deleteDB();
     this.setState(({ items }) => ({
       items: [],
       suggestions: CommonItems,
     }));
+
+
+    //update to fb
+    updateDoc(ref, {
+      suggestionsLeft: CommonItems
+    });
   };
-
-
-
-  /* this function initiziale the state with firestore storage 
-
-  constructor(props) {
-    super(props)
-    var fbArray= []; 
-  
-    readPacking().then((data) => {
-        fbArray= data;
-        for(var i = 0; i <  fbArray.length; i++){
-          const obj = { id: fbArray[i].id, name: fbArray[i].name, done: fbArray[i].done, editing: false };
-
-          this.setState(({ items }) => ({
-            items: [
-              ...items,
-              obj,
-            ],
-          }));
-          
-        }
-    }).catch((error) => {
-        console.log("error in init packing")
-    }); 
-  } */
 
 
   componentDidMount() {
     setTimeout(() => {
       var fbArray= []; 
+
+      readSuggestions().then((data) => {
+
+        this.setState(({ suggestions }) => ({
+          suggestions: data,
+        }));
+        
+      
+      }).catch((error) => {
+          console.log("error in init packing")
+      });
   
         readPacking().then((data) => {
             fbArray= data;
