@@ -236,30 +236,6 @@ export default class Itinerary extends Component {
       this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
   };
 
-  handleDel = (itemNumber) => {
-    
-    // only delete item if the item has previously been saved
-    if (itemNumber !== "") {
-      // from the list, remove the item with the same itemNumber
-      this.state.items = this.state.items.filter(
-        (i) => i.itemNumber !== this.state.prefill.itemNumber
-      );
-    }
-
-    // sort by date
-    this.state.items.sort(function (a, b) {
-      let DateA = new Date(a.date);
-      let DateB = new Date(b.date);
-      return DateA - DateB;
-    });
-
-    // reset itinerary numbers
-    this.state.items.map((item, i) => (item.itemNumber = i + 1));
-
-    // close modal
-    this.closeModal();
-  };
-
 
   componentDidMount() {
     setTimeout(() => {
@@ -298,7 +274,6 @@ export default class Itinerary extends Component {
             myItems={this.state.items}
             incrementNumItems={this.incrementNumItems}
             numItems={this.state.numItems}
-            handleDel={this.handleDel}
             itemPrefill={this.state.prefill}
             currCoordinates={this.state.currCoordinates}
           ></ItineraryModal>

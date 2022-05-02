@@ -129,15 +129,6 @@ export default class Modal extends Component {
               ></textarea>
             </div>
             <div className="d-flex justify-content-end py-3 modal-section">
-              {/* <button
-                className="btn"
-                id="delete-button"
-                onClick={(e) =>
-                  this.props.handleDel(this.props.itemPrefill["itemNumber"])
-                }
-              >
-                Delete
-              </button> */}
               <button className="btn" id="save-button" type="submit">
                 Save
               </button>
