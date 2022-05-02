@@ -153,7 +153,6 @@ export default class Itinerary extends Component {
     var datas = [];
     updateDoc(ref, {
       itinerary: deleteField(),
-  
     });
 
     for(var i = 0; i < items.length; i++){
@@ -184,6 +183,13 @@ export default class Itinerary extends Component {
 
     this.setState({
       show: false
+    });
+
+    const ref = (doc(db, "users", getUserID()));
+    var cp = this.state.items;
+
+    updateDoc(ref, {
+      itinerary: deleteField(),
     });
 
     // from the list, remove the item with the same itemNumber
@@ -234,6 +240,28 @@ export default class Itinerary extends Component {
     // set the default location to be the first element with a valid location
     if(validCoordinates.length > 0)
       this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
+
+      const items = this.state.items;
+
+      for(var i = 0; i < items.length; i++){
+        const data = {
+          date: items[i].date, 
+          eventName: items[i].eventName,
+          itemNumber: items[i].itemNumber, 
+          lat: items[i].lat,
+          lng: items[i].lng, 
+          location: items[i].location, 
+          notes: items[i].notes, 
+          time: items[i].time,
+        };
+    
+    
+        updateDoc(ref, {
+          itinerary: arrayUnion(data),
+      
+        });
+      }
+
   };
 
 
