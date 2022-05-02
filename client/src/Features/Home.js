@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./widget.css";
 import "./Home.css";
-import BudgetingPreviewChart from "./Budget Preview Chart.png";
-
+import { db } from "../firebase";
 import ItineraryWidget from "./ItineraryWidget";
+import {
+  getDoc,
+  doc
+} from "firebase/firestore";
+import { getUserID} from "./DB/readingfb";
+import BudgetingPreviewChart from "./Budget Preview Chart.png";
+import { isEmpty } from "@firebase/util";
+
+
 import PackingWidget from "./PackingWidget";
 export function AddWeather() {
   const script = document.createElement("script");
@@ -12,7 +20,28 @@ export function AddWeather() {
   script.async = false;
   document.body.appendChild(script);
 }
+
 const Home = () => {
+ 
+  const [allPrice,setAllPrice] = useState(0);
+  const [countList, setCountList] = useState([]);
+  
+  useEffect(async () => {
+    setTimeout(async()=>{
+      const firebaseDoc = doc(db,"users",getUserID());
+      const budgetList = await getDoc(firebaseDoc);
+      // set for allPrice
+      if (budgetList.exists()) {
+        setCountList(budgetList.data().budgetList)
+      }
+    },1000)
+    // return clearTimeout(timer)
+  },[])
+
+  useEffect(async () => {
+    const allPrice = countList.reduce((a,b)=>{return a + b.price},0);
+    setAllPrice(allPrice)
+  }, [countList]);
   return (
     <div className="container">
       <div className="row">
@@ -64,11 +93,12 @@ const Home = () => {
               <div className="card-header">
                 <p className="card-title">Your budget</p>
               </div>
-              <div className="card-body">
-                <img
+              <div className="card-body all-price">
+                ${allPrice}
+                {/* <img
                   src={BudgetingPreviewChart}
                   alt="preview budgeting donut chart"
-                ></img>
+                ></img> */}
               </div>
             </div>
           </div>
