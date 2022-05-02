@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./widget.css";
 import "./Home.css";
 import { db } from "../firebase";
-import ItineraryWidget from "./ItineraryWidget";
 import {
   getDoc,
   doc
@@ -10,8 +9,7 @@ import {
 import { getUserID} from "./DB/readingfb";
 import BudgetingPreviewChart from "./Budget Preview Chart.png";
 import { isEmpty } from "@firebase/util";
-
-
+import ItineraryWidget from "./ItineraryWidget";
 import PackingWidget from "./PackingWidget";
 export function AddWeather() {
   const script = document.createElement("script");

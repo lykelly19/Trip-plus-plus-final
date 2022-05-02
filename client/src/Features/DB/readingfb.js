@@ -66,6 +66,8 @@ const readFirstLocation = async () =>{
 
 
 const getUserID = () => {
+
+
     const auth = getAuth();
     const user = auth.currentUser.uid;
     
