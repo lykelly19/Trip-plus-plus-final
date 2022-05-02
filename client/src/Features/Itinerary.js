@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import ItineraryModal from "./ItineraryModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MapContainer from "./Map";
-import { readFirstLocation, getUserID} from "./DB/readingfb.js";
+import { readItinerary, getUserID} from "./DB/readingfb.js";
 import { db } from "../firebase.js";
 import { increment, deleteField, getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 
@@ -119,6 +119,7 @@ export default class Itinerary extends Component {
     //left in the end so it submits when its reorder too 
     //and updates the fb to the correct first location
     this.submitFirstLocToDB(this.state.items[0]);
+    this.submitToDB();
     // close modal
     this.closeModal();
   };
@@ -144,10 +145,51 @@ export default class Itinerary extends Component {
   }
 
 
+  submitToDB = () =>{
+
+    const items = this.state.items;
+
+    const ref = (doc(db, "users", getUserID()));
+    var datas = [];
+    updateDoc(ref, {
+      itinerary: deleteField(),
+    });
+
+    for(var i = 0; i < items.length; i++){
+    const data = {
+      date: items[i].date, 
+      eventName: items[i].eventName,
+      itemNumber: items[i].itemNumber, 
+      lat: items[i].lat,
+      lng: items[i].lng, 
+      location: items[i].location, 
+      notes: items[i].notes, 
+      time: items[i].time,
+    };
+
+
+    updateDoc(ref, {
+      itinerary: arrayUnion(data),
+  
+    });
+
+
+  }
+    
+  };
+
+
   handleDelX = (item) => {
 
     this.setState({
       show: false
+    });
+
+    const ref = (doc(db, "users", getUserID()));
+    var cp = this.state.items;
+
+    updateDoc(ref, {
+      itinerary: deleteField(),
     });
 
     // from the list, remove the item with the same itemNumber
@@ -198,31 +240,57 @@ export default class Itinerary extends Component {
     // set the default location to be the first element with a valid location
     if(validCoordinates.length > 0)
       this.state.defaultCoordinates = validCoordinates[Object.keys(validCoordinates)[0]]["location"];
-  };
 
-  handleDel = (itemNumber) => {
+      const items = this.state.items;
+
+      for(var i = 0; i < items.length; i++){
+        const data = {
+          date: items[i].date, 
+          eventName: items[i].eventName,
+          itemNumber: items[i].itemNumber, 
+          lat: items[i].lat,
+          lng: items[i].lng, 
+          location: items[i].location, 
+          notes: items[i].notes, 
+          time: items[i].time,
+        };
     
-    // only delete item if the item has previously been saved
-    if (itemNumber !== "") {
-      // from the list, remove the item with the same itemNumber
-      this.state.items = this.state.items.filter(
-        (i) => i.itemNumber !== this.state.prefill.itemNumber
-      );
-    }
+    
+        updateDoc(ref, {
+          itinerary: arrayUnion(data),
+      
+        });
+      }
 
-    // sort by date
-    this.state.items.sort(function (a, b) {
-      let DateA = new Date(a.date);
-      let DateB = new Date(b.date);
-      return DateA - DateB;
-    });
-
-    // reset itinerary numbers
-    this.state.items.map((item, i) => (item.itemNumber = i + 1));
-
-    // close modal
-    this.closeModal();
   };
+
+
+  componentDidMount() {
+    setTimeout(() => {
+      var fbArray= []; 
+  
+        readItinerary().then((data) => {
+            fbArray= data;
+            for(var i = 0; i <  fbArray.length; i++){
+              const obj = { 
+                date: fbArray[i].date, eventName: fbArray[i].eventName,
+                 itemNumber: fbArray[i].itemNumber, lat: fbArray[i].lat,
+                 lng: fbArray[i].lng, location: fbArray[i].location, 
+                 notes: fbArray[i].notes, time: fbArray[i].time };
+
+              this.setState(({ items }) => ({
+                items: [
+                  ...items,
+                  obj,
+                ],
+              }));
+              
+            }
+        }).catch((error) => {
+            console.log("error in init it")
+        });
+    }, 1000)
+  }
 
   render() {
     return (
@@ -234,7 +302,6 @@ export default class Itinerary extends Component {
             myItems={this.state.items}
             incrementNumItems={this.incrementNumItems}
             numItems={this.state.numItems}
-            handleDel={this.handleDel}
             itemPrefill={this.state.prefill}
             currCoordinates={this.state.currCoordinates}
           ></ItineraryModal>
