@@ -258,6 +258,8 @@ export default class Itinerary extends Component {
     
         updateDoc(ref, {
           itinerary: arrayUnion(data),
+          firstLocation: items[0],
+
       
         });
       }
