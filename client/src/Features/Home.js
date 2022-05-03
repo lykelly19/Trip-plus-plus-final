@@ -11,6 +11,7 @@ import BudgetingPreviewChart from "./Budget Preview Chart.png";
 import { isEmpty } from "@firebase/util";
 import ItineraryWidget from "./ItineraryWidget";
 import PackingWidget from "./PackingWidget";
+import WeatherWidget from "./Widget/Weather/weatherWidget";
 export function AddWeather() {
   const script = document.createElement("script");
   script.innerHTML =
@@ -48,7 +49,8 @@ const Home = () => {
           <p className="lead">make your trip positive</p>
         </div>
         <div class="weatherDiv col-md-7">
-          <a
+          <WeatherWidget/>
+          {/* <a
             className="weatherwidget-io mx-auto"
             href="https://forecast7.com/en/52d5213d40/berlin/"
             data-label_1="BERLIN"
@@ -69,7 +71,7 @@ const Home = () => {
             })(document, "script", "weatherwidget-io-js")
           }
 
-          {AddWeather()}
+          {AddWeather()} */}
         </div>
       </div>
       <div className="container widgets">
