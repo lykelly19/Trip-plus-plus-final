@@ -494,7 +494,7 @@ function Index() {
           State{" "}
           <Select
             showSearch
-            placeholder="Select a city"
+            placeholder="Select a state"
             optionFilterProp="children"
             onChange={(value) => {
               if (!value) {
