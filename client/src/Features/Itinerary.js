@@ -254,13 +254,22 @@ export default class Itinerary extends Component {
           notes: items[i].notes, 
           time: items[i].time,
         };
+
     
     
         updateDoc(ref, {
-          itinerary: arrayUnion(data),
-          firstLocation: items[0],
+          itinerary: arrayUnion(data),      
+        });
+      }
 
-      
+
+      //null items cant be assigned as right hand value
+      if(items.length > 0){
+      updateDoc(ref, {
+        firstLocation: items[0],      
+      }); } else{
+        updateDoc(ref, {
+          firstLocation: deleteField(),    
         });
       }
 
