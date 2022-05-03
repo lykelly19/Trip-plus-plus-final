@@ -295,8 +295,8 @@ export default class Itinerary extends Component {
                   obj,
                 ],
               }));
-              
             }
+            this.onSubmitItineraryItem();
         }).catch((error) => {
             console.log("error in init it")
         });
