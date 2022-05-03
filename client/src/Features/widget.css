@@ -1,9 +1,70 @@
-.weatherwidget-io{
+.weatherwidget-io {
     border-radius: 10px;
 }
 
-.weatherDiv{
-    width: 900px;
+.weatherDiv>div {
+    /*width: 900px;*/
     /* width: 600%; */
     /* margin-left: -250%; */
+}
+
+.weatherComponent {
+    text-align: center;
+    flex-grow: 0;
+    /* do not grow   - initial value: 0 */
+    flex-shrink: .1;
+    /* do not shrink - initial value: 1 */
+    flex-basis: 7em;
+    /* width/height  - initial value: auto */
+}
+
+.weatherHeader {
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.weatherDay {
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.weatherComponent .card-header {
+    background-color: #333333 !important;
+    color: #f5f5f5;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.Clouds {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Rain {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../rain.jpg");
+    background-size: cover;
+    background-position: bottom;
+}
+
+.Clear {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clear.jpg");
+    background-size: cover;
+    background-position: bottom;
+}
+
+.Snow {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../snow.jpg");
+    background-size: cover;
+    background-position: bottom;
 }
