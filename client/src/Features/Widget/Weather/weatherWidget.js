@@ -10,11 +10,12 @@ export default function WeatherWidget() {
     const [longitude, setLongitude] = useState('');
     const [location, setLocation] = useState('');
 
-    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly,alert&units=imperial&appid=9892f1d9ad6b9ba1ef521593e8a298d6`
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,hourly,alert&units=imperial&appid=251f287140b1a65e4f5316aa6573bf9f`
 
     const updateWeatherData = () => {
         axios.get(url).then((response) => {
             setWeatherData(response.data);
+            console.log("API Requested");
         })
     }
 
