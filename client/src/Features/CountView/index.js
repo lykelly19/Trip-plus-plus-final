@@ -533,11 +533,11 @@ function Index() {
               disabled
             />
           </div>
-          <div style={{ marginTop: 30 }}>Average Trafic</div>
+          <div style={{ marginTop: 30 }}>Average Transit</div>
           <div>
             <InputNumber
               addonBefore="$"
-              placeholder="Average trafic"
+              placeholder="Average Transit"
               style={{ width: "100%" }}
               {...cityProps("ticket")}
               disabled

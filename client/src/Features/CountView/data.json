@@ -50,7 +50,7 @@
     },
     {
     "id":8,
-    "name":"michigan",
+    "name":"Michigan",
     "prop1": 29,
     "prop2":24,
     "prop3": 52
@@ -97,81 +97,5 @@
     "prop1": 32,
     "prop2":24,
     "prop3": 84
-     },
-    {
-    "id":15,
-    "name":"Iowa"
-    },
-    {
-    "id":16,
-    "name":"Kansas"
-    },
-    {
-    "id":17,
-    "name":"Kentucky"
-    },
-    {
-    "id":18,
-    "name":"Louisiana"
-    },
-    {
-    "id":19,
-    "name":"Maine"
-    },
-    {
-    "id":20,
-    "name":"Maryland"
-    },
-    {
-    "id":21,
-    "name":"Massachusetts"
-    },
-    {
-    "id":22,
-    "name":"Michigan"
-    },
-    {
-    "id":23,
-    "name":"Minnesota"
-    },
-    {
-    "id":24,
-    "name":"Mississippi"
-    },
-    {
-    "id":25,
-    "name":"Missouri"
-    },
-    {
-    "id":26,
-    "name":"Montana"
-    },
-    {
-    "id":27,
-    "name":"Nebraska"
-    },
-    {
-    "id":28,
-    "name":"Nevada"
-    },
-    {
-    "id":29,
-    "name":"New Hampshire"
-    },
-    {
-    "id":30,
-    "name":"New Jersey"
-    },
-    {
-    "id":31,
-    "name":"New Mexico"
-    },
-    {
-    "id":32,
-    "name":"New York"
-    },
-    {
-    "id":33,
-    "name":"North Carolina"
     }
 ]

@@ -306,7 +306,7 @@ export default class Itinerary extends Component {
             currCoordinates={this.state.currCoordinates}
           ></ItineraryModal>
         )}
-        <div className="itinerary-container table-responsive-sm card px-5">
+        <div className="itinerary-container table-responsive-sm card">
           {" "}
           {/*py-4 px-5 mt-4*/}
           <ItineraryTable
@@ -365,7 +365,7 @@ export const ItineraryTable = ({ items, handleEdit, handleDelX }) => (
           key={i}
         >
           {/*my-auto*/}
-          <th className="col-1 align-middle my-auto" 
+          <th className="col-1 align-middle" 
             onClick={() => handleEdit(item)}
             data-bs-toggle="tooltip"
             title="edit this event">
