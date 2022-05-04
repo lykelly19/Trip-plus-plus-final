@@ -34,6 +34,90 @@
     text-shadow: 2px 2px 4px #000000;
 }
 
+
+.Mist {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Smoke {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Squall {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Smoke {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Haze {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Dust {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+.Fog {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+
+.Sand {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+
+.Ash {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
+
+ .Tornado {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../clouds.jpg");
+    background-size: cover;
+}
+
 .Clouds {
     color: white;
     font-weight: bold;
@@ -43,6 +127,24 @@
 }
 
 .Rain {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../rain.jpg");
+    background-size: cover;
+    background-position: bottom;
+}
+
+.Drizzle {
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+    background: url("../rain.jpg");
+    background-size: cover;
+    background-position: bottom;
+}
+
+.Thunderstorm {
     color: white;
     font-weight: bold;
     text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
